@@ -1,2 +1,7 @@
-# juliettefaivre.github.io
-Personal academic website for Juliette Faivre, featuring her research interests, publications, CV, professional experience, and contact information.
+# Juliette Faivre
+
+This repository contains the source files for my personal academic and professional website.
+
+The website includes information about my research interests, professional experience, publications, CV, and contact details.
+
+Website: https://yourusername.github.io

@@ -1,114 +1,1000 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Juliette Faivre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
+    :root {
+      --navy:        #0f2240;
+      --navy-soft:   #1c3a6e;
+      --blue:        #3a7bd5;
+      --blue-light:  #6aa3f0;
+      --sky:         #b8d4f5;
+      --beige:       #f7f3ee;
+      --bg:          #f5f5f7;
+      --surface:     rgba(255,255,255,0.72);
+      --surface-solid: #ffffff;
+      --border:      rgba(0,0,0,0.07);
+      --border-mid:  rgba(0,0,0,0.12);
+      --text:        #1d1d1f;
+      --text-2:      #424245;
+      --text-3:      #6e6e73;
+      --text-4:      #aeaeb2;
+      --sidebar-w:   240px;
+      --radius:      18px;
+      --radius-sm:   12px;
+      --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
     body {
-      font-family: Arial, sans-serif;
-      max-width: 850px;
-      margin: 60px auto;
-      padding: 0 24px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
-      color: #222;
-      background: #fafafa;
     }
 
-    header {
-      margin-bottom: 40px;
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 32px 100px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0a1e3d 0%, #0f2d5a 45%, #1a3f7a 100%);
     }
 
-    h1 {
-      font-size: 42px;
-      margin-bottom: 8px;
+    /* Subtle radial glow */
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 900px; height: 700px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -55%);
+      background: radial-gradient(ellipse, rgba(58,123,213,0.22) 0%, transparent 68%);
+      pointer-events: none;
     }
 
-    h2 {
+    /* Apple-style bottom fade */
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      z-index: 2;
+    }
+
+    /* Subtle noise grain */
+    #hero-grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Photo */
+    .hero-photo {
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: linear-gradient(145deg, #1c3a6e, #3a7bd5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 36px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.12),
+        0 0 0 6px rgba(255,255,255,0.04),
+        0 32px 80px rgba(0,0,0,0.45);
+      animation: riseUp 1s var(--ease) both;
+    }
+
+    .hero-photo svg { width: 64px; height: 64px; opacity: 0.45; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 14px;
+      animation: riseUp 1s 0.1s var(--ease) both;
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 6vw, 4.4rem);
+      font-weight: 700;
+      color: #f5f5f7;
+      letter-spacing: -0.025em;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      animation: riseUp 1s 0.18s var(--ease) both;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      font-weight: 300;
+      color: rgba(245,245,247,0.58);
+      letter-spacing: 0.01em;
+      max-width: 480px;
+      animation: riseUp 1s 0.26s var(--ease) both;
+    }
+
+    /* Pill chips */
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
       margin-top: 36px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 6px;
+      animation: riseUp 1s 0.36s var(--ease) both;
     }
 
-    a {
-      color: #0056b3;
+    .chip {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: rgba(184,212,245,0.9);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.11);
+      padding: 6px 16px;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* Scroll cue */
+    .scroll-cue {
+      margin-top: 56px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: riseUp 1s 0.55s var(--ease) both;
+    }
+
+    .scroll-cue span {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(184,212,245,0.4);
+    }
+
+    .scroll-cue .caret {
+      width: 18px; height: 18px;
+      border-right: 1.5px solid rgba(184,212,245,0.35);
+      border-bottom: 1.5px solid rgba(184,212,245,0.35);
+      transform: rotate(45deg);
+      animation: bob 2s ease-in-out infinite;
+    }
+
+    /* ══════════════════════════════════════════
+       LAYOUT
+    ══════════════════════════════════════════ */
+    #main-layout {
+      display: flex;
+      align-items: flex-start;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 28px 100px;
+      gap: 40px;
+    }
+
+    /* ══════════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════════ */
+    #sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      position: sticky;
+      top: 28px;
+      padding: 32px 0;
+    }
+
+    .sidebar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.6) inset,
+        0 2px 24px rgba(0,0,0,0.06);
+    }
+
+    .sidebar-photo {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: linear-gradient(145deg, var(--navy-soft), var(--blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      box-shadow: 0 4px 16px rgba(15,34,64,0.2);
+      overflow: hidden;
+    }
+
+    .sidebar-photo svg { width: 34px; height: 34px; opacity: 0.5; }
+
+    .sidebar-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      text-align: center;
+      letter-spacing: -0.01em;
+    }
+
+    .sidebar-role {
+      font-size: 11px;
+      color: var(--text-3);
+      text-align: center;
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 18px 0;
+    }
+
+    nav ul { list-style: none; display: flex; flex-direction: column; gap: 1px; }
+
+    nav ul li a {
+      display: flex;
+      align-items: center;
+      gap: 9px;
       text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-3);
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease);
+      letter-spacing: -0.01em;
     }
 
-    a:hover {
-      text-decoration: underline;
+    nav ul li a .dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--border-mid);
+      flex-shrink: 0;
+      transition: background 0.2s var(--ease), transform 0.2s var(--ease);
     }
 
-    .subtitle {
-      font-size: 20px;
-      color: #555;
-      margin-top: 0;
+    nav ul li a:hover {
+      background: rgba(58,123,213,0.07);
+      color: var(--text-2);
     }
 
-    .contact {
-      margin-top: 40px;
+    nav ul li a.active {
+      background: rgba(58,123,213,0.1);
+      color: var(--blue);
+      font-weight: 500;
+    }
+
+    nav ul li a.active .dot {
+      background: var(--blue);
+      transform: scale(1.3);
+    }
+
+    .sidebar-social {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .sidebar-social a {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.04);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .sidebar-social a:hover {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+
+    /* ══════════════════════════════════════════
+       CONTENT
+    ══════════════════════════════════════════ */
+    #content {
+      flex: 1;
+      min-width: 0;
+      padding-top: 40px;
+    }
+
+    section {
+      margin-bottom: 72px;
+      scroll-margin-top: 36px;
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    section h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.022em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    section p {
       font-size: 15px;
-      color: #555;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 14px;
+      font-weight: 400;
+    }
+
+    section p strong { color: var(--text); font-weight: 600; }
+
+    /* ── Highlights grid ── */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .hcard {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+      transition: box-shadow 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+
+    .hcard:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+      transform: translateY(-2px);
+    }
+
+    .hcard-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .hcard-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 5px;
+    }
+
+    .hcard-text {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.55;
+    }
+
+    /* ── Tag cloud ── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-2);
+      background: var(--surface-solid);
+      border: 1px solid var(--border-mid);
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: default;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .tag:hover {
+      background: var(--navy);
+      color: #f5f5f7;
+      border-color: var(--navy);
+    }
+
+    /* ── Publication cards ── */
+    .pub-card {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px 22px;
+      margin-bottom: 10px;
+      transition: box-shadow 0.25s var(--ease);
+    }
+
+    .pub-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+
+    .pub-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 5px;
+    }
+
+    .pub-meta { font-size: 13px; color: var(--text-3); }
+
+    .pub-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(58,123,213,0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* Placeholder */
+    .placeholder-box {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .placeholder-box p {
+      font-size: 14px;
+      color: var(--text-4);
+      margin: 0;
+    }
+
+    /* ── Awards ── */
+    .award-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .award-row:last-child { border-bottom: none; }
+
+    .award-year {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--blue);
+      min-width: 36px;
+      padding-top: 1px;
+      letter-spacing: 0.02em;
+    }
+
+    .award-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .award-org { font-size: 13px; color: var(--text-3); margin-top: 2px; }
+
+    /* ── Blog ── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .blog-card {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: box-shadow 0.25s var(--ease), transform 0.25s var(--ease);
+      cursor: pointer;
+    }
+
+    .blog-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+      transform: translateY(-2px);
+    }
+
+    .blog-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .blog-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+
+    .blog-excerpt {
+      font-size: 13px;
+      color: var(--text-3);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .blog-date { font-size: 12px; color: var(--text-4); }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .contact-card {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s var(--ease);
+    }
+
+    .contact-card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      border-color: rgba(58,123,213,0.3);
+      transform: translateY(-1px);
+    }
+
+    .contact-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-4);
+      margin-bottom: 3px;
+    }
+
+    .contact-value { font-size: 13px; font-weight: 500; color: var(--text); }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    footer {
+      background: var(--navy);
+      color: rgba(245,245,247,0.3);
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ══════════════════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════════════════ */
+    @keyframes riseUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(5px); }
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 720px) {
+      #main-layout { flex-direction: column; padding: 0 16px 60px; gap: 0; }
+
+      #sidebar {
+        width: 100%;
+        position: relative;
+        top: 0;
+        padding: 24px 0 0;
+      }
+
+      .sidebar-card { display: flex; flex-direction: column; align-items: center; }
+
+      nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+      }
+
+      nav ul li a { padding: 6px 10px; font-size: 12px; }
+      .dot { display: none; }
+
+      #content { padding-top: 24px; }
+      .highlights { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <h1>Juliette Faivre</h1>
-    <p class="subtitle">Technology Policy, AI Governance, and Emerging Technologies</p>
-  </header>
 
-  <section>
-    <h2>About</h2>
-    <p>
-      I am an incoming PhD student in Engineering and Public Policy at Carnegie Mellon University.
-      My research interests focus on AI governance, technology policy, and the societal and regulatory
-      implications of emerging technologies.
-    </p>
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section id="hero">
+  <div id="hero-grain"></div>
+  <div class="hero-inner">
 
-    <p>
-      I previously completed an MPhil in Technology Policy at the University of Cambridge and studied
-      International Management at King&apos;s College London, including a year abroad at the Wharton School
-      of the University of Pennsylvania. I also worked for three years as a Business Transformation
-      Consultant at Ernst and Young.
-    </p>
-  </section>
+    <!--
+      TO ADD YOUR PHOTO:
+      Save photo as "photo.jpg" in the same folder, then replace the
+      <div class="hero-photo">…</div> with:
+      <img class="hero-photo" src="photo.jpg" alt="Juliette Faivre" />
+    -->
+    <div class="hero-photo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2">
+        <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+    </div>
 
-  <section>
-    <h2>Research Interests</h2>
-    <p>
-      My interests include AI governance, data governance, digital regulation, online scraping,
-      platform accountability, responsible innovation, and the political economy of emerging technologies.
-    </p>
-  </section>
+    <p class="hero-eyebrow">Technology Policy &nbsp;·&nbsp; AI Governance</p>
+    <h1 class="hero-name">Juliette Faivre</h1>
+    <p class="hero-sub">Incoming PhD candidate at Carnegie Mellon University exploring how societies govern artificial intelligence and emerging technologies.</p>
 
-  <section>
-    <h2>Publications and Writing</h2>
-    <p>
-      Coming soon.
-    </p>
-  </section>
+    <div class="hero-chips">
+      <span class="chip">CMU Engineering & Public Policy</span>
+      <span class="chip">Cambridge MPhil</span>
+      <span class="chip">Ernst & Young</span>
+    </div>
 
-  <section>
-    <h2>CV</h2>
-    <p>
-      CV coming soon.
-    </p>
-  </section>
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <div class="caret"></div>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>Contact</h2>
-    <p>
-      Email: coming soon
-    </p>
-    <p>
-      LinkedIn: coming soon
-    </p>
-  </section>
+<!-- ═══════════════════════ MAIN LAYOUT ════════════════════════ -->
+<div id="main-layout">
 
-  <p class="contact">
-    Last updated: May 2026
-  </p>
+  <!-- SIDEBAR ──────────────────────────────────────────────── -->
+  <aside id="sidebar">
+    <div class="sidebar-card">
+
+      <!--
+        Replace <div class="sidebar-photo">…</div> with:
+        <img class="sidebar-photo" src="photo.jpg" alt="Juliette Faivre" />
+      -->
+      <div class="sidebar-photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+      </div>
+
+      <p class="sidebar-name">Juliette Faivre</p>
+      <p class="sidebar-role">PhD Student · CMU<br>AI & Technology Policy</p>
+
+      <div class="sidebar-divider"></div>
+
+      <nav>
+        <ul>
+          <li><a href="#about"        class="nav-link active"><span class="dot"></span>About</a></li>
+          <li><a href="#research"     class="nav-link"><span class="dot"></span>Research Interests</a></li>
+          <li><a href="#publications" class="nav-link"><span class="dot"></span>Publications & Writing</a></li>
+          <li><a href="#awards"       class="nav-link"><span class="dot"></span>Awards & Honors</a></li>
+          <li><a href="#blog"         class="nav-link"><span class="dot"></span>Personal Thoughts</a></li>
+          <li><a href="#contact"      class="nav-link"><span class="dot"></span>Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-social">
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:your@email.com" title="Email">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+        <a href="#" target="_blank" title="Google Scholar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12h6m-3-3v6"/></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENT ──────────────────────────────────────────────── -->
+  <main id="content">
+
+    <!-- ABOUT ──────────────────── -->
+    <section id="about">
+      <p class="section-eyebrow">Introduction</p>
+      <h2>About Me</h2>
+
+      <p>
+        I am an incoming PhD student in Engineering and Public Policy at
+        <strong>Carnegie Mellon University</strong>. My research focuses on how societies
+        govern artificial intelligence and emerging digital technologies — examining the
+        institutions, rules, and norms shaping their development and deployment.
+      </p>
+      <p>
+        I completed an <strong>MPhil in Technology Policy</strong> at the University of Cambridge
+        and studied International Management at King's College London, with a year abroad
+        at the <strong>Wharton School, University of Pennsylvania</strong>. I then spent
+        three years as a Business Transformation Consultant at <strong>Ernst & Young</strong>,
+        advising large organisations on technology-driven change.
+      </p>
+      <p>
+        I am broadly interested in how regulatory frameworks can be designed to be both
+        technically informed and democratically legitimate — especially as AI systems
+        become more capable and more consequential.
+      </p>
+
+      <div class="highlights">
+        <div class="hcard">
+          <span class="hcard-icon">🎓</span>
+          <div class="hcard-title">Education</div>
+          <div class="hcard-text">MPhil Technology Policy — Cambridge<br>Int'l Management — KCL / Wharton</div>
+        </div>
+        <div class="hcard">
+          <span class="hcard-icon">🔬</span>
+          <div class="hcard-title">PhD (Incoming)</div>
+          <div class="hcard-text">Engineering & Public Policy<br>Carnegie Mellon University</div>
+        </div>
+        <div class="hcard">
+          <span class="hcard-icon">💼</span>
+          <div class="hcard-title">Industry</div>
+          <div class="hcard-text">Business Transformation Consultant<br>Ernst & Young · 3 years</div>
+        </div>
+        <div class="hcard">
+          <span class="hcard-icon">🌍</span>
+          <div class="hcard-title">Focus Areas</div>
+          <div class="hcard-text">AI Governance · Digital Regulation<br>Platform Accountability</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH ────────────────── -->
+    <section id="research">
+      <p class="section-eyebrow">Scholarship</p>
+      <h2>Research Interests</h2>
+
+      <p>
+        My work sits at the intersection of law, policy, and computer science — examining
+        how governance frameworks can keep pace with rapidly evolving technologies.
+        I draw on political economy, legal analysis, and science & technology studies.
+      </p>
+      <p>
+        I am particularly interested in comparative approaches to AI regulation: understanding
+        why different jurisdictions (EU, US, UK) have chosen distinct strategies and what the
+        implications are for innovation and societal outcomes.
+      </p>
+
+      <div class="tags">
+        <span class="tag">AI Governance</span>
+        <span class="tag">Data Governance</span>
+        <span class="tag">Digital Regulation</span>
+        <span class="tag">Online Scraping</span>
+        <span class="tag">Platform Accountability</span>
+        <span class="tag">Responsible Innovation</span>
+        <span class="tag">Political Economy of Technology</span>
+        <span class="tag">Algorithmic Accountability</span>
+        <span class="tag">Regulatory Design</span>
+        <span class="tag">Emerging Technologies</span>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS ────────────── -->
+    <section id="publications">
+      <p class="section-eyebrow">Work</p>
+      <h2>Publications & Writing</h2>
+
+      <!--
+        TO ADD A PUBLICATION, paste this above the placeholder-box:
+        <div class="pub-card">
+          <div class="pub-title">
+            Your Paper Title <span class="pub-badge">2025</span>
+          </div>
+          <div class="pub-meta">Journal or Conference · Co-authors</div>
+        </div>
+      -->
+
+      <div class="placeholder-box">
+        <p>Publications and working papers coming soon.</p>
+      </div>
+    </section>
+
+    <!-- AWARDS ─────────────────── -->
+    <section id="awards">
+      <p class="section-eyebrow">Recognition</p>
+      <h2>Awards & Honors</h2>
+
+      <!--
+        TO ADD AN AWARD, copy one .award-row block:
+        <div class="award-row">
+          <div class="award-year">2024</div>
+          <div>
+            <div class="award-name">Award Name</div>
+            <div class="award-org">Awarding Institution</div>
+          </div>
+        </div>
+      -->
+
+      <div class="award-row">
+        <div class="award-year">—</div>
+        <div>
+          <div class="award-name">Awards & Honors</div>
+          <div class="award-org">Coming soon.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG ───────────────────── -->
+    <section id="blog">
+      <p class="section-eyebrow">Reflections</p>
+      <h2>Personal Thoughts</h2>
+
+      <p>Occasional writing on AI, technology, policy, and ideas I find compelling.</p>
+
+      <!--
+        TO ADD A POST, copy one .blog-card inside .blog-grid:
+        <div class="blog-card">
+          <div class="blog-label">AI Policy</div>
+          <div class="blog-title">Your Post Title</div>
+          <div class="blog-excerpt">A short excerpt or tagline.</div>
+          <div class="blog-date">May 2026</div>
+        </div>
+      -->
+
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-label">Coming Soon</div>
+          <div class="blog-title">First post on its way…</div>
+          <div class="blog-excerpt">Watch this space for thoughts on technology governance, AI policy, and academia.</div>
+          <div class="blog-date">2026</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT ────────────────── -->
+    <section id="contact">
+      <p class="section-eyebrow">Get in Touch</p>
+      <h2>Contact</h2>
+
+      <p>I welcome messages from researchers, policymakers, and anyone interested in AI governance and technology policy.</p>
+
+      <!-- Update href and display values with your real details -->
+      <div class="contact-grid">
+        <a class="contact-card" href="mailto:your@email.com">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">your@email.com</div>
+          </div>
+        </a>
+
+        <a class="contact-card" href="https://linkedin.com/in/yourprofile" target="_blank">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">Juliette Faivre</div>
+          </div>
+        </a>
+
+        <a class="contact-card" href="https://github.com/yourprofile" target="_blank">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">yourprofile</div>
+          </div>
+        </a>
+
+        <a class="contact-card" href="#">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">CV</div>
+            <div class="contact-value">Download (coming soon)</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>&copy; 2026 Juliette Faivre &nbsp;&middot;&nbsp; Last updated May 2026</footer>
+
+<script>
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks  = document.querySelectorAll('.nav-link');
+
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const hit = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+        if (hit) hit.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
+
+  sections.forEach(s => spy.observe(s));
+
+  navLinks.forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href'))
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
 </body>
 </html>

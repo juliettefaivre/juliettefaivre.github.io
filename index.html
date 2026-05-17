@@ -367,21 +367,44 @@
 
     .award-org { font-size: 13.5px; color: var(--text-3); margin-top: 2px; }
 
-    /* ── Blog: simple list ── */
+    /* ── Blog: note cards ── */
     .blog-list {
-      margin-top: 16px;
-      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 22px;
     }
 
     .blog-item {
-      display: block;
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 18px;
+      align-items: center;
       text-decoration: none;
       color: inherit;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      transition: border-color 0.15s var(--ease), transform 0.15s var(--ease), background 0.15s var(--ease);
     }
 
-    .blog-item:hover .blog-title { color: var(--navy); }
+    .blog-item:hover {
+      border-color: var(--border-mid);
+      background: var(--surface-solid);
+      transform: translateY(-1px);
+    }
+
+    .blog-thumb {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: var(--bridge);
+    }
+
+    .blog-content { min-width: 0; }
 
     .blog-title {
       font-size: 15.5px;
@@ -396,6 +419,14 @@
       font-size: 13px;
       color: var(--text-3);
       font-variant-numeric: tabular-nums;
+      margin-bottom: 7px;
+    }
+
+    .blog-blurb {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.55;
+      margin: 0;
     }
 
     /* ── Contact: plain text rows ── */
@@ -483,6 +514,7 @@
 
       #content { padding-top: 16px; }
       .highlights { grid-template-columns: 110px 1fr; column-gap: 18px; }
+      .blog-item { grid-template-columns: 92px 1fr; gap: 14px; padding: 10px; }
       .contact-row { grid-template-columns: 80px 1fr; }
     }
   </style>
@@ -532,7 +564,7 @@
       <div class="sidebar-social">
         <a href="mailto:jfaivre@andrew.cmu.edu">Email</a>
         <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="#" target="_blank" rel="noopener">Scholar</a>
+        <a href="https://scholar.google.com/citations?user=Yg6dnysAAAAJ&amp;hl=en" target="_blank" rel="noopener">Scholar</a>
       </div>
     </div>
   </aside>
@@ -701,16 +733,33 @@
 
       <p>Occasional writing on technology, policy, and ideas I find worth thinking about.</p>
 
-      <!--
-        Add a note:
-        <a class="blog-item" href="#">
-          <div class="blog-title">Note title</div>
-          <div class="blog-meta">May 2026</div>
+      <div class="blog-list">
+        <a class="blog-item" href="notes/responsible-ai-governance.html">
+          <img class="blog-thumb" src="assets/note-ai-governance.svg" alt="" />
+          <div class="blog-content">
+            <div class="blog-title">Responsible AI Governance</div>
+            <div class="blog-meta">May 2026</div>
+            <p class="blog-blurb">A short note on why AI governance needs institutions that are technically literate, accountable, and adaptable.</p>
+          </div>
         </a>
-      -->
 
-      <div class="placeholder-box">
-        <p>First notes coming soon.</p>
+        <a class="blog-item" href="notes/digital-public-services.html">
+          <img class="blog-thumb" src="assets/note-public-services.svg" alt="" />
+          <div class="blog-content">
+            <div class="blog-title">Digital Public Services and Trust</div>
+            <div class="blog-meta">May 2026</div>
+            <p class="blog-blurb">Reflections on how governments can make online services easier to use without losing transparency or public confidence.</p>
+          </div>
+        </a>
+
+        <a class="blog-item" href="notes/children-generative-ai.html">
+          <img class="blog-thumb" src="assets/note-children-ai.svg" alt="" />
+          <div class="blog-content">
+            <div class="blog-title">Children, Safety, and Generative AI</div>
+            <div class="blog-meta">May 2026</div>
+            <p class="blog-blurb">A starting point for thinking about child wellbeing, platform design, and the safeguards that emerging AI systems require.</p>
+          </div>
+        </a>
       </div>
     </section>
 
@@ -738,7 +787,7 @@
         </div>
         <div class="contact-row">
           <span class="contact-label">Scholar</span>
-          <span class="contact-value"><a href="#" target="_blank" rel="noopener">Google Scholar profile</a></span>
+          <span class="contact-value"><a href="https://scholar.google.com/citations?user=Yg6dnysAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar profile</a></span>
         </div>
         <div class="contact-row">
           <span class="contact-label">CV</span>

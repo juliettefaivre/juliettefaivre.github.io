@@ -15,6 +15,10 @@
       --blue:        #4c6ef5;
       --blue-light:  #8ea4d6;
       --sky:         #c8d4e8;
+      --rose-deep:   #3f1612;
+      --rose:        #a24f42;
+      --rose-soft:   #dfa08d;
+      --rose-pale:   #f0d6ca;
       --beige:       #f7f3ee;
       --bg:          #f7f8fa;
       --bridge:      #eaeef5;
@@ -57,13 +61,13 @@
       position: relative;
       overflow: hidden;
       background: linear-gradient(180deg,
-        #0a1832  0%,
-        #112648  16%,
-        #1a3563  32%,
-        #2f4d80  48%,
-        #5c7da8  64%,
-        #94afd0  78%,
-        #c8d6e8  90%,
+        #2f120d  0%,
+        #4d1d17  16%,
+        #743127  32%,
+        #a45242  50%,
+        #c77762  66%,
+        #dfa08d  80%,
+        #f0d6ca  91%,
         var(--bg) 100%);
     }
 
@@ -262,7 +266,86 @@
 
     section p strong { color: var(--text); font-weight: 600; }
 
-    /* ── Highlights: quiet two-column info list ── */
+    section p a {
+      color: var(--rose);
+      text-decoration: underline;
+      text-decoration-color: rgba(143,63,79,0.28);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.15s var(--ease);
+    }
+
+    section p a:hover {
+      text-decoration-color: var(--rose);
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 30px;
+      padding-left: 118px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 84px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--rose), var(--rose-pale));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .timeline-date {
+      position: absolute;
+      left: -118px;
+      top: 2px;
+      width: 66px;
+      color: var(--text-3);
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.35;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -39px;
+      top: 5px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--rose);
+      box-shadow: 0 0 0 5px var(--bg);
+    }
+
+    .timeline-title {
+      color: var(--text);
+      font-size: 15.5px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .timeline-text {
+      color: var(--text-2);
+      font-size: 14.5px;
+      line-height: 1.68;
+      margin: 0;
+    }
+
     .highlights {
       display: grid;
       grid-template-columns: 130px 1fr;
@@ -314,11 +397,21 @@
 
     .pub-card:last-child { border-bottom: none; }
 
+    .pub-card a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .pub-card a:hover .pub-title {
+      color: var(--rose);
+    }
+
     .pub-title {
       font-size: 15.5px;
       font-weight: 500;
       color: var(--text);
       margin-bottom: 4px;
+      transition: color 0.15s var(--ease);
     }
 
     .pub-meta { font-size: 13.5px; color: var(--text-3); }
@@ -429,6 +522,64 @@
       margin: 0;
     }
 
+    /* ── Personal travel cards ── */
+    .travel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .travel-card {
+      position: relative;
+      display: block;
+      min-height: 190px;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: #fff;
+      text-decoration: none;
+      background: #2a2a2a;
+    }
+
+    .travel-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 190px;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.35s var(--ease), filter 0.35s var(--ease);
+    }
+
+    .travel-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.46));
+      transition: background 0.35s var(--ease);
+    }
+
+    .travel-card span {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 1;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .travel-card:hover img {
+      transform: scale(1.045);
+      filter: saturate(1.08);
+    }
+
+    .travel-card:hover::after {
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(60,23,33,0.58));
+    }
+
     /* ── Contact: plain text rows ── */
     .contact-list {
       margin-top: 16px;
@@ -513,8 +664,13 @@
       .sidebar-social { justify-content: center; }
 
       #content { padding-top: 16px; }
+      .timeline { padding-left: 86px; }
+      .timeline::before { left: 62px; }
+      .timeline-date { left: -86px; width: 48px; }
+      .timeline-dot { left: -28px; }
       .highlights { grid-template-columns: 110px 1fr; column-gap: 18px; }
       .blog-item { grid-template-columns: 92px 1fr; gap: 14px; padding: 10px; }
+      .travel-grid { grid-template-columns: 1fr; }
       .contact-row { grid-template-columns: 80px 1fr; }
     }
   </style>
@@ -554,16 +710,17 @@
         <ul>
           <li><a href="#about"        class="nav-link active">About</a></li>
           <li><a href="#research"     class="nav-link">Research</a></li>
-          <li><a href="#publications" class="nav-link">Writing</a></li>
-          <li><a href="#awards"       class="nav-link">Honours</a></li>
-          <li><a href="#blog"         class="nav-link">Notes</a></li>
+          <li><a href="#publications" class="nav-link">Publications</a></li>
+          <li><a href="#awards"       class="nav-link">Relevant Honors</a></li>
+          <li><a href="#thoughts"     class="nav-link">Thoughts</a></li>
+          <li><a href="#personal"     class="nav-link">Personal</a></li>
           <li><a href="#contact"      class="nav-link">Contact</a></li>
         </ul>
       </nav>
 
       <div class="sidebar-social">
         <a href="mailto:jfaivre@andrew.cmu.edu">Email</a>
-        <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://linkedin.com/in/juliette-faivre" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://scholar.google.com/citations?user=Yg6dnysAAAAJ&amp;hl=en" target="_blank" rel="noopener">Scholar</a>
       </div>
     </div>
@@ -577,54 +734,59 @@
       <h2>About</h2>
 
       <p>
-        I will begin a PhD in Engineering &amp; Public Policy at Carnegie Mellon in
-        August 2026, working on the governance of artificial intelligence and emerging
-        digital technologies &mdash; the institutions, rules, and norms that shape how
-        these systems are built and deployed.
-      </p>
-      <p>
-        Most recently I worked at Ernst &amp; Young in Luxembourg (September 2023&ndash;May 2026),
-        joining as a Junior Consultant in Business Transformation and promoted to Senior
-        Consultant in June 2025. I advised public-sector and corporate clients on
-        technology-driven change: leading a project with a major European institution to
-        assess the digital maturity of Luxembourg's public services online, piloting a
-        human&ndash;AI workflow for regulatory news monitoring, reviewing the digital
-        presence of an engineering firm against responsible-design principles, conducting
-        a market study of Luxembourg's transportation systems, and supporting Luxembourg's
-        Ministry of Defense on recruitment-process optimisation.
-      </p>
-      <p>
-        Before EY I read for an MPhil in Technology Policy at the University of Cambridge,
-        and a BSc in International Management at King's College London &mdash; with an
-        exchange year at the Wharton School, University of Pennsylvania, and a Global
-        Business term at Tecnol&oacute;gico de Monterrey in Mexico. During and around the
-        MPhil I worked as a visiting policy researcher at the British Office of
-        Communications (Ofcom) on the safety of generative AI for children, and as a
-        visiting researcher at the European Commission on the intersection of IoT, AI, and
-        the circular economy. Earlier, I was a research assistant in the Cambridge
-        Experimental and Behavioural Economics Group on generative AI and creativity, a
-        Science &amp; Technology research intern with the Think Tank and Civil Societies
-        Program at the Lauder Institute (University of Pennsylvania), and a Business
-        Development intern at IBM in Dublin.
-      </p>
-      <p>
-        My broader interest is in how regulatory frameworks can be made both technically
-        literate and democratically legitimate as AI systems become more capable and more
-        consequential. I work in French, English, Polish, and Luxembourgish.
+        Hi! My name is Juliette Faivre, and I am an incoming PhD student in
+        Engineering &amp; Public Policy at Carnegie Mellon University from August
+        2026 onwards, where I am lucky to be supervised by Professor Sarah Cen.
       </p>
 
-      <div class="highlights">
-        <div class="hcard-title">Doctorate</div>
-        <div class="hcard-text">Engineering &amp; Public Policy, Carnegie Mellon University (incoming)</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2026&ndash;</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Incoming PhD student in Engineering &amp; Public Policy, Carnegie Mellon University</div>
+          <p class="timeline-text">
+            Researching AI governance and digital technologies at the intersection
+            of policy, management, and engineering, with a focus on the institutions,
+            rules, and norms that shape how these systems are built and deployed.
+          </p>
+        </div>
 
-        <div class="hcard-title">Graduate</div>
-        <div class="hcard-text">MPhil, Technology Policy, University of Cambridge (2022&ndash;2023)</div>
+        <div class="timeline-item">
+          <div class="timeline-date">2023&ndash;2026</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Senior Consultant in Business Transformation, Ernst &amp; Young Luxembourg</div>
+          <p class="timeline-text">
+            Focused on public-sector and business transformation strategy, delivering
+            reports and market studies across transport, consumer trends, social
+            services, defense, and other sectors. Led work with a major European
+            institution to assess the digital maturity of public services in Luxembourg.
+          </p>
+        </div>
 
-        <div class="hcard-title">Undergraduate</div>
-        <div class="hcard-text">BSc (Hons) International Management, First-Class Honours, King's College London &mdash; exchange year at the Wharton School, University of Pennsylvania (2018&ndash;2022)</div>
+        <div class="timeline-item">
+          <div class="timeline-date">2022&ndash;2023</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Graduate study in Technology Policy, University of Cambridge</div>
+          <p class="timeline-text">
+            Completed an MPhil in Technology Policy at the University of Cambridge.
+            Worked on generative AI safety for children at Ofcom, and on IoT, AI,
+            and the circular economy at the European Commission. Also supported
+            research on generative AI and creativity with the Cambridge Experimental
+            and Behavioral Economics Group.
+          </p>
+        </div>
 
-        <div class="hcard-title">Industry</div>
-        <div class="hcard-text">Senior Consultant (2025&ndash;2026) &middot; Junior Consultant (2023&ndash;2025), Business Transformation, Ernst &amp; Young, Luxembourg</div>
+        <div class="timeline-item">
+          <div class="timeline-date">2018&ndash;2022</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Undergraduate study in International Management</div>
+          <p class="timeline-text">
+            Completed a BSc in International Management at King's College London,
+            including an exchange year at the Wharton School, University of
+            Pennsylvania. Worked as a Science &amp; Technology research intern with
+            the Lauder Institute's Think Tank and Civil Societies Program.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -633,65 +795,87 @@
       <h2>Research</h2>
 
       <p>
-        My work sits at the intersection of public policy, law, and the management of
-        technology. Three threads run through it.
+        My research focuses on AI governance: the institutions, rules, and design
+        choices that shape how AI systems are developed, deployed, and made
+        accountable. I am interested in how current and future rules can support
+        responsible AI development and deployment while remaining technically
+        informed and adaptable.
       </p>
       <p>
-        <strong>Human&ndash;AI collaboration in organisations.</strong> How digital technologies
-        &mdash; and generative AI in particular &mdash; are reshaping work, communication,
-        creativity, and productivity, and what good collaboration between humans and machines
-        looks like in practice.
+        <strong>AI taxation.</strong> I am currently working on whether we can tax AI,
+        what such taxes would target, and how they might shape public welfare.
       </p>
       <p>
-        <strong>Ethical technology in business.</strong> How organisations can design, deploy,
-        and govern user-centred technologies responsibly, balancing commercial pressure with
-        accountability to the people their products affect.
+        I am also interested in privacy, ethical technology design, human&ndash;AI
+        collaboration, explainability, and the societal impacts of digital
+        technologies, especially in public-sector and organizational settings.
       </p>
       <p>
-        <strong>Societal impacts of digital technologies.</strong> Implications for privacy,
-        digital governance, and the wellbeing of children online &mdash; with attention to
-        comparative regulatory approaches across the EU, US, and UK.
-      </p>
-      <p>
-        Methodologically I work primarily in literature review and qualitative research
-        (semi-structured interviews, document analysis), with foundational skills in
-        quantitative methods (R, Python, SPSS) and survey design (Qualtrics, Microsoft Forms).
+        Methodologically, I come from a qualitative background, especially literature
+        review, semi-structured interviews, and document analysis. Over time, I am
+        building stronger quantitative skills to complement this work. I have
+        foundational skills in R, Python, SPSS, and survey design (Qualtrics and
+        Microsoft Forms), and am gaining more every day with the PhD and my
+        supervisor, Prof. Sarah Cen.
       </p>
     </section>
 
     <!-- PUBLICATIONS ────────────── -->
     <section id="publications">
-      <h2>Writing</h2>
+      <h2>Publications</h2>
+
+      <p>
+        For a fuller list and updates, please consult my
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=Yg6dnysAAAAJ" target="_blank" rel="noopener">Google Scholar profile</a>.
+      </p>
 
       <div class="pub-card">
-        <div class="pub-title">Deepseek under international scrutiny: balancing innovation and users' data protection</div>
-        <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2025</span></div>
+        <a href="https://www.privacylaws.com/reports-gateway/articles/int197/int197deepseek/" target="_blank" rel="noopener">
+          <div class="pub-title">DeepSeek under international scrutiny: balancing innovation and users' data protection</div>
+          <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2025</span></div>
+        </a>
       </div>
 
       <div class="pub-card">
-        <div class="pub-title">Unlocking the AI paradox?</div>
-        <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2023</span></div>
+        <a href="https://www.privacylaws.com/reports-gateway/articles/int184/" target="_blank" rel="noopener">
+          <div class="pub-title">Unlocking the AI paradox?</div>
+          <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2023</span></div>
+        </a>
       </div>
 
       <div class="pub-card">
-        <div class="pub-title">The AI Act: towards global effects?</div>
-        <div class="pub-meta">SSRN working paper &middot; <span class="pub-year">2023</span></div>
+        <a href="https://ssrn.com/abstract=4514993" target="_blank" rel="noopener">
+          <div class="pub-title">The AI Act: towards global effects?</div>
+          <div class="pub-meta">SSRN working paper &middot; <span class="pub-year">2023</span></div>
+        </a>
       </div>
 
       <div class="pub-card">
-        <div class="pub-title">Negotiations in tech: an analysis of asymmetric ransomware negotiations</div>
-        <div class="pub-meta">SSRN working paper &middot; <span class="pub-year">2023</span></div>
+        <a href="https://ssrn.com/abstract=4530094" target="_blank" rel="noopener">
+          <div class="pub-title">Negotiations in tech: an analysis of asymmetric ransomware negotiations</div>
+          <div class="pub-meta">SSRN working paper &middot; <span class="pub-year">2023</span></div>
+        </a>
       </div>
 
       <div class="pub-card">
-        <div class="pub-title">Get rewarded for giving your data away? The rise of &lsquo;neobrowsers&rsquo;</div>
-        <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2022</span></div>
+        <a href="https://www.privacylaws.com/media/4004/int179.pdf" target="_blank" rel="noopener">
+          <div class="pub-title">Get rewarded for giving your data away? The rise of &lsquo;neobrowsers&rsquo;</div>
+          <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2022</span></div>
+        </a>
       </div>
     </section>
 
     <!-- AWARDS ─────────────────── -->
     <section id="awards">
-      <h2>Honours</h2>
+      <h2>Relevant Honors and Awards</h2>
+
+      <div class="award-row">
+        <div class="award-year">2026</div>
+        <div>
+          <div class="award-name">Fulbright Scholarship &mdash; Doctoral Research Award (up to $2,500/month)</div>
+          <div class="award-org">Awarded by the Fulbright Commission of Luxembourg and Belgium; respectfully declined because my doctoral degree was already fully funded</div>
+        </div>
+      </div>
 
       <div class="award-row">
         <div class="award-year">2023</div>
@@ -712,8 +896,8 @@
       <div class="award-row">
         <div class="award-year">2022</div>
         <div>
-          <div class="award-name">Wellington Medal Nomination</div>
-          <div class="award-org">King's College London Business Faculty &mdash; selected from approximately 3,000 students</div>
+          <div class="award-name">Faculty nominee for the Wellington Medal</div>
+          <div class="award-org">King's College London Business Faculty &mdash; the award recognizes a student's excellent academic achievements, contributions to King's, and potential for the future</div>
         </div>
       </div>
 
@@ -727,9 +911,9 @@
     </section>
 
 
-    <!-- BLOG ───────────────────── -->
-    <section id="blog">
-      <h2>Notes</h2>
+    <!-- THOUGHTS ───────────────────── -->
+    <section id="thoughts">
+      <h2>Thoughts</h2>
 
       <p>Occasional writing on technology, policy, and ideas I find worth thinking about.</p>
 
@@ -757,8 +941,34 @@
           <div class="blog-content">
             <div class="blog-title">Children, Safety, and Generative AI</div>
             <div class="blog-meta">May 2026</div>
-            <p class="blog-blurb">A starting point for thinking about child wellbeing, platform design, and the safeguards that emerging AI systems require.</p>
+            <p class="blog-blurb">A starting point for thinking about child well-being, platform design, and the safeguards that emerging AI systems require.</p>
           </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- PERSONAL ────────────────── -->
+    <section id="personal">
+      <h2>Personal</h2>
+
+      <p>
+        I have been lucky to live, study, work, and travel across several places
+        that shaped how I see technology, policy, and people. This space is for a
+        quieter archive of those moments.
+      </p>
+
+      <div class="travel-grid">
+        <a class="travel-card" href="travel/europe.html">
+          <img src="assets/travel-europe.svg" alt="" />
+          <span>Europe</span>
+        </a>
+        <a class="travel-card" href="travel/united-states.html">
+          <img src="assets/travel-united-states.svg" alt="" />
+          <span>United States</span>
+        </a>
+        <a class="travel-card" href="travel/asia.html">
+          <img src="assets/travel-asia.svg" alt="" />
+          <span>Asia</span>
         </a>
       </div>
     </section>
@@ -776,9 +986,7 @@
         <div class="contact-row">
           <span class="contact-label">Email</span>
           <span class="contact-value">
-            <a href="mailto:jfaivre@andrew.cmu.edu">jfaivre@andrew.cmu.edu</a> &middot;
-            <a href="mailto:jecf2@cantab.ac.uk">jecf2@cantab.ac.uk</a> &middot;
-            <a href="mailto:juliette.ec.faivre@gmail.com">juliette.ec.faivre@gmail.com</a>
+            <a href="mailto:jfaivre@andrew.cmu.edu">jfaivre@andrew.cmu.edu</a>
           </span>
         </div>
         <div class="contact-row">

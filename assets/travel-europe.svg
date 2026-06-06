@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Europe travel placeholder">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#d7a5a4"/>
-      <stop offset="0.55" stop-color="#ead5d2"/>
-      <stop offset="1" stop-color="#f7f8fa"/>
+      <stop offset="0" stop-color="#83d7f5"/>
+      <stop offset="0.55" stop-color="#d8f0f7"/>
+      <stop offset="1" stop-color="#f7fbfd"/>
     </linearGradient>
   </defs>
   <rect width="640" height="480" fill="url(#sky)"/>
-  <path d="M0 348c80-48 154-64 226-48s134 54 210 34 132-72 204-60v206H0Z" fill="#8f3f4f" opacity=".28"/>
-  <path d="M0 380c84-32 154-36 210-12s116 45 184 24 142-58 246-30v118H0Z" fill="#3c1721" opacity=".52"/>
-  <rect x="92" y="202" width="74" height="128" fill="#f4ece8"/>
-  <rect x="190" y="164" width="86" height="166" fill="#fff7f3"/>
-  <rect x="312" y="118" width="72" height="212" fill="#f4ece8"/>
-  <rect x="420" y="186" width="96" height="144" fill="#fff7f3"/>
-  <path d="M92 202l37-46 37 46M190 164l43-52 43 52M312 118l36-52 36 52M420 186l48-50 48 50" fill="#6b2937"/>
-  <path d="M119 236h20M119 268h20M223 204h20M223 238h20M340 164h16M340 198h16M456 224h24M456 258h24" stroke="#8f3f4f" stroke-width="8" stroke-linecap="round"/>
+  <path d="M0 348c80-48 154-64 226-48s134 54 210 34 132-72 204-60v206H0Z" fill="#21aee8" opacity=".28"/>
+  <path d="M0 380c84-32 154-36 210-12s116 45 184 24 142-58 246-30v118H0Z" fill="#071827" opacity=".52"/>
+  <rect x="92" y="202" width="74" height="128" fill="#eef8fb"/>
+  <rect x="190" y="164" width="86" height="166" fill="#ffffff"/>
+  <rect x="312" y="118" width="72" height="212" fill="#eef8fb"/>
+  <rect x="420" y="186" width="96" height="144" fill="#ffffff"/>
+  <path d="M92 202l37-46 37 46M190 164l43-52 43 52M312 118l36-52 36 52M420 186l48-50 48 50" fill="#0b2d47"/>
+  <path d="M119 236h20M119 268h20M223 204h20M223 238h20M340 164h16M340 198h16M456 224h24M456 258h24" stroke="#168fc2" stroke-width="8" stroke-linecap="round"/>
 </svg>

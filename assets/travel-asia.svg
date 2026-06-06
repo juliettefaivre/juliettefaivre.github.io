@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Asia travel placeholder">
   <defs>
     <linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ead5d2"/>
-      <stop offset="0.56" stop-color="#d7a5a4"/>
-      <stop offset="1" stop-color="#5f2633"/>
+      <stop offset="0" stop-color="#d8f0f7"/>
+      <stop offset="0.56" stop-color="#83d7f5"/>
+      <stop offset="1" stop-color="#0b2d47"/>
     </linearGradient>
   </defs>
   <rect width="640" height="480" fill="url(#dawn)"/>
-  <circle cx="162" cy="132" r="54" fill="#fff7f3" opacity=".8"/>
+  <circle cx="162" cy="132" r="54" fill="#f7fbfd" opacity=".8"/>
   <path d="M0 322c86-30 176-40 270-8s206 12 370-38v204H0Z" fill="#14213d" opacity=".28"/>
-  <path d="M0 376c112-34 206-32 282 0s168 30 358-28v132H0Z" fill="#2a1117" opacity=".58"/>
-  <path d="M248 148h144l-72-42Z" fill="#6b2937"/>
-  <path d="M272 188h96v142h-96Z" fill="#fff7f3"/>
-  <path d="M226 188h188l-94-54Z" fill="#8f3f4f"/>
-  <path d="M292 226h56M292 260h56" stroke="#d7a5a4" stroke-width="10" stroke-linecap="round"/>
-  <path d="M226 330h188" stroke="#fff7f3" stroke-width="12" stroke-linecap="round"/>
+  <path d="M0 376c112-34 206-32 282 0s168 30 358-28v132H0Z" fill="#071827" opacity=".58"/>
+  <path d="M248 148h144l-72-42Z" fill="#0b2d47"/>
+  <path d="M272 188h96v142h-96Z" fill="#f7fbfd"/>
+  <path d="M226 188h188l-94-54Z" fill="#168fc2"/>
+  <path d="M292 226h56M292 260h56" stroke="#83d7f5" stroke-width="10" stroke-linecap="round"/>
+  <path d="M226 330h188" stroke="#f7fbfd" stroke-width="12" stroke-linecap="round"/>
 </svg>

@@ -197,16 +197,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      margin-top: 22px;
+      gap: 14px;
+      margin-top: 24px;
       animation: riseUp 0.9s 0.22s var(--ease) both;
     }
 
     .hero-social a {
       display: grid;
       place-items: center;
-      width: 34px;
-      height: 34px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       border: 1px solid rgba(255,255,255,0.2);
       color: rgba(255,255,255,0.82);
@@ -224,8 +224,8 @@
     }
 
     .hero-social svg {
-      width: 17px;
-      height: 17px;
+      width: 24px;
+      height: 24px;
       display: block;
     }
 
@@ -1739,7 +1739,7 @@
       <img class="hero-photo" src="juliette.jpg" alt="Juliette Faivre" />
 
       <h1 class="hero-name">Juliette Faivre</h1>
-      <p class="hero-sub">Doctoral Researcher at Carnegie Mellon University</p>
+      <p class="hero-sub">AI Policy Researcher at Carnegie Mellon University</p>
 
       <nav class="hero-social" aria-label="Profile links">
         <a href="mailto:jfaivre@andrew.cmu.edu" aria-label="Email Juliette Faivre">
@@ -2269,7 +2269,7 @@
       el.title = 'Follow the butterfly';
       el.innerHTML = butterflySvg;
       el.style.setProperty('--butterfly-size', '62px');
-      const wingBase = 0.5 + Math.random() * 0.09;
+      const wingBase = 0.56 + Math.random() * 0.1;
       el.style.setProperty('--wing-speed', `${wingBase.toFixed(2)}s`);
       el.style.setProperty('--right-wing-speed', `${(wingBase * 1.06).toFixed(2)}s`);
       el.style.setProperty('--right-wing-delay', `-${(wingBase * 0.18).toFixed(2)}s`);
@@ -2289,8 +2289,8 @@
           y: -120
         },
         vel: {
-          x: 0.58,
-          y: -0.18
+          x: 0.08,
+          y: -0.03
         },
         target: { x: 0, y: 0, s: 1 },
         nextTargetAt: 0,
@@ -2303,12 +2303,26 @@
 
     let lastFrame = performance.now();
 
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+    const normalizeZone = zone => {
+      const width = Math.max(1, zone.right - zone.left);
+      const height = Math.max(1, zone.bottom - zone.top);
+
+      return {
+        left: zone.left,
+        right: zone.left + width,
+        top: zone.top,
+        bottom: zone.top + height
+      };
+    };
+
     const getHeroAvoidRect = size => {
       if (!heroFrame) return null;
 
       const swarmRect = butterflySwarm.getBoundingClientRect();
       const frameRect = heroFrame.getBoundingClientRect();
-      const clearance = Math.max(28, size * 0.42);
+      const clearance = Math.max(34, size * 0.56);
 
       return {
         left: frameRect.left - swarmRect.left - size - clearance,
@@ -2318,54 +2332,64 @@
       };
     };
 
-    const pickOutsideHeroFrame = size => {
+    const getTopRightFloatZone = size => {
       const bounds = butterflySwarm.getBoundingClientRect();
       const margin = Math.min(120, Math.max(56, bounds.width * 0.08));
       const maxX = Math.max(margin, bounds.width - margin - size);
       const maxY = Math.max(margin, bounds.height - margin - size);
-      const avoid = getHeroAvoidRect(size);
+      const makeZone = ({ left, right, top, bottom }) => normalizeZone({
+        left: clamp(left, margin, maxX),
+        right: clamp(right, margin, maxX),
+        top: clamp(top, margin, maxY),
+        bottom: clamp(bottom, margin, maxY)
+      });
+      const fallback = makeZone({
+        left: bounds.width * 0.72,
+        right: maxX,
+        top: bounds.height * 0.1,
+        bottom: bounds.height * 0.28
+      });
 
-      if (!avoid) {
-        return {
-          x: margin + Math.random() * Math.max(1, maxX - margin),
-          y: margin + Math.random() * Math.max(1, maxY - margin)
-        };
+      if (!heroFrame) return fallback;
+
+      const swarmRect = butterflySwarm.getBoundingClientRect();
+      const frameRect = heroFrame.getBoundingClientRect();
+      const frameTop = frameRect.top - swarmRect.top;
+      const frameRight = frameRect.right - swarmRect.left;
+      const frameBottom = frameRect.bottom - swarmRect.top;
+      const sideLeft = frameRight + Math.max(34, size * 0.6);
+
+      if (sideLeft + 76 < maxX) {
+        const top = clamp(frameTop + 42, margin, maxY);
+        const bottom = clamp(Math.max(top + 76, Math.min(frameTop + 190, frameBottom - size * 0.5)), margin, maxY);
+
+        return makeZone({
+          left: sideLeft,
+          right: maxX,
+          top,
+          bottom
+        });
       }
 
-      const regions = [];
-      const addRegion = (x1, x2, y1, y2) => {
-        const left = Math.max(margin, x1);
-        const right = Math.min(maxX, x2);
-        const top = Math.max(margin, y1);
-        const bottom = Math.min(maxY, y2);
-        const area = Math.max(0, right - left) * Math.max(0, bottom - top);
-
-        if (area > 1) {
-          regions.push({ left, right, top, bottom, area });
-        }
-      };
-
-      addRegion(margin, maxX, margin, avoid.top);
-      addRegion(margin, maxX, avoid.bottom, maxY);
-      addRegion(margin, avoid.left, avoid.top, avoid.bottom);
-      addRegion(avoid.right, maxX, avoid.top, avoid.bottom);
-
-      if (!regions.length) {
-        return {
-          x: margin + Math.random() * Math.max(1, maxX - margin),
-          y: Math.max(margin, maxY - size * 0.8)
-        };
+      const aboveBottom = frameTop - size - 34;
+      if (aboveBottom > margin + 70) {
+        return makeZone({
+          left: bounds.width * 0.68,
+          right: maxX,
+          top: margin + 8,
+          bottom: aboveBottom
+        });
       }
 
-      let cursor = Math.random() * regions.reduce((total, region) => total + region.area, 0);
-      const region = regions.find(item => {
-        cursor -= item.area;
-        return cursor <= 0;
-      }) || regions[regions.length - 1];
+      return fallback;
+    };
+
+    const pickTopRightTarget = size => {
+      const zone = getTopRightFloatZone(size);
 
       return {
-        x: region.left + Math.random() * Math.max(1, region.right - region.left),
-        y: region.top + Math.random() * Math.max(1, region.bottom - region.top)
+        x: zone.left + Math.random() * Math.max(1, zone.right - zone.left),
+        y: zone.top + Math.random() * Math.max(1, zone.bottom - zone.top)
       };
     };
 
@@ -2388,7 +2412,7 @@
       if (avoid.bottom <= maxY) options.push({ x, y: avoid.bottom, distance: Math.abs(avoid.bottom - y) });
 
       if (!options.length) {
-        return { ...pickOutsideHeroFrame(size), changed: true };
+        return { ...pickTopRightTarget(size), changed: true };
       }
 
       options.sort((a, b) => a.distance - b.distance);
@@ -2407,12 +2431,12 @@
 
     const pickTarget = butterfly => {
       const size = butterfly.el.offsetWidth || 62;
-      const nextTarget = pickOutsideHeroFrame(size);
+      const nextTarget = pickTopRightTarget(size);
 
       butterfly.target.x = nextTarget.x;
       butterfly.target.y = nextTarget.y;
-      butterfly.target.s = 0.74 + Math.random() * 0.22;
-      butterfly.nextTargetAt = performance.now() + 2100 + Math.random() * 2600;
+      butterfly.target.s = 0.82 + Math.random() * 0.1;
+      butterfly.nextTargetAt = performance.now() + 7600 + Math.random() * 4200;
     };
 
     const openButterflyPortal = (href, sourceEl) => {
@@ -2504,35 +2528,31 @@
       butterflies.forEach((butterfly, index) => {
         const { el, pos, vel, target } = butterfly;
 
-        if (now > butterfly.nextTargetAt || Math.hypot(target.x - pos.x, target.y - pos.y) < 46) {
+        if (now > butterfly.nextTargetAt || Math.hypot(target.x - pos.x, target.y - pos.y) < 24) {
           pickTarget(butterfly);
         }
 
         const dx = target.x - pos.x;
         const dy = target.y - pos.y;
         const distance = Math.max(Math.hypot(dx, dy), 1);
-        const wander =
-          0.88 +
-          Math.sin((now + butterfly.phase) / 920) * 0.16 +
-          Math.sin((now + butterfly.phase * 1.7) / 360) * 0.08;
-        const desiredSpeed = Math.min(butterfly.speed * wander, 0.38 + distance / 210);
+        const desiredSpeed = Math.min(0.42, distance / 520);
         const desiredX = (dx / distance) * desiredSpeed;
         const desiredY = (dy / distance) * desiredSpeed;
-        const steering = 0.028 + Math.min(distance / 9000, 0.018);
+        const steering = 0.018 + Math.min(distance / 14000, 0.012);
 
         vel.x += (desiredX - vel.x) * steering * delta;
         vel.y += (desiredY - vel.y) * steering * delta;
 
         vel.x += (
-          Math.sin((now + butterfly.phase) / 410) * 0.006 +
-          Math.sin((now + butterfly.phase * 1.3) / 1370) * 0.004
+          Math.sin((now + butterfly.phase) / 1400) * 0.0018 +
+          Math.sin((now + butterfly.phase * 1.3) / 3200) * 0.0012
         ) * delta;
         vel.y += (
-          Math.cos((now + butterfly.phase) / 390) * 0.007 +
-          Math.sin((now + butterfly.phase) / 880) * 0.004
+          Math.cos((now + butterfly.phase) / 1500) * 0.0018 +
+          Math.sin((now + butterfly.phase) / 2800) * 0.0012
         ) * delta;
 
-        const maxSpeed = 2.18;
+        const maxSpeed = 0.58;
         let currentSpeed = Math.max(Math.hypot(vel.x, vel.y), 0.001);
         if (currentSpeed > maxSpeed) {
           vel.x = (vel.x / currentSpeed) * maxSpeed;
@@ -2550,15 +2570,15 @@
           el.style.setProperty('--right-wing-speed', `${(wingSpeed * (1.04 + Math.random() * 0.06)).toFixed(2)}s`);
           el.style.setProperty('--right-wing-delay', `-${(wingSpeed * (0.14 + Math.random() * 0.08)).toFixed(2)}s`);
           el.style.setProperty('--body-speed', `${(wingSpeed * 2.25).toFixed(2)}s`);
-          butterfly.nextWingShiftAt = now + 620 + Math.random() * 760;
+          butterfly.nextWingShiftAt = now + 950 + Math.random() * 980;
         }
 
         const driftX =
-          Math.sin((now + butterfly.phase) / (780 + index * 90)) * (10 + index * 3) +
-          Math.sin((now + butterfly.phase) / 1530) * 7;
+          Math.sin((now + butterfly.phase) / (1800 + index * 90)) * 24 +
+          Math.sin((now + butterfly.phase) / 4200) * 10;
         const driftY =
-          Math.cos((now + butterfly.phase) / (640 + index * 110)) * (9 + index * 2) +
-          Math.sin((now + butterfly.phase * 1.8) / 1180) * 5;
+          Math.cos((now + butterfly.phase) / (2100 + index * 110)) * 18 +
+          Math.sin((now + butterfly.phase * 1.8) / 3600) * 7;
         let drawX = pos.x + driftX;
         let drawY = pos.y + driftY;
         const safePoint = keepOutsideHeroFrame(drawX, drawY, (el.offsetWidth || 62) * target.s);
@@ -2566,15 +2586,15 @@
         if (safePoint.changed) {
           pos.x += safePoint.x - drawX;
           pos.y += safePoint.y - drawY;
-          vel.x *= -0.18;
-          vel.y *= -0.18;
+          vel.x *= -0.08;
+          vel.y *= -0.08;
           pickTarget(butterfly);
           drawX = safePoint.x;
           drawY = safePoint.y;
         }
 
         const heading = Math.atan2(vel.y, vel.x) * 180 / Math.PI;
-        const tilt = Math.max(-31, Math.min(31, heading * 0.38 + Math.sin(now / 340) * 5 + vel.y * 3.2));
+        const tilt = Math.max(-16, Math.min(16, heading * 0.22 + Math.sin((now + butterfly.phase) / 1400) * 5));
 
         el.style.setProperty('--butterfly-x', `${drawX}px`);
         el.style.setProperty('--butterfly-y', `${drawY}px`);

@@ -193,6 +193,54 @@
       animation: riseUp 0.9s 0.16s var(--ease) both;
     }
 
+    .hero-social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 22px;
+      animation: riseUp 0.9s 0.22s var(--ease) both;
+    }
+
+    .hero-social a {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.82);
+      background: rgba(255,255,255,0.055);
+      text-decoration: none;
+      transition: color 0.16s var(--ease), border-color 0.16s var(--ease), background 0.16s var(--ease), transform 0.16s var(--ease);
+    }
+
+    .hero-social a:hover,
+    .hero-social a:focus-visible {
+      color: #ffffff;
+      border-color: rgba(255,255,255,0.42);
+      background: rgba(255,255,255,0.11);
+      transform: translateY(-1px);
+    }
+
+    .hero-social svg {
+      width: 17px;
+      height: 17px;
+      display: block;
+    }
+
+    .hero-social .icon-stroke {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .hero-social .icon-fill {
+      fill: currentColor;
+    }
+
     .hero-note {
       position: relative;
       z-index: 1;
@@ -1680,7 +1728,34 @@
       <img class="hero-photo" src="juliette.jpg" alt="Juliette Faivre" />
 
       <h1 class="hero-name">Juliette Faivre</h1>
-      <p class="hero-sub">First-year PhD student in Engineering &amp; Public Policy at Carnegie Mellon, working on the governance of artificial intelligence and emerging technologies.</p>
+      <p class="hero-sub">Doctoral Researcher at Carnegie Mellon University</p>
+
+      <nav class="hero-social" aria-label="Profile links">
+        <a href="mailto:jfaivre@andrew.cmu.edu" aria-label="Email Juliette Faivre">
+          <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+            <path class="icon-stroke" d="M4.5 6.5h15v11h-15z" />
+            <path class="icon-stroke" d="m5 7 7 6 7-6" />
+          </svg>
+        </a>
+        <a href="https://scholar.google.com/citations?user=Yg6dnysAAAAJ&amp;hl=en" target="_blank" rel="noopener" aria-label="Google Scholar profile">
+          <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+            <path class="icon-stroke" d="M3.5 9.5 12 5l8.5 4.5L12 14z" />
+            <path class="icon-stroke" d="M6.5 11.2v4.3c1.3 1.7 3.1 2.5 5.5 2.5s4.2-.8 5.5-2.5v-4.3" />
+            <path class="icon-stroke" d="M20.5 9.5v5" />
+          </svg>
+        </a>
+        <a href="https://linkedin.com/in/juliette-faivre" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+            <path class="icon-fill" d="M6.8 8.8H3.9v10h2.9v-10ZM5.4 4.1a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Zm13.5 9c0-3-1.6-4.5-3.8-4.5-1.8 0-2.6 1-3 1.7V8.8H9.3v10h2.9v-5c0-1.4.7-2.3 1.9-2.3s1.8.8 1.8 2.3v5h3v-5.7Z" />
+          </svg>
+        </a>
+        <a href="https://x.com/juliettefaivre" target="_blank" rel="noopener" aria-label="X profile">
+          <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+            <path class="icon-stroke" d="M4.5 4.8 19.5 19.2" />
+            <path class="icon-stroke" d="M19 4.8 4.8 19.2" />
+          </svg>
+        </a>
+      </nav>
     </div>
 
     <aside class="hero-note" aria-label="Brief profile">
@@ -2064,6 +2139,7 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   if (butterflySwarm && !reduceMotion.matches) {
+    const heroFrame = document.querySelector('.hero-inner');
     let butterflyVisible = true;
     let portalOpening = false;
     const butterflySvg = `
@@ -2195,8 +2271,8 @@
       return {
         el,
         pos: {
-          x: Math.random() * butterflySwarm.clientWidth,
-          y: Math.random() * butterflySwarm.clientHeight
+          x: -120,
+          y: -120
         },
         vel: {
           x: 0.58,
@@ -2213,14 +2289,114 @@
 
     let lastFrame = performance.now();
 
-    const pickTarget = butterfly => {
+    const getHeroAvoidRect = size => {
+      if (!heroFrame) return null;
+
+      const swarmRect = butterflySwarm.getBoundingClientRect();
+      const frameRect = heroFrame.getBoundingClientRect();
+      const clearance = Math.max(28, size * 0.42);
+
+      return {
+        left: frameRect.left - swarmRect.left - size - clearance,
+        right: frameRect.right - swarmRect.left + clearance,
+        top: frameRect.top - swarmRect.top - size - clearance,
+        bottom: frameRect.bottom - swarmRect.top + clearance
+      };
+    };
+
+    const pickOutsideHeroFrame = size => {
       const bounds = butterflySwarm.getBoundingClientRect();
       const margin = Math.min(120, Math.max(56, bounds.width * 0.08));
-      const width = Math.max(1, bounds.width - margin * 2);
-      const height = Math.max(1, bounds.height - margin * 2);
+      const maxX = Math.max(margin, bounds.width - margin - size);
+      const maxY = Math.max(margin, bounds.height - margin - size);
+      const avoid = getHeroAvoidRect(size);
 
-      butterfly.target.x = margin + Math.random() * width;
-      butterfly.target.y = margin + Math.random() * height;
+      if (!avoid) {
+        return {
+          x: margin + Math.random() * Math.max(1, maxX - margin),
+          y: margin + Math.random() * Math.max(1, maxY - margin)
+        };
+      }
+
+      const regions = [];
+      const addRegion = (x1, x2, y1, y2) => {
+        const left = Math.max(margin, x1);
+        const right = Math.min(maxX, x2);
+        const top = Math.max(margin, y1);
+        const bottom = Math.min(maxY, y2);
+        const area = Math.max(0, right - left) * Math.max(0, bottom - top);
+
+        if (area > 1) {
+          regions.push({ left, right, top, bottom, area });
+        }
+      };
+
+      addRegion(margin, maxX, margin, avoid.top);
+      addRegion(margin, maxX, avoid.bottom, maxY);
+      addRegion(margin, avoid.left, avoid.top, avoid.bottom);
+      addRegion(avoid.right, maxX, avoid.top, avoid.bottom);
+
+      if (!regions.length) {
+        return {
+          x: margin + Math.random() * Math.max(1, maxX - margin),
+          y: Math.max(margin, maxY - size * 0.8)
+        };
+      }
+
+      let cursor = Math.random() * regions.reduce((total, region) => total + region.area, 0);
+      const region = regions.find(item => {
+        cursor -= item.area;
+        return cursor <= 0;
+      }) || regions[regions.length - 1];
+
+      return {
+        x: region.left + Math.random() * Math.max(1, region.right - region.left),
+        y: region.top + Math.random() * Math.max(1, region.bottom - region.top)
+      };
+    };
+
+    const keepOutsideHeroFrame = (x, y, size) => {
+      const avoid = getHeroAvoidRect(size);
+
+      if (!avoid || x <= avoid.left || x >= avoid.right || y <= avoid.top || y >= avoid.bottom) {
+        return { x, y, changed: false };
+      }
+
+      const bounds = butterflySwarm.getBoundingClientRect();
+      const margin = Math.min(120, Math.max(56, bounds.width * 0.08));
+      const maxX = Math.max(margin, bounds.width - margin - size);
+      const maxY = Math.max(margin, bounds.height - margin - size);
+      const options = [];
+
+      if (avoid.left >= margin) options.push({ x: avoid.left, y, distance: Math.abs(x - avoid.left) });
+      if (avoid.right <= maxX) options.push({ x: avoid.right, y, distance: Math.abs(avoid.right - x) });
+      if (avoid.top >= margin) options.push({ x, y: avoid.top, distance: Math.abs(y - avoid.top) });
+      if (avoid.bottom <= maxY) options.push({ x, y: avoid.bottom, distance: Math.abs(avoid.bottom - y) });
+
+      if (!options.length) {
+        return { ...pickOutsideHeroFrame(size), changed: true };
+      }
+
+      options.sort((a, b) => a.distance - b.distance);
+      let nextX = x;
+      let nextY = y;
+
+      nextX = options[0].x;
+      nextY = options[0].y;
+
+      return {
+        x: Math.max(margin, Math.min(maxX, nextX)),
+        y: Math.max(margin, Math.min(maxY, nextY)),
+        changed: true
+      };
+    };
+
+    const pickTarget = butterfly => {
+      const size = butterfly.el.offsetWidth || 62;
+      const nextTarget = pickOutsideHeroFrame(size);
+
+      butterfly.target.x = nextTarget.x;
+      butterfly.target.y = nextTarget.y;
       butterfly.target.s = 0.74 + Math.random() * 0.22;
       butterfly.nextTargetAt = performance.now() + 2100 + Math.random() * 2600;
     };
@@ -2369,11 +2545,25 @@
         const driftY =
           Math.cos((now + butterfly.phase) / (640 + index * 110)) * (9 + index * 2) +
           Math.sin((now + butterfly.phase * 1.8) / 1180) * 5;
+        let drawX = pos.x + driftX;
+        let drawY = pos.y + driftY;
+        const safePoint = keepOutsideHeroFrame(drawX, drawY, (el.offsetWidth || 62) * target.s);
+
+        if (safePoint.changed) {
+          pos.x += safePoint.x - drawX;
+          pos.y += safePoint.y - drawY;
+          vel.x *= -0.18;
+          vel.y *= -0.18;
+          pickTarget(butterfly);
+          drawX = safePoint.x;
+          drawY = safePoint.y;
+        }
+
         const heading = Math.atan2(vel.y, vel.x) * 180 / Math.PI;
         const tilt = Math.max(-31, Math.min(31, heading * 0.38 + Math.sin(now / 340) * 5 + vel.y * 3.2));
 
-        el.style.setProperty('--butterfly-x', `${pos.x + driftX}px`);
-        el.style.setProperty('--butterfly-y', `${pos.y + driftY}px`);
+        el.style.setProperty('--butterfly-x', `${drawX}px`);
+        el.style.setProperty('--butterfly-y', `${drawY}px`);
         el.style.setProperty('--butterfly-r', `${tilt}deg`);
         el.style.setProperty('--butterfly-s', target.s.toFixed(2));
       });
@@ -2381,7 +2571,11 @@
       requestAnimationFrame(fly);
     };
 
-    butterflies.forEach(pickTarget);
+    butterflies.forEach(butterfly => {
+      pickTarget(butterfly);
+      butterfly.pos.x = butterfly.target.x;
+      butterfly.pos.y = butterfly.target.y;
+    });
     requestAnimationFrame(fly);
     window.addEventListener('resize', () => butterflies.forEach(pickTarget));
     window.addEventListener('pageshow', () => {

@@ -328,7 +328,7 @@
       z-index: -1;
       border-radius: 50%;
       background:
-        radial-gradient(circle, rgba(245,251,255,0.96), rgba(156,236,255,0.68) 32%, rgba(33,174,232,0.34) 56%, transparent 76%);
+        radial-gradient(circle, rgba(245,251,255,0.78), rgba(156,236,255,0.48) 32%, rgba(33,174,232,0.22) 56%, transparent 76%);
       opacity: 0;
       transform: scale(0.76);
       filter: blur(14px);
@@ -339,9 +339,9 @@
     .butterfly:focus-visible {
       opacity: 1;
       filter:
-        drop-shadow(0 0 14px rgba(245,251,255,0.9))
-        drop-shadow(0 0 30px rgba(156,236,255,0.76))
-        drop-shadow(0 0 54px rgba(33,174,232,0.48))
+        drop-shadow(0 0 12px rgba(245,251,255,0.72))
+        drop-shadow(0 0 24px rgba(156,236,255,0.5))
+        drop-shadow(0 0 42px rgba(33,174,232,0.28))
         drop-shadow(0 12px 20px rgba(15,55,70,0.28));
     }
 
@@ -382,11 +382,11 @@
       opacity: 0;
       background:
         radial-gradient(circle at var(--portal-x) var(--portal-y),
-          rgba(98,230,243,0.22) 0 7%,
-          rgba(14,91,130,0.28) 18%,
-          rgba(7,24,39,0.82) 48%,
-        rgba(2,7,12,0.99) 100%);
-      transition: opacity 0.12s ease-out;
+          rgba(216,240,247,0.22) 0 6%,
+          rgba(33,174,232,0.16) 17%,
+          rgba(7,24,39,0.86) 46%,
+          rgba(2,7,12,0.99) 100%);
+      transition: opacity 0.08s ease-out;
     }
 
     .butterfly-portal::before {
@@ -397,10 +397,10 @@
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: rgba(98,230,243,0.72);
-      box-shadow: 0 0 32px rgba(98,230,243,0.86);
+      background: rgba(216,240,247,0.68);
+      box-shadow: 0 0 28px rgba(156,236,255,0.62);
       transform: translate(-50%, -50%);
-      animation: portalSeed 0.32s ease-out both;
+      animation: portalSeed 0.22s ease-out both;
     }
 
     .butterfly-portal.is-open {
@@ -422,14 +422,14 @@
     .butterfly-portal::after {
       background:
         conic-gradient(from 120deg,
-          rgba(98,230,243,0.95),
-          rgba(74,168,255,0.9),
-          rgba(255,215,130,0.78),
-          rgba(240,143,143,0.74),
-          rgba(155,230,157,0.76),
-          rgba(98,230,243,0.95));
-      filter: blur(9px) saturate(1.15);
-      animation: portalIris 0.92s 0.54s cubic-bezier(0.14, 0.72, 0.18, 1) both;
+          rgba(216,240,247,0.82),
+          rgba(33,174,232,0.56),
+          rgba(5,32,51,0.84),
+          rgba(79,109,127,0.38),
+          rgba(9,45,70,0.82),
+          rgba(216,240,247,0.82));
+      filter: blur(11px) saturate(0.86);
+      animation: portalIris 0.62s 0.18s cubic-bezier(0.08, 0.78, 0.14, 1) both;
     }
 
     .portal-butterfly {
@@ -439,7 +439,7 @@
       width: var(--portal-full-size);
       transform: translate(-50%, -50%) scale(var(--portal-start-scale)) rotate(0deg);
       transform-origin: center;
-      animation: portalDive 1.3s cubic-bezier(0.14, 0.72, 0.18, 1) both;
+      animation: portalDive 0.86s cubic-bezier(0.08, 0.78, 0.14, 1) both;
     }
 
     .portal-butterfly::before {
@@ -449,12 +449,12 @@
       z-index: -1;
       border-radius: 50%;
       background:
-        radial-gradient(circle, rgba(98,230,243,0.44), transparent 56%),
-        radial-gradient(circle at 24% 42%, rgba(255,215,130,0.2), transparent 32%),
-        radial-gradient(circle at 76% 42%, rgba(240,143,143,0.16), transparent 32%);
+        radial-gradient(circle, rgba(216,240,247,0.32), transparent 58%),
+        radial-gradient(circle at 24% 42%, rgba(33,174,232,0.16), transparent 34%),
+        radial-gradient(circle at 76% 42%, rgba(79,109,127,0.14), transparent 34%);
       filter: blur(24px);
-      opacity: 0.9;
-      animation: portalButterflyGlow 0.9s 0.42s cubic-bezier(0.14, 0.72, 0.18, 1) both;
+      opacity: 0.72;
+      animation: portalButterflyGlow 0.5s 0.2s cubic-bezier(0.08, 0.78, 0.14, 1) both;
     }
 
     .portal-butterfly svg {
@@ -474,13 +474,14 @@
     .portal-butterfly .portal-left-wing {
       transform-box: fill-box;
       transform-origin: right center;
-      animation: portalWingLeft 0.32s ease-in-out infinite alternate;
+      animation: portalWingLeft 0.2s cubic-bezier(0.36, 0, 0.2, 1) infinite;
     }
 
     .portal-butterfly .portal-right-wing {
       transform-box: fill-box;
       transform-origin: left center;
-      animation: portalWingRight 0.32s ease-in-out infinite alternate;
+      animation: portalWingRight 0.21s cubic-bezier(0.36, 0, 0.2, 1) infinite;
+      animation-delay: -0.04s;
     }
 
     .portal-tunnel {
@@ -492,20 +493,20 @@
       background:
         radial-gradient(circle at 50% 50%,
           transparent 0 8%,
-          rgba(98,230,243,0.34) 9%,
-          rgba(7,24,39,0.78) 44%,
+          rgba(216,240,247,0.22) 9%,
+          rgba(7,24,39,0.82) 43%,
           rgba(2,7,12,0.96) 100%),
         repeating-radial-gradient(circle at 50% 50%,
-          rgba(216,240,247,0.14) 0 2px,
-          transparent 3px 42px),
+          rgba(216,240,247,0.12) 0 2px,
+          transparent 3px 38px),
         conic-gradient(from 0deg,
-          rgba(98,230,243,0.12),
-          rgba(74,168,255,0.18),
-          rgba(255,215,130,0.09),
-          rgba(240,143,143,0.09),
-          rgba(155,230,157,0.1),
-          rgba(98,230,243,0.12));
-      animation: portalTunnel 0.54s 1.02s cubic-bezier(0.14, 0.72, 0.18, 1) both;
+          rgba(216,240,247,0.1),
+          rgba(33,174,232,0.16),
+          rgba(2,7,12,0.22),
+          rgba(79,109,127,0.12),
+          rgba(2,7,12,0.26),
+          rgba(216,240,247,0.1));
+      animation: portalTunnel 0.38s 0.52s cubic-bezier(0.08, 0.78, 0.14, 1) both;
     }
 
     .portal-tunnel::before {
@@ -516,19 +517,19 @@
       background:
         repeating-radial-gradient(circle at 50% 50%,
           transparent 0 38px,
-          rgba(216,240,247,0.14) 39px 41px,
+          rgba(216,240,247,0.13) 39px 41px,
           transparent 42px 76px),
         conic-gradient(from 40deg,
-          rgba(98,230,243,0.16),
-          rgba(2,7,12,0.2),
-          rgba(74,168,255,0.18),
+          rgba(216,240,247,0.12),
           rgba(2,7,12,0.24),
-          rgba(155,230,157,0.1),
+          rgba(33,174,232,0.16),
+          rgba(2,7,12,0.28),
+          rgba(79,109,127,0.1),
           rgba(2,7,12,0.2),
-          rgba(98,230,243,0.16));
+          rgba(216,240,247,0.12));
       border-radius: 50%;
       opacity: 0;
-      animation: portalCheckerRush 0.54s 1.02s linear both;
+      animation: portalCheckerRush 0.38s 0.52s linear both;
     }
 
     .portal-tunnel::after {
@@ -542,25 +543,25 @@
       border-radius: 45% 45% 10px 10px;
       transform: translate(-50%, -50%) scale(0.22);
       background:
-        radial-gradient(circle at 70% 51%, rgba(255,215,130,0.95) 0 2.2%, transparent 2.4%),
-        linear-gradient(135deg, rgba(98,230,243,0.7), rgba(139,124,246,0.42) 58%, rgba(4,11,18,0.9));
+        radial-gradient(circle at 70% 51%, rgba(216,240,247,0.86) 0 2.2%, transparent 2.4%),
+        linear-gradient(135deg, rgba(216,240,247,0.32), rgba(33,174,232,0.24) 58%, rgba(4,11,18,0.94));
       box-shadow:
-        0 0 44px rgba(98,230,243,0.56),
+        0 0 38px rgba(156,236,255,0.42),
         inset 0 0 36px rgba(255,255,255,0.16);
-      animation: portalDoorRush 0.54s 1.08s cubic-bezier(0.14, 0.72, 0.18, 1) both;
+      animation: portalDoorRush 0.34s 0.58s cubic-bezier(0.08, 0.78, 0.14, 1) both;
     }
 
     .portal-spark {
       position: absolute;
       left: var(--portal-x);
       top: var(--portal-y);
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--spark-color);
-      box-shadow: 0 0 18px var(--spark-color);
+      width: 2px;
+      height: var(--spark-length, 26px);
+      border-radius: 999px;
+      background: linear-gradient(180deg, transparent, var(--spark-color), transparent);
+      box-shadow: 0 0 14px var(--spark-color);
       transform: translate(-50%, -50%);
-      animation: portalSpark 0.76s ease-out var(--spark-delay) both;
+      animation: portalSpark 0.44s ease-out var(--spark-delay) both;
     }
 
     .portal-connector {
@@ -569,42 +570,45 @@
       top: 0;
       width: var(--connector-distance);
       height: 2px;
-      background: linear-gradient(90deg, rgba(98,230,243,0), rgba(156,236,255,0.92), rgba(98,230,243,0));
-      box-shadow: 0 0 16px rgba(98,230,243,0.68);
+      background: linear-gradient(90deg, rgba(98,230,243,0), rgba(216,240,247,0.84), rgba(98,230,243,0));
+      box-shadow: 0 0 14px rgba(156,236,255,0.48);
       transform-origin: left center;
       transform:
         translate(var(--portal-x), var(--portal-y))
         rotate(var(--connector-angle));
       opacity: 0;
-      animation: portalConnector 0.42s ease-out both;
+      animation: portalConnector 0.24s ease-out both;
     }
 
     @keyframes portalDive {
       0% {
         opacity: 1;
+        filter: blur(0) brightness(1);
         transform:
           translate(calc(-50% + var(--portal-offset-x)), calc(-50% + var(--portal-offset-y)))
           scale(var(--portal-start-scale))
           rotate(0deg);
       }
-      24% {
+      18% {
         opacity: 1;
         transform:
-          translate(calc(-50% + var(--portal-offset-x) * 0.36), calc(-50% + var(--portal-offset-y) * 0.36))
+          translate(calc(-50% + var(--portal-offset-x) * 0.28), calc(-50% + var(--portal-offset-y) * 0.28))
           scale(var(--portal-pop-scale))
-          rotate(-6deg);
+          rotate(-8deg);
       }
-      70% {
+      52% {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(0.94) rotate(9deg);
+        filter: blur(0.2px) brightness(1.06);
+        transform: translate(-50%, -50%) scale(0.98) rotate(13deg);
       }
-      84% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.05) rotate(-4deg);
+      74% {
+        opacity: 0.92;
+        transform: translate(-50%, -50%) scale(1.38) rotate(-18deg);
       }
       100% {
-        opacity: 0.28;
-        transform: translate(-50%, -50%) scale(var(--portal-end-scale)) rotate(-12deg);
+        opacity: 0.08;
+        filter: blur(5px) brightness(0.82);
+        transform: translate(-50%, -50%) scale(var(--portal-end-scale)) rotate(-34deg);
       }
     }
 
@@ -624,12 +628,12 @@
     @keyframes portalIris {
       0% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.06) rotate(0deg);
+        transform: translate(-50%, -50%) scale(0.05) rotate(0deg);
       }
-      18% { opacity: 0.82; }
+      16% { opacity: 0.7; }
       100% {
-        opacity: 0.92;
-        transform: translate(-50%, -50%) scale(5.8) rotate(190deg);
+        opacity: 0.84;
+        transform: translate(-50%, -50%) scale(6.8) rotate(290deg);
       }
     }
 
@@ -649,26 +653,30 @@
     }
 
     @keyframes portalWingLeft {
-      from { transform: rotate(-8deg) scaleX(1); }
-      to { transform: rotate(18deg) scaleX(0.88); }
+      0%, 100% { transform: rotate(-12deg) scaleX(1) skewY(0deg); }
+      38% { transform: rotate(27deg) scaleX(0.74) skewY(-3deg); }
+      58% { transform: rotate(10deg) scaleX(0.9) skewY(1deg); }
+      78% { transform: rotate(21deg) scaleX(0.78) skewY(-2deg); }
     }
 
     @keyframes portalWingRight {
-      from { transform: rotate(8deg) scaleX(1); }
-      to { transform: rotate(-18deg) scaleX(0.88); }
+      0%, 100% { transform: rotate(12deg) scaleX(1) skewY(0deg); }
+      36% { transform: rotate(-27deg) scaleX(0.74) skewY(3deg); }
+      58% { transform: rotate(-10deg) scaleX(0.9) skewY(-1deg); }
+      78% { transform: rotate(-21deg) scaleX(0.78) skewY(2deg); }
     }
 
     @keyframes portalTunnel {
       0% {
         opacity: 0;
-        filter: brightness(1.1) saturate(1);
+        filter: brightness(1.08) saturate(0.85) blur(2px);
       }
-      34% {
-        opacity: 0.78;
+      30% {
+        opacity: 0.72;
       }
       100% {
         opacity: 1;
-        filter: brightness(1.08) saturate(1.12);
+        filter: brightness(0.98) saturate(0.82) blur(0);
       }
     }
 
@@ -679,9 +687,9 @@
         transform: scale(0.72) rotate(0deg);
       }
       to {
-        opacity: 0.46;
-        background-position: 0 0, 160px 160px;
-        transform: scale(1.08) rotate(26deg);
+        opacity: 0.5;
+        background-position: 0 0, 210px 210px;
+        transform: scale(1.22) rotate(48deg);
       }
     }
 
@@ -696,7 +704,7 @@
       }
       100% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(4.8) rotate(0deg);
+        transform: translate(-50%, -50%) scale(5.6) rotate(0deg);
       }
     }
 
@@ -716,7 +724,8 @@
           translate(-50%, -50%)
           rotate(var(--spark-angle))
           translateX(var(--spark-distance))
-          scale(0.12);
+          scaleY(1.9)
+          scaleX(0.36);
       }
     }
 
@@ -743,19 +752,20 @@
     .butterfly-left-wing {
       transform-box: fill-box;
       transform-origin: right center;
-      animation: butterflyLeft var(--wing-speed, 0.48s) cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      animation: butterflyLeft var(--wing-speed, 0.54s) cubic-bezier(0.36, 0, 0.2, 1) infinite;
+      animation-delay: var(--left-wing-delay, 0s);
     }
 
     .butterfly-right-wing {
       transform-box: fill-box;
       transform-origin: left center;
-      animation: butterflyRight 0.56s cubic-bezier(0.45, 0, 0.2, 1) infinite;
-      animation-delay: -0.08s;
+      animation: butterflyRight var(--right-wing-speed, 0.57s) cubic-bezier(0.36, 0, 0.2, 1) infinite;
+      animation-delay: var(--right-wing-delay, -0.08s);
     }
 
     .butterfly-body {
       transform-origin: center;
-      animation: butterflyBody 1.12s ease-in-out infinite alternate;
+      animation: butterflyBody var(--body-speed, 1.18s) ease-in-out infinite alternate;
     }
 
     /* ══════════════════════════════════════════
@@ -1274,18 +1284,21 @@
     }
 
     @keyframes butterflyLeft {
-      0% { transform: rotate(-7deg) scaleX(1) skewY(0deg); }
-      22% { transform: rotate(18deg) scaleX(0.78) skewY(-2deg); }
-      48% { transform: rotate(5deg) scaleX(0.92) skewY(1deg); }
-      72% { transform: rotate(24deg) scaleX(0.72) skewY(-3deg); }
-      100% { transform: rotate(-5deg) scaleX(0.98) skewY(0deg); }
+      0%, 100% { transform: rotate(-11deg) scaleX(1) skewY(0deg) translateY(0); }
+      13% { transform: rotate(-4deg) scaleX(0.96) skewY(1deg) translateY(-0.4px); }
+      31% { transform: rotate(25deg) scaleX(0.72) skewY(-3deg) translateY(0.9px); }
+      47% { transform: rotate(7deg) scaleX(0.9) skewY(1deg) translateY(-0.2px); }
+      63% { transform: rotate(18deg) scaleX(0.79) skewY(-2deg) translateY(0.5px); }
+      81% { transform: rotate(-7deg) scaleX(0.98) skewY(0deg) translateY(-0.6px); }
     }
 
     @keyframes butterflyRight {
-      0% { transform: rotate(5deg) scaleX(0.86); }
-      30% { transform: rotate(-15deg) scaleX(0.68); }
-      60% { transform: rotate(-3deg) scaleX(0.78); }
-      100% { transform: rotate(8deg) scaleX(0.88); }
+      0%, 100% { transform: rotate(11deg) scaleX(1) skewY(0deg) translateY(0); }
+      12% { transform: rotate(4deg) scaleX(0.96) skewY(-1deg) translateY(-0.4px); }
+      29% { transform: rotate(-25deg) scaleX(0.72) skewY(3deg) translateY(0.9px); }
+      46% { transform: rotate(-7deg) scaleX(0.9) skewY(-1deg) translateY(-0.2px); }
+      64% { transform: rotate(-18deg) scaleX(0.79) skewY(2deg) translateY(0.5px); }
+      82% { transform: rotate(7deg) scaleX(0.98) skewY(0deg) translateY(-0.6px); }
     }
 
     @keyframes butterflyBody {
@@ -1837,6 +1850,13 @@
       </p>
 
       <div class="pub-card">
+        <a href="https://arxiv.org/abs/2607.02144" target="_blank" rel="noopener">
+          <div class="pub-title">Taxing Artificial Intelligence</div>
+          <div class="pub-meta">arXiv working paper &middot; with Sarah H. Cen &middot; <span class="pub-year">2026</span></div>
+        </a>
+      </div>
+
+      <div class="pub-card">
         <a href="https://www.privacylaws.com/reports-gateway/articles/int197/int197deepseek/" target="_blank" rel="noopener">
           <div class="pub-title">DeepSeek under international scrutiny: balancing innovation and users' data protection</div>
           <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2025</span></div>
@@ -2159,7 +2179,11 @@
       el.title = 'Follow the butterfly';
       el.innerHTML = butterflySvg;
       el.style.setProperty('--butterfly-size', '62px');
-      el.style.setProperty('--wing-speed', '0.48s');
+      const wingBase = 0.5 + Math.random() * 0.09;
+      el.style.setProperty('--wing-speed', `${wingBase.toFixed(2)}s`);
+      el.style.setProperty('--right-wing-speed', `${(wingBase * 1.06).toFixed(2)}s`);
+      el.style.setProperty('--right-wing-delay', `-${(wingBase * 0.18).toFixed(2)}s`);
+      el.style.setProperty('--body-speed', `${(wingBase * 2.28).toFixed(2)}s`);
       el.addEventListener('click', event => {
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
 
@@ -2175,13 +2199,15 @@
           y: Math.random() * butterflySwarm.clientHeight
         },
         vel: {
-          x: 0.75,
-          y: -0.25
+          x: 0.58,
+          y: -0.18
         },
         target: { x: 0, y: 0, s: 1 },
         nextTargetAt: 0,
+        nextWingShiftAt: 0,
         phase: Math.random() * 1000,
-        speed: 1.55
+        speed: 1.32 + Math.random() * 0.22,
+        wingBase
       };
     });
 
@@ -2195,8 +2221,8 @@
 
       butterfly.target.x = margin + Math.random() * width;
       butterfly.target.y = margin + Math.random() * height;
-      butterfly.target.s = 0.76 + Math.random() * 0.16;
-      butterfly.nextTargetAt = performance.now() + 3400 + Math.random() * 3200;
+      butterfly.target.s = 0.74 + Math.random() * 0.22;
+      butterfly.nextTargetAt = performance.now() + 2100 + Math.random() * 2600;
     };
 
     const openButterflyPortal = (href, sourceEl) => {
@@ -2216,7 +2242,7 @@
       const longestSide = Math.max(window.innerWidth, window.innerHeight);
       const portalFullSize = Math.max(longestSide * 1.55, 1180);
       const portalStartScale = Math.max(0.035, rect.width / portalFullSize);
-      const portalPopScale = Math.min(0.34, Math.max(0.16, portalStartScale * 8.5));
+      const portalPopScale = Math.min(0.38, Math.max(0.18, portalStartScale * 9.2));
 
       const portal = document.createElement('div');
       portal.className = 'butterfly-portal';
@@ -2227,7 +2253,7 @@
       portal.style.setProperty('--portal-full-size', `${portalFullSize}px`);
       portal.style.setProperty('--portal-start-scale', portalStartScale.toFixed(4));
       portal.style.setProperty('--portal-pop-scale', portalPopScale.toFixed(4));
-      portal.style.setProperty('--portal-end-scale', '1.12');
+      portal.style.setProperty('--portal-end-scale', '1.78');
       portal.style.setProperty('--connector-distance', `${connectorDistance}px`);
       portal.style.setProperty('--connector-angle', `${connectorAngle}deg`);
 
@@ -2246,13 +2272,19 @@
       portalTunnel.className = 'portal-tunnel';
       portal.appendChild(portalTunnel);
 
-      const sparkColors = ['#62e6f3', '#21aee8', '#4aa8ff', '#ffd782', '#f08f8f', '#9be69d'];
-      Array.from({ length: 26 }, (_, sparkIndex) => {
+      const sparkColors = [
+        'rgba(216,240,247,0.82)',
+        'rgba(156,236,255,0.72)',
+        'rgba(33,174,232,0.58)',
+        'rgba(132,152,166,0.5)'
+      ];
+      Array.from({ length: 18 }, (_, sparkIndex) => {
         const spark = document.createElement('span');
         spark.className = 'portal-spark';
-        spark.style.setProperty('--spark-angle', `${sparkIndex * 13.8 + Math.random() * 12}deg`);
-        spark.style.setProperty('--spark-distance', `${150 + Math.random() * 280}px`);
-        spark.style.setProperty('--spark-delay', `${0.48 + Math.random() * 0.16}s`);
+        spark.style.setProperty('--spark-angle', `${sparkIndex * 20 + Math.random() * 14}deg`);
+        spark.style.setProperty('--spark-distance', `${170 + Math.random() * 330}px`);
+        spark.style.setProperty('--spark-delay', `${0.14 + Math.random() * 0.2}s`);
+        spark.style.setProperty('--spark-length', `${18 + Math.random() * 32}px`);
         spark.style.setProperty('--spark-color', sparkColors[sparkIndex % sparkColors.length]);
         portal.appendChild(spark);
       });
@@ -2267,7 +2299,7 @@
 
       window.setTimeout(() => {
         window.location.href = href;
-      }, 1620);
+      }, 1040);
     };
 
     const fly = now => {
@@ -2289,30 +2321,56 @@
         const dx = target.x - pos.x;
         const dy = target.y - pos.y;
         const distance = Math.max(Math.hypot(dx, dy), 1);
-        const desiredSpeed = Math.min(butterfly.speed, 0.45 + distance / 260);
+        const wander =
+          0.88 +
+          Math.sin((now + butterfly.phase) / 920) * 0.16 +
+          Math.sin((now + butterfly.phase * 1.7) / 360) * 0.08;
+        const desiredSpeed = Math.min(butterfly.speed * wander, 0.38 + distance / 210);
         const desiredX = (dx / distance) * desiredSpeed;
         const desiredY = (dy / distance) * desiredSpeed;
+        const steering = 0.028 + Math.min(distance / 9000, 0.018);
 
-        vel.x += (desiredX - vel.x) * 0.035 * delta;
-        vel.y += (desiredY - vel.y) * 0.035 * delta;
+        vel.x += (desiredX - vel.x) * steering * delta;
+        vel.y += (desiredY - vel.y) * steering * delta;
 
-        vel.x += Math.sin((now + butterfly.phase) / 520) * 0.006 * delta;
-        vel.y += Math.cos((now + butterfly.phase) / 470) * 0.006 * delta;
+        vel.x += (
+          Math.sin((now + butterfly.phase) / 410) * 0.006 +
+          Math.sin((now + butterfly.phase * 1.3) / 1370) * 0.004
+        ) * delta;
+        vel.y += (
+          Math.cos((now + butterfly.phase) / 390) * 0.007 +
+          Math.sin((now + butterfly.phase) / 880) * 0.004
+        ) * delta;
 
-        const maxSpeed = 2.05;
-        const currentSpeed = Math.max(Math.hypot(vel.x, vel.y), 0.001);
+        const maxSpeed = 2.18;
+        let currentSpeed = Math.max(Math.hypot(vel.x, vel.y), 0.001);
         if (currentSpeed > maxSpeed) {
           vel.x = (vel.x / currentSpeed) * maxSpeed;
           vel.y = (vel.y / currentSpeed) * maxSpeed;
+          currentSpeed = maxSpeed;
         }
 
         pos.x += vel.x * delta;
         pos.y += vel.y * delta;
 
-        const driftX = Math.sin((now + butterfly.phase) / (760 + index * 90)) * (16 + index * 3);
-        const driftY = Math.cos((now + butterfly.phase) / (680 + index * 110)) * (12 + index * 2);
+        if (now > butterfly.nextWingShiftAt) {
+          const travel = Math.min(currentSpeed / maxSpeed, 1);
+          const wingSpeed = Math.max(0.38, Math.min(0.68, butterfly.wingBase + 0.1 - travel * 0.18 + (Math.random() - 0.5) * 0.05));
+          el.style.setProperty('--wing-speed', `${wingSpeed.toFixed(2)}s`);
+          el.style.setProperty('--right-wing-speed', `${(wingSpeed * (1.04 + Math.random() * 0.06)).toFixed(2)}s`);
+          el.style.setProperty('--right-wing-delay', `-${(wingSpeed * (0.14 + Math.random() * 0.08)).toFixed(2)}s`);
+          el.style.setProperty('--body-speed', `${(wingSpeed * 2.25).toFixed(2)}s`);
+          butterfly.nextWingShiftAt = now + 620 + Math.random() * 760;
+        }
+
+        const driftX =
+          Math.sin((now + butterfly.phase) / (780 + index * 90)) * (10 + index * 3) +
+          Math.sin((now + butterfly.phase) / 1530) * 7;
+        const driftY =
+          Math.cos((now + butterfly.phase) / (640 + index * 110)) * (9 + index * 2) +
+          Math.sin((now + butterfly.phase * 1.8) / 1180) * 5;
         const heading = Math.atan2(vel.y, vel.x) * 180 / Math.PI;
-        const tilt = Math.max(-28, Math.min(28, heading * 0.38 + Math.sin(now / 340) * 5));
+        const tilt = Math.max(-31, Math.min(31, heading * 0.38 + Math.sin(now / 340) * 5 + vel.y * 3.2));
 
         el.style.setProperty('--butterfly-x', `${pos.x + driftX}px`);
         el.style.setProperty('--butterfly-y', `${pos.y + driftY}px`);

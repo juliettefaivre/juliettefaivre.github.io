@@ -777,6 +777,264 @@
       }
     }
 
+    body.portal-open {
+      background: #02070c;
+    }
+
+    body.portal-open #hero,
+    body.portal-open #main-layout,
+    body.portal-open footer {
+      animation: pageDropIntoDarkness 1.04s cubic-bezier(0.08, 0.78, 0.14, 1) both;
+      transform-origin: 50% 72vh;
+      will-change: transform, filter, opacity;
+    }
+
+    .butterfly-portal {
+      background:
+        radial-gradient(circle at var(--portal-x) var(--portal-y),
+          rgba(216,240,247,0.18) 0 4%,
+          rgba(33,174,232,0.1) 8%,
+          transparent 18%),
+        radial-gradient(ellipse at 50% 70%,
+          rgba(6,23,38,0) 0 18%,
+          rgba(3,12,22,0.78) 44%,
+          rgba(1,5,10,0.98) 78%,
+          #000 100%),
+        linear-gradient(180deg,
+          rgba(5,24,39,0.08),
+          rgba(1,6,11,0.94));
+      transition: opacity 0.06s ease-out;
+    }
+
+    .butterfly-portal::before {
+      width: 18px;
+      height: 18px;
+      background: rgba(216,240,247,0.74);
+      box-shadow: 0 0 24px rgba(156,236,255,0.46);
+      animation: descentSeed 0.52s cubic-bezier(0.1, 0.76, 0.2, 1) both;
+    }
+
+    .butterfly-portal::after {
+      left: 50%;
+      top: 66%;
+      width: 52vmin;
+      height: 52vmin;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle,
+          #000 0 18%,
+          rgba(2,7,12,0.98) 30%,
+          rgba(9,45,70,0.44) 48%,
+          rgba(216,240,247,0.11) 58%,
+          transparent 70%);
+      filter: blur(5px) saturate(0.72);
+      animation: descentMouth 0.86s 0.06s cubic-bezier(0.08, 0.78, 0.14, 1) both;
+    }
+
+    .portal-tunnel {
+      background:
+        radial-gradient(ellipse at 50% 64%,
+          rgba(0,0,0,0) 0 12%,
+          rgba(4,19,31,0.76) 46%,
+          rgba(0,0,0,0.96) 100%),
+        repeating-radial-gradient(ellipse at 50% 72%,
+          rgba(216,240,247,0.08) 0 1px,
+          transparent 2px 40px),
+        linear-gradient(180deg,
+          rgba(5,24,39,0.02),
+          rgba(1,5,10,0.9));
+      animation: descentTunnel 0.86s 0.12s cubic-bezier(0.08, 0.78, 0.14, 1) both;
+    }
+
+    .portal-tunnel::before {
+      inset: -28vmax;
+      border-radius: 50%;
+      background:
+        repeating-linear-gradient(102deg,
+          transparent 0 68px,
+          rgba(216,240,247,0.08) 69px 70px,
+          transparent 71px 132px),
+        repeating-linear-gradient(78deg,
+          transparent 0 96px,
+          rgba(33,174,232,0.06) 97px 98px,
+          transparent 99px 168px);
+      animation: descentStreaks 0.86s 0.12s cubic-bezier(0.08, 0.78, 0.14, 1) both;
+    }
+
+    .portal-tunnel::after {
+      left: 50%;
+      top: 72%;
+      width: 22vmin;
+      height: 22vmin;
+      border: 1px solid rgba(216,240,247,0.18);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle,
+          rgba(216,240,247,0.24) 0 2%,
+          rgba(33,174,232,0.12) 8%,
+          rgba(0,0,0,0.98) 54%,
+          transparent 76%);
+      box-shadow:
+        0 0 42px rgba(33,174,232,0.18),
+        inset 0 0 28px rgba(0,0,0,0.82);
+      animation: descentGlimmer 0.72s 0.18s cubic-bezier(0.08, 0.78, 0.14, 1) both;
+    }
+
+    .portal-spark {
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(216,240,247,0.74), transparent);
+      box-shadow: 0 0 10px rgba(156,236,255,0.28);
+      animation: descentSpark 0.58s ease-out var(--spark-delay) both;
+    }
+
+    .portal-connector {
+      background: linear-gradient(90deg, rgba(98,230,243,0), rgba(216,240,247,0.68), rgba(98,230,243,0));
+      animation: descentConnector 0.24s ease-out both;
+    }
+
+    @keyframes pageDropIntoDarkness {
+      0% {
+        opacity: 1;
+        filter: brightness(1) blur(0);
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      }
+      28% {
+        opacity: 0.96;
+        filter: brightness(0.92) blur(0.2px);
+        transform: translate3d(0, -16vh, 0) scale(1.025) rotate(-0.18deg);
+      }
+      62% {
+        opacity: 0.72;
+        filter: brightness(0.62) blur(0.9px);
+        transform: translate3d(0, -82vh, 0) scale(1.08) rotate(0.32deg);
+      }
+      100% {
+        opacity: 0.18;
+        filter: brightness(0.28) blur(2.4px);
+        transform: translate3d(0, -152vh, 0) scale(1.16) rotate(-0.42deg);
+      }
+    }
+
+    @keyframes descentSeed {
+      0% {
+        opacity: 0.95;
+        transform: translate(-50%, -50%) scale(0.7);
+      }
+      44% {
+        opacity: 0.86;
+        transform:
+          translate(calc(-50% - var(--portal-offset-x) * 0.42), calc(-50% - var(--portal-offset-y) * 0.2 + 18vh))
+          scale(1.12);
+      }
+      100% {
+        opacity: 0;
+        transform:
+          translate(calc(-50% - var(--portal-offset-x) * 0.8), calc(-50% - var(--portal-offset-y) * 0.35 + 58vh))
+          scale(0.48);
+      }
+    }
+
+    @keyframes descentMouth {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.22);
+      }
+      34% {
+        opacity: 0.78;
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(3.6);
+      }
+    }
+
+    @keyframes descentTunnel {
+      0% {
+        opacity: 0;
+        filter: brightness(1.02) blur(2px);
+        background-position: 0 0, 0 0, 0 0;
+      }
+      24% {
+        opacity: 0.7;
+      }
+      100% {
+        opacity: 1;
+        filter: brightness(0.82) blur(0);
+        background-position: 0 0, 0 180px, 0 0;
+      }
+    }
+
+    @keyframes descentStreaks {
+      0% {
+        opacity: 0;
+        transform: translateY(-18vh) scale(0.78);
+      }
+      28% {
+        opacity: 0.42;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(44vh) scale(1.2);
+      }
+    }
+
+    @keyframes descentGlimmer {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.18);
+      }
+      40% {
+        opacity: 0.72;
+      }
+      100% {
+        opacity: 0.12;
+        transform: translate(-50%, -50%) scale(5.8);
+      }
+    }
+
+    @keyframes descentSpark {
+      0% {
+        opacity: 0;
+        transform:
+          translate(-50%, -50%)
+          rotate(var(--spark-angle))
+          translateY(-6px)
+          scaleY(0.6);
+      }
+      22% {
+        opacity: 0.78;
+      }
+      100% {
+        opacity: 0;
+        transform:
+          translate(-50%, -50%)
+          rotate(var(--spark-angle))
+          translateY(var(--spark-distance))
+          scaleY(2.4)
+          scaleX(0.34);
+      }
+    }
+
+    @keyframes descentConnector {
+      0% {
+        opacity: 0;
+        transform:
+          translate(var(--portal-x), var(--portal-y))
+          rotate(var(--connector-angle))
+          scaleX(0.08);
+      }
+      42% {
+        opacity: 0.72;
+      }
+      100% {
+        opacity: 0;
+        transform:
+          translate(var(--portal-x), var(--portal-y))
+          rotate(var(--connector-angle))
+          scaleX(1);
+      }
+    }
+
     .butterfly-left-wing {
       transform-box: fill-box;
       transform-origin: right center;
@@ -2476,11 +2734,6 @@
       portal.style.setProperty('--connector-distance', `${connectorDistance}px`);
       portal.style.setProperty('--connector-angle', `${connectorAngle}deg`);
 
-      const portalButterfly = document.createElement('div');
-      portalButterfly.className = 'portal-butterfly';
-      portalButterfly.innerHTML = portalButterflySvg;
-      portal.appendChild(portalButterfly);
-
       if (connectorDistance > 24) {
         const connector = document.createElement('span');
         connector.className = 'portal-connector';
@@ -2500,10 +2753,10 @@
       Array.from({ length: 18 }, (_, sparkIndex) => {
         const spark = document.createElement('span');
         spark.className = 'portal-spark';
-        spark.style.setProperty('--spark-angle', `${sparkIndex * 20 + Math.random() * 14}deg`);
-        spark.style.setProperty('--spark-distance', `${170 + Math.random() * 330}px`);
+        spark.style.setProperty('--spark-angle', `${-10 + Math.random() * 20}deg`);
+        spark.style.setProperty('--spark-distance', `${220 + Math.random() * 360}px`);
         spark.style.setProperty('--spark-delay', `${0.14 + Math.random() * 0.2}s`);
-        spark.style.setProperty('--spark-length', `${18 + Math.random() * 32}px`);
+        spark.style.setProperty('--spark-length', `${28 + Math.random() * 46}px`);
         spark.style.setProperty('--spark-color', sparkColors[sparkIndex % sparkColors.length]);
         portal.appendChild(spark);
       });

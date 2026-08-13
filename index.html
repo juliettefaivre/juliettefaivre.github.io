@@ -72,25 +72,26 @@
 
     .site-menu {
       position: absolute;
-      top: 28px;
-      right: 34px;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 8;
       display: flex;
       align-items: center;
       justify-content: flex-end;
       flex-wrap: wrap;
       gap: 6px 16px;
-      max-width: min(720px, calc(100% - 68px));
-      padding: 12px 18px;
-      border: 1px solid rgba(216,240,247,0.12);
-      border-radius: 999px;
+      width: 100%;
+      min-height: 58px;
+      padding: 18px 42px;
+      border-bottom: 1px solid rgba(216,240,247,0.1);
       background:
-        linear-gradient(135deg, rgba(8,29,46,0.82), rgba(5,20,33,0.62)),
-        rgba(7,24,39,0.72);
+        linear-gradient(90deg, rgba(3,14,23,0.94), rgba(5,22,36,0.88) 58%, rgba(3,14,23,0.96)),
+        rgba(3,14,23,0.94);
       box-shadow:
-        0 14px 40px rgba(2,10,18,0.22),
-        inset 0 1px 0 rgba(255,255,255,0.08);
-      backdrop-filter: blur(14px);
+        0 10px 32px rgba(2,10,18,0.16),
+        inset 0 -1px 0 rgba(255,255,255,0.035);
+      backdrop-filter: blur(10px);
     }
 
     .site-menu a {
@@ -1592,9 +1593,7 @@
     ══════════════════════════════════════════ */
     @media (max-width: 980px) {
       .site-menu {
-        left: 28px;
-        right: 28px;
-        max-width: none;
+        padding-inline: 28px;
       }
 
       .hero-inner {
@@ -1617,13 +1616,10 @@
       }
 
       .site-menu {
-        top: 18px;
-        left: 16px;
-        right: 16px;
+        min-height: 62px;
         justify-content: flex-end;
         gap: 8px 13px;
-        border-radius: 18px;
-        padding: 10px 12px;
+        padding: 14px 16px;
       }
 
       .site-menu a {
@@ -1912,10 +1908,8 @@
       }
 
       .site-menu {
-        top: 16px;
-        left: 12px;
-        right: 12px;
         gap: 8px 11px;
+        padding-inline: 12px;
       }
 
       .hero-inner {

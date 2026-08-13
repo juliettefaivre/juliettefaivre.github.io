@@ -12,20 +12,20 @@
     :root {
       --navy:        #14213d;
       --navy-soft:   #2a3f5f;
-      --blue:        #21aee8;
-      --blue-light:  #83d7f5;
-      --sky:         #d8f0f7;
+      --blue:        #178dbd;
+      --blue-light:  #5fbfd8;
+      --sky:         #c8e4eb;
       --rose-deep:   #071827;
-      --rose:        #168fc2;
-      --rose-soft:   #83d7f5;
-      --rose-pale:   #d8f0f7;
-      --beige:       #eef8fb;
-      --bg:          #f7fbfd;
-      --bridge:      #e6f5fa;
-      --surface:     rgba(255,255,255,0.72);
-      --surface-solid: #ffffff;
-      --border:      rgba(7,24,39,0.08);
-      --border-mid:  rgba(7,24,39,0.14);
+      --rose:        #117aa7;
+      --rose-soft:   #72c9dd;
+      --rose-pale:   #c8e4eb;
+      --beige:       #e4f0f4;
+      --bg:          #edf6f8;
+      --bridge:      #d7e9ee;
+      --surface:     rgba(255,255,255,0.66);
+      --surface-solid: #f8fcfd;
+      --border:      rgba(7,24,39,0.1);
+      --border-mid:  rgba(7,24,39,0.18);
       --text:        #1d1d1f;
       --text-2:      #424245;
       --text-3:      #6e6e73;
@@ -61,25 +61,53 @@
       overflow: hidden;
       background: linear-gradient(180deg,
         #071827  0%,
-        #0c2d47  16%,
-        #11557b  34%,
-        #1d88b8  52%,
-        #5fc5e8  70%,
-        #a9e1f2  84%,
-        #d8f0f7  93%,
+        #0a2940  18%,
+        #0e4a69  38%,
+        #16749a  58%,
+        #3ca3bf  76%,
+        #78c7d6  88%,
+        #c4e2e8  96%,
         var(--bg) 100%);
+    }
+
+    .site-menu {
+      position: absolute;
+      top: 28px;
+      right: 34px;
+      z-index: 8;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      max-width: min(720px, calc(100% - 68px));
+    }
+
+    .site-menu a {
+      color: rgba(243,244,246,0.72);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.15s var(--ease);
+    }
+
+    .site-menu a:hover,
+    .site-menu a:focus-visible {
+      color: rgba(255,255,255,0.96);
     }
 
     .hero-inner {
       position: relative;
       z-index: 3;
       display: grid;
-      grid-template-columns: minmax(300px, 0.86fr) minmax(380px, 1fr);
+      grid-template-columns: minmax(300px, 0.72fr) minmax(540px, 1fr);
       align-items: center;
-      gap: 76px;
-      max-width: 1180px;
-      width: min(100%, 1180px);
-      padding: 68px 74px;
+      gap: 62px;
+      max-width: 1280px;
+      width: min(100%, 1280px);
+      padding: 56px 64px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.16);
       background:
@@ -168,72 +196,23 @@
     .hero-note {
       position: relative;
       z-index: 1;
-      width: min(100%, 470px);
+      width: min(100%, 620px);
       justify-self: center;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding: 38px;
+      padding: 28px 34px;
       border-radius: 10px;
       border: 1px solid rgba(255,255,255,0.18);
       background:
-        linear-gradient(145deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08)),
-        rgba(8,55,84,0.18);
+        linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.055)),
+        rgba(6,42,64,0.26);
       box-shadow:
-        0 24px 72px rgba(6,34,51,0.18),
+        0 22px 62px rgba(6,34,51,0.22),
         inset 0 1px 0 rgba(255,255,255,0.16);
       backdrop-filter: blur(16px);
       animation: riseUp 0.9s 0.22s var(--ease) both;
       overflow: hidden;
-      transition: transform 0.28s var(--ease), border-color 0.28s var(--ease), box-shadow 0.28s var(--ease);
-    }
-
-    .hero-note::before,
-    .hero-note::after {
-      content: '';
-      position: absolute;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.28s var(--ease);
-    }
-
-    .hero-note::before {
-      inset: -40%;
-      background: linear-gradient(115deg,
-        transparent 0 42%,
-        rgba(214,248,255,0.3) 47%,
-        rgba(214,248,255,0.08) 52%,
-        transparent 58% 100%);
-      transform: translateX(-28%);
-    }
-
-    .hero-note::after {
-      inset: 0;
-      background:
-        radial-gradient(circle at 18% 24%, rgba(222,250,255,0.9) 0 1px, transparent 2px),
-        radial-gradient(circle at 76% 22%, rgba(156,236,255,0.85) 0 1px, transparent 2px),
-        radial-gradient(circle at 84% 68%, rgba(222,250,255,0.8) 0 1px, transparent 2px),
-        radial-gradient(circle at 28% 78%, rgba(111,213,244,0.72) 0 1px, transparent 2px);
-      filter: drop-shadow(0 0 8px rgba(125,224,250,0.45));
-    }
-
-    .hero-note:hover {
-      transform: translateY(-4px);
-      border-color: rgba(215,248,255,0.34);
-      box-shadow:
-        0 30px 86px rgba(6,34,51,0.24),
-        0 0 0 1px rgba(215,248,255,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.2);
-    }
-
-    .hero-note:hover::before {
-      opacity: 1;
-      animation: noteSheen 1.15s var(--ease) both;
-    }
-
-    .hero-note:hover::after {
-      opacity: 1;
-      animation: noteSparkle 1.7s ease-in-out infinite alternate;
     }
 
     .hero-note-label {
@@ -244,7 +223,7 @@
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
 
     .hero-note-copy {
@@ -252,13 +231,13 @@
       z-index: 1;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 10px;
     }
 
     .hero-note-copy p {
       color: rgba(255,255,255,0.82);
-      font-size: 14.8px;
-      line-height: 1.68;
+      font-size: 14.2px;
+      line-height: 1.54;
     }
 
     .hero-link {
@@ -1259,16 +1238,6 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes noteSheen {
-      from { transform: translateX(-34%) rotate(0.001deg); }
-      to { transform: translateX(34%) rotate(0.001deg); }
-    }
-
-    @keyframes noteSparkle {
-      from { transform: translateY(0); filter: drop-shadow(0 0 5px rgba(125,224,250,0.32)); }
-      to { transform: translateY(-2px); filter: drop-shadow(0 0 12px rgba(125,224,250,0.58)); }
-    }
-
     @keyframes butterflyLeft {
       0%, 100% { transform: rotate(-11deg) scaleX(1) skewY(0deg) translateY(0); }
       13% { transform: rotate(-4deg) scaleX(0.96) skewY(1deg) translateY(-0.4px); }
@@ -1301,6 +1270,12 @@
        RESPONSIVE
     ══════════════════════════════════════════ */
     @media (max-width: 980px) {
+      .site-menu {
+        left: 28px;
+        right: 28px;
+        max-width: none;
+      }
+
       .hero-inner {
         grid-template-columns: 1fr;
         gap: 34px;
@@ -1316,8 +1291,20 @@
     @media (max-width: 720px) {
       #hero {
         min-height: auto;
-        padding: 58px 16px 78px;
+        padding: 86px 16px 78px;
         align-items: start;
+      }
+
+      .site-menu {
+        top: 18px;
+        left: 16px;
+        right: 16px;
+        justify-content: flex-end;
+        gap: 8px 13px;
+      }
+
+      .site-menu a {
+        font-size: 11.5px;
       }
 
       .hero-inner {
@@ -1602,7 +1589,14 @@
 
     @media (max-width: 420px) {
       #hero {
-        padding: 48px 12px 66px;
+        padding: 92px 12px 66px;
+      }
+
+      .site-menu {
+        top: 16px;
+        left: 12px;
+        right: 12px;
+        gap: 8px 11px;
       }
 
       .hero-inner {
@@ -1658,9 +1652,7 @@
       .portal-butterfly,
       .portal-tunnel,
       .portal-spark,
-      .hero-note,
-      .hero-note::before,
-      .hero-note::after {
+      .hero-note {
         animation: none !important;
         transition: none !important;
       }
@@ -1671,6 +1663,16 @@
 
 <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section id="hero">
+  <nav class="site-menu" aria-label="Primary navigation">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#publications">Publications</a>
+    <a href="#awards">Honors</a>
+    <a href="#thoughts">Thoughts</a>
+    <a href="#personal">Personal</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
   <div class="butterfly-swarm"></div>
 
   <div class="hero-inner">
@@ -1693,12 +1695,9 @@
         <p>
           I believe deeply in the promise of technology and AI, and in policy
           and governance as tools for helping that promise unfold responsibly.
-          My work explores how institutions can manage dual-use technologies:
-          supporting beneficial uses in
-          science, medicine, productivity, and human flourishing while reducing
-          misuse, unintended externalities, and systemic disruption. I care
-          about governance that strengthens public trust, helps institutions
-          adapt, and mitigates ethical, social, and democratic risks.
+          My research asks how institutions can encourage benefits in science,
+          medicine, productivity, and human flourishing while reducing misuse,
+          externalities, and systemic risks.
         </p>
         <p>
           My background is in Technology Policy at the University of Cambridge

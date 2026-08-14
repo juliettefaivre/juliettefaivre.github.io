@@ -1219,9 +1219,9 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       margin-top: 24px;
-      padding-left: 174px;
+      padding-left: 194px;
     }
 
     .timeline::before {
@@ -1247,7 +1247,7 @@
 
     .timeline-date {
       position: absolute;
-      left: -174px;
+      left: -194px;
       top: 2px;
       width: 96px;
       color: var(--text-3);
@@ -1259,7 +1259,7 @@
 
     .timeline-dot {
       position: absolute;
-      left: -66px;
+      left: -86px;
       top: 5px;
       width: 9px;
       height: 9px;
@@ -1278,45 +1278,46 @@
 
     .timeline-logo {
       position: absolute;
-      left: -48px;
-      top: -1px;
+      left: -68px;
+      top: -6px;
       display: grid;
       place-items: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
+      width: 56px;
+      height: 38px;
+      border-radius: 9px;
       border: 1px solid rgba(7,24,39,0.1);
-      background: rgba(255,255,255,0.56);
-      color: var(--text);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      line-height: 1;
+      background: rgba(255,255,255,0.72);
       box-shadow: 0 8px 18px rgba(7,24,39,0.06);
+      overflow: hidden;
+      padding: 5px;
+    }
+
+    .timeline-logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .timeline-logo--cmu {
-      color: #a6192e;
       border-color: rgba(166,25,46,0.2);
-      background: rgba(255,255,255,0.7);
+      padding: 7px 5px;
     }
 
     .timeline-logo--cam {
-      color: #0072ce;
       border-color: rgba(0,114,206,0.2);
-      background: rgba(255,255,255,0.68);
+      padding: 5px;
     }
 
     .timeline-logo--wharton {
-      color: #011f5b;
       border-color: rgba(1,31,91,0.18);
-      background: rgba(255,255,255,0.68);
+      padding: 6px 5px;
     }
 
     .timeline-logo--kcl {
-      color: #6f1d77;
-      border-color: rgba(111,29,119,0.18);
-      background: rgba(255,255,255,0.68);
+      border-color: rgba(201,41,41,0.22);
+      background: rgba(255,255,255,0.78);
+      padding: 3px;
     }
 
     .timeline-degree {
@@ -2273,7 +2274,9 @@
         <div class="timeline-item">
           <div class="timeline-date">2026&ndash;</div>
           <div class="timeline-dot"></div>
-          <div class="timeline-logo timeline-logo--cmu" aria-hidden="true">CMU</div>
+          <div class="timeline-logo timeline-logo--cmu" aria-hidden="true">
+            <img src="assets/logos/cmu-wordmark.svg" alt="">
+          </div>
           <div class="timeline-title">Carnegie Mellon University</div>
           <div class="timeline-degree">Ph.D. in Engineering &amp; Public Policy &mdash; AI Policy</div>
           <p class="timeline-text">
@@ -2291,7 +2294,9 @@
         <div class="timeline-item">
           <div class="timeline-date">2022&ndash;2023</div>
           <div class="timeline-dot"></div>
-          <div class="timeline-logo timeline-logo--cam" aria-hidden="true">CAM</div>
+          <div class="timeline-logo timeline-logo--cam" aria-hidden="true">
+            <img src="assets/logos/cambridge-logo.png" alt="">
+          </div>
           <div class="timeline-title">University of Cambridge</div>
           <div class="timeline-degree">MPhil in Technology Policy</div>
           <p class="timeline-text">
@@ -2303,7 +2308,9 @@
         <div class="timeline-item">
           <div class="timeline-date">2021&ndash;2022</div>
           <div class="timeline-dot"></div>
-          <div class="timeline-logo timeline-logo--wharton" aria-hidden="true">W</div>
+          <div class="timeline-logo timeline-logo--wharton" aria-hidden="true">
+            <img src="assets/logos/wharton-logo.png" alt="">
+          </div>
           <div class="timeline-title">Wharton School, University of Pennsylvania</div>
           <div class="timeline-degree">Exchange year</div>
           <p class="timeline-text">
@@ -2314,7 +2321,9 @@
         <div class="timeline-item">
           <div class="timeline-date">2018&ndash;2022</div>
           <div class="timeline-dot"></div>
-          <div class="timeline-logo timeline-logo--kcl" aria-hidden="true">KCL</div>
+          <div class="timeline-logo timeline-logo--kcl" aria-hidden="true">
+            <img src="assets/logos/kcl-logo.svg" alt="">
+          </div>
           <div class="timeline-title">King's College London</div>
           <div class="timeline-degree">BSc in International Management</div>
           <p class="timeline-text">

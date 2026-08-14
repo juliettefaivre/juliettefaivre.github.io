@@ -212,7 +212,7 @@
       align-items: center;
       justify-content: center;
       gap: 14px;
-      margin-top: 26px;
+      margin-top: 10px;
       animation: riseUp 0.9s 0.22s var(--ease) both;
     }
 
@@ -1189,6 +1189,19 @@
 
     section p strong { color: var(--text); font-weight: 600; }
 
+    .subsection-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 26px 0 12px;
+    }
+
+    .about-subsection:first-of-type .subsection-title {
+      margin-top: 0;
+    }
+
     section p a {
       color: var(--rose);
       text-decoration: underline;
@@ -1267,6 +1280,29 @@
       font-size: 14.5px;
       line-height: 1.68;
       margin: 0;
+    }
+
+    .timeline-item--work {
+      margin: -4px 0 0;
+      padding: 12px 16px 12px 18px;
+      border: 1px solid rgba(17,122,167,0.18);
+      border-radius: 8px;
+      background: rgba(17,122,167,0.055);
+    }
+
+    .timeline-item--work .timeline-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--bg);
+      border: 2px solid var(--rose);
+      box-shadow: 0 0 0 5px var(--bg);
+    }
+
+    .timeline-item--work .timeline-title {
+      color: var(--text-2);
+      font-size: 14.5px;
+      font-weight: 500;
+      margin-bottom: 0;
     }
 
     .highlights {
@@ -1443,6 +1479,41 @@
       color: var(--text-2);
       line-height: 1.55;
       margin: 0;
+    }
+
+    .personal-notes {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0;
+    }
+
+    .personal-notes li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--text-2);
+      font-size: 15.5px;
+      line-height: 1.7;
+    }
+
+    .personal-notes li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.76em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--rose);
+      box-shadow: 0 0 0 4px rgba(17,122,167,0.08);
+    }
+
+    .personal-notes a {
+      color: var(--rose);
+      text-decoration: underline;
+      text-decoration-color: rgba(143,63,79,0.28);
+      text-underline-offset: 3px;
     }
 
     /* ── Personal travel cards ── */
@@ -1790,6 +1861,11 @@
         padding: 0 0 22px 24px;
       }
 
+      .timeline-item--work {
+        margin-bottom: 22px;
+        padding: 12px 14px 12px 24px;
+      }
+
       .timeline-date {
         position: static;
         width: auto;
@@ -1994,7 +2070,7 @@
 
       <h1 class="hero-name">Juliette Faivre</h1>
       <p class="hero-sub">
-        <span>AI Policy PhD</span>
+        <span>AI Policy Ph.D.</span>
         <span>Carnegie Mellon University</span>
       </p>
 
@@ -2028,7 +2104,7 @@
     <aside class="hero-note" aria-label="Introductory profile">
       <div class="hero-note-copy">
         <p>
-          <span class="hero-greeting">Hi!</span> I am a first-year PhD student in Engineering &amp; Public Policy at
+          <span class="hero-greeting">Hi!</span> I am a first-year Ph.D. student in Engineering &amp; Public Policy at
           Carnegie Mellon University, supervised by Professor Sarah Cen, where I
           focus on AI policy. Please check out our latest paper on
           <a class="hero-link" href="https://arxiv.org/abs/2607.02144" target="_blank" rel="noopener">AI taxation</a>! &#128161;
@@ -2050,8 +2126,7 @@
           consulting.
         </p>
         <p>
-          Always excited to
-          <a class="hero-link" href="#contact">connect</a> with like-minded individuals!
+          Always excited to connect with like-minded individuals!
         </p>
       </div>
     </aside>
@@ -2068,7 +2143,7 @@
       <img class="sidebar-photo" src="juliette.jpg" alt="Juliette Faivre" />
 
       <p class="sidebar-name">Juliette Faivre</p>
-      <p class="sidebar-role">PhD student, Carnegie Mellon<br>Engineering &amp; Public Policy</p>
+      <p class="sidebar-role">Ph.D. student, Carnegie Mellon<br>Engineering &amp; Public Policy</p>
 
       <div class="sidebar-divider"></div>
 
@@ -2099,58 +2174,77 @@
     <section id="about">
       <h2>About</h2>
 
-      <p>
-        Hi! My name is Juliette Faivre, and I am an incoming PhD student in
-        Engineering &amp; Public Policy at Carnegie Mellon University from August
-        2026 onwards, where I am lucky to be supervised by Professor Sarah Cen.
-      </p>
+      <div class="about-subsection">
+        <h3 class="subsection-title">Quick Intro</h3>
+        <p>
+          My name is Juliette Faivre, and I am French, Polish, and Luxembourgish.
+          I have lived in more than nine places, and I enjoy discovering new
+          cultures, learning languages, and discussing new ideas.
+        </p>
+        <p>
+          Technology was one of the things that tied those places together for me
+          as a child, and it has always fascinated me. At the same time, I stayed
+          aware of moments such as Cambridge Analytica, the Facebook Files, and
+          the broader effects of technology on people and institutions. During my
+          business studies, I became interested in Humane Technology, Tristan
+          Harris' work, and the role business can play in designing more humane
+          metrics. I also got involved in research and think-tank work studying
+          how science and technology affect society.
+        </p>
+        <p>
+          I went on to complete a master's in Technology Policy at Cambridge at
+          the same time that generative AI and large language models were
+          emerging, which quickly became the focus of my research. Today, I work
+          at the intersection of technology, policy, management, and engineering.
+          You can learn more on my <a href="#personal">personal page</a>.
+        </p>
+      </div>
+
+      <div class="about-subsection">
+        <h3 class="subsection-title">Education</h3>
+      </div>
 
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-date">2026&ndash;</div>
           <div class="timeline-dot"></div>
-          <div class="timeline-title">Incoming PhD student in Engineering &amp; Public Policy, Carnegie Mellon University</div>
+          <div class="timeline-title">Ph.D. in Engineering &amp; Public Policy, Carnegie Mellon University</div>
           <p class="timeline-text">
-            Researching AI governance and digital technologies at the intersection
-            of policy, management, and engineering, with a focus on the institutions,
-            rules, and norms that shape how these systems are built and deployed.
+            Researching AI governance and AI policy, supervised by Professor Sarah Cen.
           </p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item timeline-item--work">
           <div class="timeline-date">2023&ndash;2026</div>
           <div class="timeline-dot"></div>
-          <div class="timeline-title">Senior Consultant in Business Transformation, Ernst &amp; Young Luxembourg</div>
-          <p class="timeline-text">
-            Focused on public-sector and business transformation strategy, delivering
-            reports and market studies across transport, consumer trends, social
-            services, defense, and other sectors. Led work with a major European
-            institution to assess the digital maturity of public services in Luxembourg.
-          </p>
+          <div class="timeline-title">Business Transformations consulting at EY Luxembourg</div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-date">2022&ndash;2023</div>
           <div class="timeline-dot"></div>
-          <div class="timeline-title">Graduate study in Technology Policy, University of Cambridge</div>
+          <div class="timeline-title">MPhil in Technology Policy, University of Cambridge</div>
           <p class="timeline-text">
-            Completed an MPhil in Technology Policy at the University of Cambridge.
-            Worked on generative AI safety for children at Ofcom, and on IoT, AI,
-            and the circular economy at the European Commission. Also supported
-            research on generative AI and creativity with the Cambridge Experimental
-            and Behavioral Economics Group.
+            Focused on technology governance, digital policy, and emerging AI questions.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2021&ndash;2022</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Exchange year, Wharton School, University of Pennsylvania</div>
+          <p class="timeline-text">
+            Studied management, public policy, and technology-related questions in Philadelphia.
           </p>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-date">2018&ndash;2022</div>
           <div class="timeline-dot"></div>
-          <div class="timeline-title">Undergraduate study in International Management</div>
+          <div class="timeline-title">BSc in International Management, King's Business School</div>
           <p class="timeline-text">
-            Completed a BSc in International Management at King's College London,
-            including an exchange year at the Wharton School, University of
-            Pennsylvania. Worked as a Science &amp; Technology research intern with
-            the Lauder Institute's Think Tank and Civil Societies Program.
+            Built the business and management foundation that later shaped my interest
+            in technology governance and institutional design.
           </p>
         </div>
       </div>
@@ -2181,7 +2275,7 @@
         review, semi-structured interviews, and document analysis. Over time, I am
         building stronger quantitative skills to complement this work. I have
         foundational skills in R, Python, SPSS, and survey design (Qualtrics and
-        Microsoft Forms), and am gaining more every day with the PhD and my
+        Microsoft Forms), and am gaining more every day with the Ph.D. and my
         supervisor, Prof. Sarah Cen.
       </p>
     </section>
@@ -2329,6 +2423,14 @@
         that shaped how I see technology, policy, and people. This space is for a
         quieter archive of those moments.
       </p>
+
+      <ul class="personal-notes">
+        <li>
+          Before CMU, I lived in Luxembourg and was a Senior Consultant at EY
+          focused on Business Transformations. I also made a small
+          <a href="travel/luxembourg.html">fun facts page about Luxembourg</a>.
+        </li>
+      </ul>
 
       <div class="travel-grid">
         <a class="travel-card" href="travel/europe.html">

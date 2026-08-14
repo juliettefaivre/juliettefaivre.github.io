@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxembourg Fun Facts | Juliette Faivre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --rose: #168fc2;
+      --navy: #071827;
+      --bg: #f7fbfd;
+      --border: rgba(7,24,39,0.08);
+      --text: #1d1d1f;
+      --text-2: #424245;
+      --text-3: #6e6e73;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 64px 28px 96px;
+    }
+
+    .back-link {
+      color: var(--text-3);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--rose); }
+
+    header {
+      margin-top: 38px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(2.3rem, 5vw, 3.4rem);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    p {
+      max-width: 700px;
+      color: var(--text-2);
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .fact {
+      min-height: 150px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.92), rgba(215,233,238,0.46)),
+        #ffffff;
+      box-shadow: 0 18px 46px rgba(7,24,39,0.06);
+    }
+
+    .fact-label {
+      color: var(--rose);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .fact p {
+      font-size: 15px;
+      line-height: 1.62;
+      margin: 0;
+    }
+
+    footer {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 28px;
+      border-top: 1px solid var(--border);
+      color: var(--text-3);
+      font-size: 13px;
+    }
+
+    @media (max-width: 720px) {
+      main { padding: 48px 20px 72px; }
+      .facts { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back-link" href="../index.html#personal">Back to Personal</a>
+    <header>
+      <h1>Luxembourg Fun Facts</h1>
+      <p>
+        A tiny, affectionate page for a tiny country that somehow contains many
+        languages, many borders, and a very large amount of personal history for me.
+      </p>
+    </header>
+
+    <div class="facts">
+      <article class="fact">
+        <div class="fact-label">Many Languages</div>
+        <p>
+          Luxembourgish, French, and German are all official languages, and daily
+          life often moves between several languages in the same conversation.
+        </p>
+      </article>
+
+      <article class="fact">
+        <div class="fact-label">Small Country, Big Crossroads</div>
+        <p>
+          Luxembourg sits between France, Belgium, and Germany, which makes it feel
+          both very local and very international at the same time.
+        </p>
+      </article>
+
+      <article class="fact">
+        <div class="fact-label">Free Public Transport</div>
+        <p>
+          Since 2020, public transport has been free across the country, a policy
+          choice I always found interesting from both a practical and governance
+          perspective.
+        </p>
+      </article>
+
+      <article class="fact">
+        <div class="fact-label">My Pre-CMU Chapter</div>
+        <p>
+          Before moving to Carnegie Mellon, I lived in Luxembourg and worked at EY
+          on Business Transformations work, mostly around institutions, services,
+          and how organizations adapt.
+        </p>
+      </article>
+    </div>
+  </main>
+  <footer>Juliette Faivre &middot; Personal</footer>
+</body>
+</html>

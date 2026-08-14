@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visited Countries | Juliette Faivre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --rose: #168fc2;
+      --navy: #071827;
+      --bg: #f7fbfd;
+      --border: rgba(7,24,39,0.08);
+      --text: #1d1d1f;
+      --text-2: #424245;
+      --text-3: #6e6e73;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 64px 28px 96px;
+    }
+
+    .back-link {
+      color: var(--text-3);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--rose); }
+
+    header {
+      margin-top: 38px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(2.3rem, 5vw, 3.4rem);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    p {
+      max-width: 700px;
+      color: var(--text-2);
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+
+    .map-panel {
+      margin-top: 28px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.88), rgba(215,233,238,0.52));
+      box-shadow: 0 18px 46px rgba(7,24,39,0.06);
+    }
+
+    .world-map {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .land {
+      fill: #d8e7ec;
+      stroke: rgba(7,24,39,0.18);
+      stroke-width: 1.2;
+    }
+
+    .map-note {
+      margin: 18px 0 0;
+      color: var(--text-3);
+      font-size: 14px;
+    }
+
+    footer {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px;
+      border-top: 1px solid var(--border);
+      color: var(--text-3);
+      font-size: 13px;
+    }
+
+    @media (max-width: 720px) {
+      main { padding: 48px 20px 72px; }
+      .map-panel { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back-link" href="../index.html#personal">Back to Personal</a>
+    <header>
+      <h1>Visited Countries</h1>
+      <p>
+        A small public map of the countries I have visited so far. I will color
+        the exact countries once I add the full list.
+      </p>
+    </header>
+
+    <section class="map-panel" aria-label="World map">
+      <svg class="world-map" viewBox="0 0 900 460" role="img" aria-labelledby="map-title map-desc">
+        <title id="map-title">World map placeholder</title>
+        <desc id="map-desc">A simplified world map ready to mark visited countries.</desc>
+        <path class="land" d="M93 132c37-31 93-41 137-25 37 14 68 43 86 83 16 35 5 64-24 82-29 17-68 19-97 4-31-16-47-45-83-55-28-8-66-6-83-27-16-20 28-48 64-62Z" />
+        <path class="land" d="M290 256c39 15 58 45 62 79 5 42-18 75-52 97-23-36-47-73-54-117-5-31 8-51 44-59Z" />
+        <path class="land" d="M386 109c24-24 69-35 107-28 41 8 56 32 79 58 22 24 52 33 77 49 38 24 36 57 2 75-27 14-73 8-106 0-44-11-91-14-132 5-24 11-56 24-77 8-22-17-13-49 12-65 29-18 37-35 22-68-6-14 3-25 16-34Z" />
+        <path class="land" d="M438 266c31 11 64 30 78 62 17 39 6 84-30 103-41-29-72-82-69-131 1-19 8-29 21-34Z" />
+        <path class="land" d="M611 103c54-17 127-8 174 22 42 27 67 72 41 108-27 37-96 35-141 18-36-14-68-16-103-8-29 7-67 18-89-1-22-18-9-49 18-63 40-22 53-58 100-76Z" />
+        <path class="land" d="M703 301c31-10 67-2 91 18 30 25 43 66 19 88-29 26-83 5-107-24-23-28-34-60-3-82Z" />
+      </svg>
+      <p class="map-note">Country coloring and the visited list are coming next.</p>
+    </section>
+  </main>
+  <footer>Juliette Faivre &middot; Personal</footer>
+</body>
+</html>

@@ -1232,7 +1232,7 @@
       flex-direction: column;
       gap: 14px;
       margin-top: 24px;
-      padding-left: 206px;
+      padding-left: 226px;
     }
 
     .timeline::before {
@@ -1258,7 +1258,7 @@
 
     .timeline-date {
       position: absolute;
-      left: -206px;
+      left: -226px;
       top: 2px;
       width: 96px;
       color: var(--text-3);
@@ -1270,7 +1270,7 @@
 
     .timeline-dot {
       position: absolute;
-      left: -98px;
+      left: -116px;
       top: 5px;
       width: 9px;
       height: 9px;
@@ -1289,12 +1289,12 @@
 
     .timeline-logo {
       position: absolute;
-      left: -82px;
-      top: -8px;
+      left: -100px;
+      top: -12px;
       display: grid;
       place-items: center;
-      width: 68px;
-      height: 50px;
+      width: 88px;
+      height: 64px;
       border-radius: 10px;
       border: 1px solid rgba(7,24,39,0.1);
       background: rgba(255,255,255,0.78);
@@ -1313,33 +1313,33 @@
     .timeline-logo--cmu {
       border-color: rgba(166,25,46,0.2);
       background: #b21d2b;
-      left: -84px;
-      top: -12px;
-      width: 64px;
-      height: 64px;
       border-radius: 8px;
       padding: 0;
     }
 
     .timeline-logo--cmu img {
-      transform: scale(0.9);
+      transform: scale(0.88);
     }
 
     .timeline-logo--cam {
       border-color: rgba(0,114,206,0.2);
       background: #fff;
-      padding: 4px;
+      padding: 8px;
     }
 
     .timeline-logo--wharton {
       border-color: rgba(1,31,91,0.18);
-      padding: 6px 5px;
+      padding: 8px;
     }
 
     .timeline-logo--kcl {
       border-color: rgba(201,41,41,0.22);
       background: #e12726;
       padding: 0;
+    }
+
+    .timeline-logo--kcl img {
+      transform: scale(0.9);
     }
 
     .timeline-degree {
@@ -1404,6 +1404,111 @@
       border-bottom: 1px solid var(--border);
     }
 
+    .research-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin: 14px 0 18px;
+      padding: 0;
+    }
+
+    .research-list li {
+      position: relative;
+      padding-left: 20px;
+      color: var(--text-2);
+      font-size: 14.8px;
+      line-height: 1.62;
+    }
+
+    .research-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.78em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rose);
+      box-shadow: 0 0 0 4px rgba(17,122,167,0.08);
+    }
+
+    .research-experience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .experience-card {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.52);
+    }
+
+    .experience-logo {
+      width: 76px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      border: 1px solid rgba(7,24,39,0.1);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .experience-logo--msca {
+      color: #fff;
+      background:
+        radial-gradient(circle at 50% 34%, #f7cc2b 0 18%, transparent 19%),
+        linear-gradient(180deg, #f7f7f7 0 34%, #003399 34% 57%, #8f0c64 57%);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .experience-logo--cebeg {
+      background: #f5b321;
+      color: #111;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.05;
+      text-align: center;
+    }
+
+    .experience-logo--ttcsp {
+      color: #07508d;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .experience-logo--ofcom {
+      color: #e0004d;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .experience-title {
+      color: var(--text);
+      font-size: 14.5px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .experience-meta {
+      color: var(--text-3);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: 4px;
+    }
+
     /* ── Tags: inline comma-separated reading list ── */
     .tags {
       margin-top: 18px;
@@ -1424,6 +1529,10 @@
 
     /* ── Publication entries ── */
     .pub-card {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 14px;
+      align-items: start;
       padding: 16px 0;
       border-bottom: 1px solid var(--border);
     }
@@ -1435,8 +1544,58 @@
       text-decoration: none;
     }
 
-    .pub-card a:hover .pub-title {
+    .pub-card a:hover,
+    .pub-card a:focus-visible {
       color: var(--rose);
+    }
+
+    .pub-card a:hover .pub-title,
+    .pub-card a:focus-visible .pub-title {
+      color: var(--rose);
+    }
+
+    .pub-thumb {
+      width: 82px;
+      aspect-ratio: 3 / 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(7,24,39,0.06);
+      overflow: hidden;
+    }
+
+    .pub-thumb span {
+      color: var(--text-3);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pub-thumb strong {
+      color: var(--text);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.08;
+    }
+
+    .pub-thumb--article {
+      background:
+        linear-gradient(#ffffff 0 16%, transparent 16%),
+        repeating-linear-gradient(90deg, transparent 0 30%, rgba(7,24,39,0.08) 30% 31%, transparent 31% 64%),
+        linear-gradient(180deg, #ffffff, #f4f8fa);
+    }
+
+    .pub-thumb--working {
+      background:
+        linear-gradient(90deg, rgba(17,122,167,0.16), transparent 20%),
+        linear-gradient(180deg, #fff, #f5fbfd);
     }
 
     .pub-title {
@@ -1448,6 +1607,20 @@
     }
 
     .pub-meta { font-size: 13.5px; color: var(--text-3); }
+
+    .pub-news {
+      margin-top: 8px;
+      font-size: 13.4px;
+      color: var(--text-3);
+      line-height: 1.45;
+    }
+
+    .pub-news a {
+      color: var(--rose);
+      text-decoration: underline;
+      text-decoration-color: rgba(143,63,79,0.28);
+      text-underline-offset: 3px;
+    }
 
     .pub-year {
       font-size: 13.5px;
@@ -1553,6 +1726,58 @@
       color: var(--text-2);
       line-height: 1.55;
       margin: 0;
+    }
+
+    .recommendation-list,
+    .personal-accordion {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .recommendation-item,
+    .personal-accordion details {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.5);
+      overflow: hidden;
+    }
+
+    .recommendation-item summary,
+    .personal-accordion summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 13px 14px;
+      color: var(--text);
+      font-size: 14.8px;
+      font-weight: 600;
+    }
+
+    .recommendation-item summary::-webkit-details-marker,
+    .personal-accordion summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .recommendation-item summary::after,
+    .personal-accordion summary::after {
+      content: '+';
+      float: right;
+      color: var(--rose);
+      font-weight: 500;
+    }
+
+    .recommendation-item[open] summary::after,
+    .personal-accordion details[open] summary::after {
+      content: '-';
+    }
+
+    .recommendation-item p,
+    .personal-accordion p {
+      padding: 0 14px 14px;
+      margin: 0;
+      color: var(--text-2);
+      font-size: 14.4px;
+      line-height: 1.6;
     }
 
     .personal-notes {
@@ -1990,8 +2215,35 @@
         padding: 0 0 14px;
       }
 
+      .research-experience-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-card {
+        grid-template-columns: 64px 1fr;
+        gap: 12px;
+        padding: 12px;
+      }
+
+      .experience-logo {
+        width: 64px;
+        height: 50px;
+        font-size: 15px;
+      }
+
       .pub-card {
+        grid-template-columns: 68px 1fr;
+        gap: 12px;
         padding: 15px 0;
+      }
+
+      .pub-thumb {
+        width: 68px;
+        padding: 8px;
+      }
+
+      .pub-thumb strong {
+        font-size: 11.5px;
       }
 
       .pub-title,
@@ -2203,10 +2455,10 @@
         </p>
         <p>
           My background spans Technology Policy at the University of Cambridge
-          and International Management at King's Business School, with a year
-          at Wharton, University of Pennsylvania. I have experience across
-          multiple research projects and 3+ years of industry experience in
-          consulting.
+          and International Management at King's College London, with a year
+          at Wharton, University of Pennsylvania. I have contributed to
+          multiple research projects and have 3+ years of industry experience
+          in consulting.
         </p>
         <p>
           Always excited to connect with like-minded individuals!
@@ -2235,7 +2487,7 @@
           <li><a href="#about"        class="nav-link active">About</a></li>
           <li><a href="#research"     class="nav-link">Research</a></li>
           <li><a href="#publications" class="nav-link">Publications</a></li>
-          <li><a href="#awards"       class="nav-link">Relevant Honors</a></li>
+          <li><a href="#awards"       class="nav-link">Honors</a></li>
           <li><a href="#thoughts"     class="nav-link">Thoughts</a></li>
           <li><a href="#personal"     class="nav-link">Personal</a></li>
           <li><a href="#contact"      class="nav-link">Contact</a></li>
@@ -2260,19 +2512,20 @@
       <div class="about-subsection">
         <p>
           My name is Juliette Faivre, and I am French, Polish, and Luxembourgish.
-          I have lived in more than seven countries, and I enjoy discovering new
-          cultures, learning languages, and discussing new ideas. Technology was
-          one of the things that tied those places together for me as a child.
+          From a young age, I have lived in more than seven countries, and I
+          enjoy discovering new cultures, learning languages, and discussing new
+          ideas (more about me in <a href="#personal">this section</a>).
+          Technology was one of the things that tied those places together for
+          me as a child.
         </p>
         <p>
-          As I studied business from 2018&ndash;2022, I embraced technology's power
-          to create new products, increase productivity, and expand what people
-          can build. At the same time, I stayed attentive to moments such as
-          Cambridge Analytica, the Facebook Files, and the broader effects of
-          technology on people and institutions. I became interested in the role
-          business can play in designing technology, including Humane Technology,
-          Tristan Harris' work, and more humane metrics. I also got involved in science and
-          technology think-tank research through
+          As I studied management from 2018&ndash;2022, I embraced technology's
+          power to create new products, increase productivity, and expand what
+          people can build. At the same time, I became increasingly interested
+          in the labor and wider societal effects of technology. That pushed me
+          to look at technology development and deployment differently: through
+          incentives, metrics, and more humane design. During that time, I also
+          got involved in science and technology think-tank research through
           <a href="https://en.wikipedia.org/wiki/Think_Tanks_and_Civil_Societies_Program" target="_blank" rel="noopener">TTCSP at the University of Pennsylvania</a>.
         </p>
         <p>
@@ -2280,10 +2533,6 @@
           Cambridge. This coincided with generative AI and large language models
           emerging, which quickly became the focus of my
           <a href="#research">research projects</a>.
-        </p>
-        <p>
-          You can learn more personal facts about me in
-          <a href="#personal">this section</a>.
         </p>
       </div>
 
@@ -2358,30 +2607,70 @@
     <section id="research">
       <h2>Research</h2>
 
+      <h3 class="subsection-title">Interests</h3>
       <p>
-        My research focuses on AI governance: the institutions, rules, and design
-        choices that shape how AI systems are developed, deployed, and made
-        accountable. I am interested in how current and future rules can support
-        responsible AI development and deployment while remaining technically
-        informed and adaptable.
+        AI policy and governance asks how institutions, rules, standards,
+        incentives, and practices shape the development and deployment of AI.
+        Because the field moves so quickly, my interests evolve with the ideas I
+        read and discuss. The thread tying them together is simple: which
+        existing institutions can help us govern AI, and what needs to change or
+        be created to support safer development?
       </p>
+      <ul class="research-list">
+        <li>Socioeconomic impacts of AI, especially labor and creative markets, digital sovereignty, and broadly shared benefits.</li>
+        <li>Accountability, bias, and transparency, including enforceable frameworks for high-stakes systems, watermarking, and alignment.</li>
+        <li>Online safety and privacy, including AI companions and therapy chatbots for minors, deepfakes, CSAM, and nonconsensual intimate imagery.</li>
+        <li>International coordination, regulatory fragmentation, and geopolitics in AI policy.</li>
+      </ul>
       <p>
-        <strong>AI taxation.</strong> I am currently working on whether we can tax AI,
-        what such taxes would target, and how they might shape public welfare.
+        As a result, I draw from policy, management, engineering, law, ethics,
+        philosophy, and geopolitics.
       </p>
+
+      <h3 class="subsection-title">Approach</h3>
       <p>
-        I am also interested in privacy, ethical technology design, human&ndash;AI
-        collaboration, explainability, and the societal impacts of digital
-        technologies, especially in public-sector and organizational settings.
+        My research is mixed-methods. I have a strong qualitative background in
+        literature reviews, semi-structured interviews, and policy/document
+        analysis. I also use quantitative methods from the social sciences, with
+        experience in SPSS and foundational training in Python and R. I like
+        projects where the method follows the policy question, not the other way
+        around.
       </p>
-      <p>
-        Methodologically, I come from a qualitative background, especially literature
-        review, semi-structured interviews, and document analysis. Over time, I am
-        building stronger quantitative skills to complement this work. I have
-        foundational skills in R, Python, SPSS, and survey design (Qualtrics and
-        Microsoft Forms), and am gaining more every day with the Ph.D. and my
-        supervisor, Prof. Sarah Cen.
-      </p>
+
+      <h3 class="subsection-title">Experiences</h3>
+      <div class="research-experience-grid">
+        <article class="experience-card">
+          <div class="experience-logo experience-logo--msca" aria-hidden="true">MSCA</div>
+          <div>
+            <div class="experience-title">Visiting Researcher in IoT, Circular Economy, and AI</div>
+            <div class="experience-meta">European Commission MSCA. Supervising entities: Bluesoft &amp; IoT Solutions.</div>
+          </div>
+        </article>
+
+        <article class="experience-card">
+          <div class="experience-logo experience-logo--cebeg" aria-hidden="true">CJBS<br>CEBEG</div>
+          <div>
+            <div class="experience-title">Research Assistant in Generative AI and Creativity</div>
+            <div class="experience-meta">CEBEG. Supervisor: Professor Luna Luan.</div>
+          </div>
+        </article>
+
+        <article class="experience-card">
+          <div class="experience-logo experience-logo--ttcsp" aria-hidden="true">TTCSP</div>
+          <div>
+            <div class="experience-title">Science &amp; Technology Research Intern</div>
+            <div class="experience-meta">University of Pennsylvania. Supervisor: Professor James McGann.</div>
+          </div>
+        </article>
+
+        <article class="experience-card">
+          <div class="experience-logo experience-logo--ofcom" aria-hidden="true">Ofcom</div>
+          <div>
+            <div class="experience-title">Visiting Policy Researcher in Generative AI &amp; Online Safety</div>
+            <div class="experience-meta">Ofcom. Supervisor: Professor Christos Genakos.</div>
+          </div>
+        </article>
+      </div>
     </section>
 
     <!-- PUBLICATIONS ────────────── -->
@@ -2389,51 +2678,70 @@
       <h2>Publications</h2>
 
       <p>
-        For a fuller list and updates, please consult my
+        For more details, please consult my
         <a href="https://scholar.google.com/citations?hl=en&amp;user=Yg6dnysAAAAJ" target="_blank" rel="noopener">Google Scholar profile</a>.
       </p>
 
-      <div class="pub-card">
-        <a href="https://arxiv.org/abs/2607.02144" target="_blank" rel="noopener">
-          <div class="pub-title">Taxing Artificial Intelligence</div>
-          <div class="pub-meta">arXiv working paper &middot; with Sarah H. Cen &middot; <span class="pub-year">2026</span></div>
-        </a>
-      </div>
+      <article class="pub-card">
+        <div class="pub-thumb pub-thumb--working" aria-hidden="true"><span>arXiv</span><strong>Taxing AI</strong></div>
+        <div>
+          <a href="https://arxiv.org/abs/2607.02144" target="_blank" rel="noopener">
+            <div class="pub-title">Taxing Artificial Intelligence</div>
+            <div class="pub-meta">arXiv working paper &middot; with Sarah H. Cen &middot; <span class="pub-year">2026</span></div>
+          </a>
+          <div class="pub-news">&#128240; <a href="https://www.ece.cmu.edu/news-and-events/story/2026/07/ai-taxation.html" target="_blank" rel="noopener"><em>Read the CMU news article about our paper.</em></a></div>
+        </div>
+      </article>
 
-      <div class="pub-card">
-        <a href="https://www.privacylaws.com/reports-gateway/articles/int197/int197deepseek/" target="_blank" rel="noopener">
-          <div class="pub-title">DeepSeek under international scrutiny: balancing innovation and users' data protection</div>
-          <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2025</span></div>
-        </a>
-      </div>
+      <article class="pub-card">
+        <div class="pub-thumb pub-thumb--article" aria-hidden="true"><span>Analysis</span><strong>DeepSeek</strong></div>
+        <div>
+          <a href="https://www.privacylaws.com/reports-gateway/articles/int197/int197deepseek/" target="_blank" rel="noopener">
+            <div class="pub-title">DeepSeek under international scrutiny: balancing innovation and users' data protection</div>
+            <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2025</span></div>
+          </a>
+        </div>
+      </article>
 
-      <div class="pub-card">
-        <a href="https://www.privacylaws.com/reports-gateway/articles/int184/" target="_blank" rel="noopener">
-          <div class="pub-title">Unlocking the AI paradox?</div>
-          <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2023</span></div>
-        </a>
-      </div>
+      <article class="pub-card">
+        <div class="pub-thumb pub-thumb--article" aria-hidden="true"><span>Analysis</span><strong>AI Paradox</strong></div>
+        <div>
+          <a href="https://www.privacylaws.com/reports-gateway/articles/int184/" target="_blank" rel="noopener">
+            <div class="pub-title">Unlocking the AI paradox?</div>
+            <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2023</span></div>
+          </a>
+        </div>
+      </article>
 
-      <div class="pub-card">
-        <a href="https://ssrn.com/abstract=4514993" target="_blank" rel="noopener">
-          <div class="pub-title">The AI Act: towards global effects?</div>
-          <div class="pub-meta">SSRN working paper &middot; <span class="pub-year">2023</span></div>
-        </a>
-      </div>
+      <article class="pub-card">
+        <div class="pub-thumb pub-thumb--working" aria-hidden="true"><span>Paper</span><strong>AI Act</strong></div>
+        <div>
+          <a href="https://ssrn.com/abstract=4514993" target="_blank" rel="noopener">
+            <div class="pub-title">The AI Act: towards global effects?</div>
+            <div class="pub-meta">SSRN working paper &middot; <span class="pub-year">2023</span></div>
+          </a>
+        </div>
+      </article>
 
-      <div class="pub-card">
-        <a href="https://ssrn.com/abstract=4530094" target="_blank" rel="noopener">
-          <div class="pub-title">Negotiations in tech: an analysis of asymmetric ransomware negotiations</div>
-          <div class="pub-meta">SSRN working paper &middot; <span class="pub-year">2023</span></div>
-        </a>
-      </div>
+      <article class="pub-card">
+        <div class="pub-thumb pub-thumb--working" aria-hidden="true"><span>Paper</span><strong>Ransomware</strong></div>
+        <div>
+          <a href="https://ssrn.com/abstract=4530094" target="_blank" rel="noopener">
+            <div class="pub-title">Negotiations in tech: an analysis of asymmetric ransomware negotiations</div>
+            <div class="pub-meta">SSRN working paper &middot; <span class="pub-year">2023</span></div>
+          </a>
+        </div>
+      </article>
 
-      <div class="pub-card">
-        <a href="https://www.privacylaws.com/media/4004/int179.pdf" target="_blank" rel="noopener">
-          <div class="pub-title">Get rewarded for giving your data away? The rise of &lsquo;neobrowsers&rsquo;</div>
-          <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2022</span></div>
-        </a>
-      </div>
+      <article class="pub-card">
+        <div class="pub-thumb pub-thumb--article" aria-hidden="true"><span>Analysis</span><strong>Neobrowsers</strong></div>
+        <div>
+          <a href="https://www.privacylaws.com/media/4004/int179.pdf" target="_blank" rel="noopener">
+            <div class="pub-title">Get rewarded for giving your data away? The rise of &lsquo;neobrowsers&rsquo;</div>
+            <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2022</span></div>
+          </a>
+        </div>
+      </article>
     </section>
 
     <!-- AWARDS ─────────────────── -->
@@ -2443,7 +2751,7 @@
       <div class="award-row">
         <div class="award-year">2026</div>
         <div>
-          <div class="award-name">Fulbright Scholarship &mdash; Doctoral Research Award (up to $2,500/month)</div>
+          <div class="award-name">Fulbright Scholarship &mdash; Doctoral Research Award (up to $22,500 for research)</div>
           <div class="award-org">Awarded by the Fulbright Commission of Luxembourg and Belgium; respectfully declined because my doctoral degree was already fully funded</div>
         </div>
       </div>
@@ -2467,8 +2775,8 @@
       <div class="award-row">
         <div class="award-year">2022</div>
         <div>
-          <div class="award-name">Faculty nominee for the Wellington Medal</div>
-          <div class="award-org">King's College London Business Faculty &mdash; the award recognizes a student's excellent academic achievements, contributions to King's, and potential for the future</div>
+          <div class="award-name">Wellington Medal Award nominee, King's Business School</div>
+          <div class="award-org">Selected as the Business School nominee for the university-wide Wellington Medal</div>
         </div>
       </div>
 
@@ -2488,6 +2796,7 @@
 
       <p>Occasional writing on technology, policy, and ideas I find worth thinking about.</p>
 
+      <h3 class="subsection-title">Short Essays &amp; Opinions</h3>
       <div class="blog-list">
         <a class="blog-item" href="notes/responsible-ai-governance.html">
           <img class="blog-thumb" src="assets/note-ai-governance.svg" alt="" />
@@ -2502,19 +2811,30 @@
           <img class="blog-thumb" src="assets/note-public-services.svg" alt="" />
           <div class="blog-content">
             <div class="blog-title">Digital Public Services and Trust</div>
-            <div class="blog-meta">May 2026</div>
-            <p class="blog-blurb">Reflections on how governments can make online services easier to use without losing transparency or public confidence.</p>
+            <div class="blog-meta">In progress</div>
+            <p class="blog-blurb">Currently writing: reflections on how governments can make online services easier to use without losing transparency or public confidence.</p>
           </div>
         </a>
+      </div>
 
-        <a class="blog-item" href="notes/children-generative-ai.html">
-          <img class="blog-thumb" src="assets/note-children-ai.svg" alt="" />
-          <div class="blog-content">
-            <div class="blog-title">Children, Safety, and Generative AI</div>
-            <div class="blog-meta">May 2026</div>
-            <p class="blog-blurb">A starting point for thinking about child well-being, platform design, and the safeguards that emerging AI systems require.</p>
-          </div>
-        </a>
+      <h3 class="subsection-title">Recommendations</h3>
+      <p>
+        A small, evolving list of articles, books, podcasts, posts, and ideas I
+        come across and think are worth a read.
+      </p>
+      <div class="recommendation-list">
+        <details class="recommendation-item">
+          <summary>Articles and Posts</summary>
+          <p>I will keep a short list here of pieces that helped me think differently about AI, governance, institutions, and technology.</p>
+        </details>
+        <details class="recommendation-item">
+          <summary>Books</summary>
+          <p>A place for books on technology, political economy, institutions, ethics, and the social effects of innovation.</p>
+        </details>
+        <details class="recommendation-item">
+          <summary>Podcasts and Talks</summary>
+          <p>For interviews and lectures I found especially clear, surprising, or useful.</p>
+        </details>
       </div>
     </section>
 
@@ -2522,33 +2842,31 @@
     <section id="personal">
       <h2>Personal</h2>
 
-      <p>
-        I have been lucky to live, study, work, and travel across several places
-        that shaped how I see technology, policy, and people. This space is for a
-        quieter archive of those moments.
-      </p>
-
-      <ul class="personal-notes">
-        <li>
-          Before CMU, I lived in Luxembourg and was a Senior Consultant at EY
-          focused on Business Transformations. I also made a small
-          <a href="travel/luxembourg.html">fun facts page about Luxembourg</a>.
-        </li>
-      </ul>
-
-      <div class="travel-grid">
-        <a class="travel-card" href="travel/europe.html">
-          <img src="assets/travel-europe.svg" alt="" />
-          <span>Europe</span>
-        </a>
-        <a class="travel-card" href="travel/united-states.html">
-          <img src="assets/travel-united-states.svg" alt="" />
-          <span>United States</span>
-        </a>
-        <a class="travel-card" href="travel/asia.html">
-          <img src="assets/travel-asia.svg" alt="" />
-          <span>Asia</span>
-        </a>
+      <div class="personal-accordion">
+        <details>
+          <summary>Travels</summary>
+          <p>
+            I love travelling and keep a public map of the countries I have
+            visited so far:
+            <a href="travel/visited-countries.html">see my visited countries map</a>.
+          </p>
+        </details>
+        <details>
+          <summary>Hobbies</summary>
+          <p>
+            I love travelling, painting
+            (<a href="travel/paintings.html">my paintings and favorite painters</a>),
+            and tennis, where I am currently working on my skills.
+          </p>
+        </details>
+        <details>
+          <summary>Luxembourg</summary>
+          <p>
+            When I mention that I come from Luxembourg, people are often curious
+            about the country, so I made a quick
+            <a href="travel/luxembourg.html">fun facts page about Luxembourg</a>.
+          </p>
+        </details>
       </div>
     </section>
 

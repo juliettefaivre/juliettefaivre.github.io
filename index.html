@@ -1318,7 +1318,8 @@
     }
 
     .timeline-logo--cmu img {
-      transform: scale(0.88);
+      transform: translateY(-7%) scale(0.88);
+      transform-origin: center;
     }
 
     .timeline-logo--cam {
@@ -1461,38 +1462,22 @@
       overflow: hidden;
     }
 
-    .experience-logo--msca {
-      color: #fff;
-      background:
-        radial-gradient(circle at 50% 34%, #f7cc2b 0 18%, transparent 19%),
-        linear-gradient(180deg, #f7f7f7 0 34%, #003399 34% 57%, #8f0c64 57%);
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 0.03em;
+    .experience-logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
+    .experience-logo--msca,
     .experience-logo--cebeg {
-      background: #f5b321;
-      color: #111;
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 19px;
-      font-weight: 600;
-      line-height: 1.05;
-      text-align: center;
+      padding: 0;
+      background: #fff;
     }
 
-    .experience-logo--ttcsp {
-      color: #07508d;
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-    }
-
+    .experience-logo--ttcsp,
     .experience-logo--ofcom {
-      color: #e0004d;
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
+      padding: 7px;
     }
 
     .experience-title {
@@ -1557,11 +1542,6 @@
     .pub-thumb {
       width: 82px;
       aspect-ratio: 3 / 4;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 10px;
       border: 1px solid var(--border);
       border-radius: 7px;
       background: #fff;
@@ -1569,33 +1549,11 @@
       overflow: hidden;
     }
 
-    .pub-thumb span {
-      color: var(--text-3);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .pub-thumb strong {
-      color: var(--text);
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 1.08;
-    }
-
-    .pub-thumb--article {
-      background:
-        linear-gradient(#ffffff 0 16%, transparent 16%),
-        repeating-linear-gradient(90deg, transparent 0 30%, rgba(7,24,39,0.08) 30% 31%, transparent 31% 64%),
-        linear-gradient(180deg, #ffffff, #f4f8fa);
-    }
-
-    .pub-thumb--working {
-      background:
-        linear-gradient(90deg, rgba(17,122,167,0.16), transparent 20%),
-        linear-gradient(180deg, #fff, #f5fbfd);
+    .pub-thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .pub-title {
@@ -1728,52 +1686,78 @@
       margin: 0;
     }
 
-    .recommendation-list,
-    .personal-accordion {
+    .recommendation-list {
+      list-style: none;
       display: grid;
       gap: 8px;
       margin-top: 14px;
+      padding: 0;
     }
 
-    .recommendation-item,
+    .recommendation-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--text-2);
+      font-size: 14.8px;
+      line-height: 1.6;
+    }
+
+    .recommendation-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rose);
+    }
+
+    .personal-accordion {
+      display: grid;
+      gap: 0;
+      margin-top: 14px;
+    }
+
     .personal-accordion details {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: rgba(255,255,255,0.5);
-      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      padding: 9px 0 10px;
     }
 
-    .recommendation-item summary,
+    .personal-accordion details:first-child {
+      border-top: 1px solid var(--border);
+    }
+
     .personal-accordion summary {
       cursor: pointer;
       list-style: none;
-      padding: 13px 14px;
+      padding: 0;
       color: var(--text);
       font-size: 14.8px;
       font-weight: 600;
     }
 
-    .recommendation-item summary::-webkit-details-marker,
     .personal-accordion summary::-webkit-details-marker {
       display: none;
     }
 
-    .recommendation-item summary::after,
-    .personal-accordion summary::after {
-      content: '+';
-      float: right;
+    .personal-accordion summary::before {
+      content: '>';
+      display: inline-block;
+      width: 15px;
+      margin-right: 6px;
       color: var(--rose);
       font-weight: 500;
+      transform: rotate(0deg);
+      transition: transform 0.15s var(--ease);
     }
 
-    .recommendation-item[open] summary::after,
-    .personal-accordion details[open] summary::after {
-      content: '-';
+    .personal-accordion details[open] summary::before {
+      transform: rotate(90deg);
     }
 
-    .recommendation-item p,
     .personal-accordion p {
-      padding: 0 14px 14px;
+      padding: 8px 0 0 22px;
       margin: 0;
       color: var(--text-2);
       font-size: 14.4px;
@@ -2228,7 +2212,6 @@
       .experience-logo {
         width: 64px;
         height: 50px;
-        font-size: 15px;
       }
 
       .pub-card {
@@ -2239,11 +2222,6 @@
 
       .pub-thumb {
         width: 68px;
-        padding: 8px;
-      }
-
-      .pub-thumb strong {
-        font-size: 11.5px;
       }
 
       .pub-title,
@@ -2611,11 +2589,14 @@
       <p>
         AI policy and governance asks how institutions, rules, standards,
         incentives, and practices shape the development and deployment of AI.
+      </p>
+      <p>
         Because the field moves so quickly, my interests evolve with the ideas I
-        read and discuss. The thread tying them together is simple: which
+        read and discuss. The thread tying them together is generally: which
         existing institutions can help us govern AI, and what needs to change or
         be created to support safer development?
       </p>
+      <p>This necessitates the study of the following:</p>
       <ul class="research-list">
         <li>Socioeconomic impacts of AI, especially labor and creative markets, digital sovereignty, and broadly shared benefits.</li>
         <li>Accountability, bias, and transparency, including enforceable frameworks for high-stakes systems, watermarking, and alignment.</li>
@@ -2640,7 +2621,9 @@
       <h3 class="subsection-title">Experiences</h3>
       <div class="research-experience-grid">
         <article class="experience-card">
-          <div class="experience-logo experience-logo--msca" aria-hidden="true">MSCA</div>
+          <div class="experience-logo experience-logo--msca" aria-hidden="true">
+            <img src="assets/research/msca.png" alt="" />
+          </div>
           <div>
             <div class="experience-title">Visiting Researcher in IoT, Circular Economy, and AI</div>
             <div class="experience-meta">European Commission MSCA. Supervising entities: Bluesoft &amp; IoT Solutions.</div>
@@ -2648,7 +2631,9 @@
         </article>
 
         <article class="experience-card">
-          <div class="experience-logo experience-logo--cebeg" aria-hidden="true">CJBS<br>CEBEG</div>
+          <div class="experience-logo experience-logo--cebeg" aria-hidden="true">
+            <img src="assets/research/cebeg.svg" alt="" />
+          </div>
           <div>
             <div class="experience-title">Research Assistant in Generative AI and Creativity</div>
             <div class="experience-meta">CEBEG. Supervisor: Professor Luna Luan.</div>
@@ -2656,7 +2641,9 @@
         </article>
 
         <article class="experience-card">
-          <div class="experience-logo experience-logo--ttcsp" aria-hidden="true">TTCSP</div>
+          <div class="experience-logo experience-logo--ttcsp" aria-hidden="true">
+            <img src="assets/research/ttcsp.jpg" alt="" />
+          </div>
           <div>
             <div class="experience-title">Science &amp; Technology Research Intern</div>
             <div class="experience-meta">University of Pennsylvania. Supervisor: Professor James McGann.</div>
@@ -2664,7 +2651,9 @@
         </article>
 
         <article class="experience-card">
-          <div class="experience-logo experience-logo--ofcom" aria-hidden="true">Ofcom</div>
+          <div class="experience-logo experience-logo--ofcom" aria-hidden="true">
+            <img src="assets/research/ofcom.png" alt="" />
+          </div>
           <div>
             <div class="experience-title">Visiting Policy Researcher in Generative AI &amp; Online Safety</div>
             <div class="experience-meta">Ofcom. Supervisor: Professor Christos Genakos.</div>
@@ -2683,7 +2672,9 @@
       </p>
 
       <article class="pub-card">
-        <div class="pub-thumb pub-thumb--working" aria-hidden="true"><span>arXiv</span><strong>Taxing AI</strong></div>
+        <div class="pub-thumb" aria-hidden="true">
+          <img src="assets/publications/taxing-ai.svg" alt="" />
+        </div>
         <div>
           <a href="https://arxiv.org/abs/2607.02144" target="_blank" rel="noopener">
             <div class="pub-title">Taxing Artificial Intelligence</div>
@@ -2694,7 +2685,9 @@
       </article>
 
       <article class="pub-card">
-        <div class="pub-thumb pub-thumb--article" aria-hidden="true"><span>Analysis</span><strong>DeepSeek</strong></div>
+        <div class="pub-thumb" aria-hidden="true">
+          <img src="assets/publications/deepseek.svg" alt="" />
+        </div>
         <div>
           <a href="https://www.privacylaws.com/reports-gateway/articles/int197/int197deepseek/" target="_blank" rel="noopener">
             <div class="pub-title">DeepSeek under international scrutiny: balancing innovation and users' data protection</div>
@@ -2704,7 +2697,9 @@
       </article>
 
       <article class="pub-card">
-        <div class="pub-thumb pub-thumb--article" aria-hidden="true"><span>Analysis</span><strong>AI Paradox</strong></div>
+        <div class="pub-thumb" aria-hidden="true">
+          <img src="assets/publications/ai-paradox.svg" alt="" />
+        </div>
         <div>
           <a href="https://www.privacylaws.com/reports-gateway/articles/int184/" target="_blank" rel="noopener">
             <div class="pub-title">Unlocking the AI paradox?</div>
@@ -2714,7 +2709,9 @@
       </article>
 
       <article class="pub-card">
-        <div class="pub-thumb pub-thumb--working" aria-hidden="true"><span>Paper</span><strong>AI Act</strong></div>
+        <div class="pub-thumb" aria-hidden="true">
+          <img src="assets/publications/ai-act.svg" alt="" />
+        </div>
         <div>
           <a href="https://ssrn.com/abstract=4514993" target="_blank" rel="noopener">
             <div class="pub-title">The AI Act: towards global effects?</div>
@@ -2724,7 +2721,9 @@
       </article>
 
       <article class="pub-card">
-        <div class="pub-thumb pub-thumb--working" aria-hidden="true"><span>Paper</span><strong>Ransomware</strong></div>
+        <div class="pub-thumb" aria-hidden="true">
+          <img src="assets/publications/ransomware.svg" alt="" />
+        </div>
         <div>
           <a href="https://ssrn.com/abstract=4530094" target="_blank" rel="noopener">
             <div class="pub-title">Negotiations in tech: an analysis of asymmetric ransomware negotiations</div>
@@ -2734,7 +2733,9 @@
       </article>
 
       <article class="pub-card">
-        <div class="pub-thumb pub-thumb--article" aria-hidden="true"><span>Analysis</span><strong>Neobrowsers</strong></div>
+        <div class="pub-thumb" aria-hidden="true">
+          <img src="assets/publications/neobrowsers.svg" alt="" />
+        </div>
         <div>
           <a href="https://www.privacylaws.com/media/4004/int179.pdf" target="_blank" rel="noopener">
             <div class="pub-title">Get rewarded for giving your data away? The rise of &lsquo;neobrowsers&rsquo;</div>
@@ -2822,20 +2823,9 @@
         A small, evolving list of articles, books, podcasts, posts, and ideas I
         come across and think are worth a read.
       </p>
-      <div class="recommendation-list">
-        <details class="recommendation-item">
-          <summary>Articles and Posts</summary>
-          <p>I will keep a short list here of pieces that helped me think differently about AI, governance, institutions, and technology.</p>
-        </details>
-        <details class="recommendation-item">
-          <summary>Books</summary>
-          <p>A place for books on technology, political economy, institutions, ethics, and the social effects of innovation.</p>
-        </details>
-        <details class="recommendation-item">
-          <summary>Podcasts and Talks</summary>
-          <p>For interviews and lectures I found especially clear, surprising, or useful.</p>
-        </details>
-      </div>
+      <ul class="recommendation-list">
+        <li>Work in progress.</li>
+      </ul>
     </section>
 
     <!-- PERSONAL ────────────────── -->

@@ -431,16 +431,19 @@
 
     body.rabbit-fall-open {
       overflow-x: hidden;
-      background: #02070c;
+      background: var(--bg);
     }
 
     body.rabbit-fall-open #hero,
     body.rabbit-fall-open #main-layout,
     body.rabbit-fall-open footer {
       animation: none;
-      filter: none;
+      filter:
+        brightness(var(--fall-page-brightness, 1))
+        saturate(var(--fall-page-saturation, 1));
       opacity: 1;
       transform: none;
+      will-change: filter;
     }
 
     .rabbit-fall-overlay {
@@ -451,19 +454,24 @@
       overflow: hidden;
       opacity: 0;
       background:
+        linear-gradient(180deg,
+          rgba(216,240,247,var(--fall-surface-sheen, 0)),
+          transparent 24%,
+          rgba(15,79,106,var(--fall-surface-blue, 0)) 68%,
+          rgba(4,22,36,var(--fall-surface-navy, 0))),
         radial-gradient(ellipse at 50% 112%,
-          rgba(0,0,0,calc(var(--fall-depth, 0) * 0.72)),
-          transparent 54%),
+          rgba(0,0,0,var(--fall-depth-shadow, 0)),
+          transparent 58%),
         linear-gradient(180deg,
           rgba(8,42,64,0),
-          rgba(8,42,64,calc(var(--fall-depth, 0) * 0.18)) 34%,
-          rgba(3,15,27,calc(var(--fall-depth, 0) * 0.48)) 70%,
-          rgba(0,0,0,calc(var(--fall-depth, 0) * 0.74)));
+          rgba(8,42,64,var(--fall-depth-blue, 0)) 34%,
+          rgba(3,15,27,var(--fall-depth-navy, 0)) 70%,
+          rgba(0,0,0,var(--fall-depth-black, 0)));
       transition: opacity 0.08s ease-out;
     }
 
     .rabbit-fall-overlay.is-falling {
-      opacity: var(--fall-overlay-opacity, 0.16);
+      opacity: 1;
     }
 
     .rabbit-fall-overlay::before,
@@ -521,10 +529,13 @@
         radial-gradient(ellipse at 70% 32%, rgba(216,240,247,0.1), transparent 25%),
         radial-gradient(ellipse at 50% 84%, rgba(0,0,0,0.84), transparent 42%),
         linear-gradient(180deg,
-          #134e68 0%,
-          #0a314c 24%,
-          #061b31 48%,
-          #020a14 72%,
+          #c4e2e8 0%,
+          #78c7d6 8%,
+          #3ca3bf 18%,
+          #134e68 34%,
+          #0a314c 52%,
+          #061b31 70%,
+          #020a14 88%,
           #000 100%);
     }
 
@@ -1833,23 +1844,26 @@
     }
 
     .pub-actions {
-      display: grid;
-      grid-template-columns: repeat(3, max-content) minmax(0, 1fr);
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
       gap: 8px;
       align-items: start;
-      width: 100%;
+      width: min(100%, 780px);
+      max-width: 100%;
       margin-top: 10px;
+      padding-bottom: var(--pub-panel-space, 0px);
+      transition: padding-bottom 0.18s var(--ease);
     }
 
     .pub-detail {
-      display: contents;
+      display: inline-block;
     }
 
     .pub-detail summary,
     .pub-action {
       display: inline-grid;
       place-items: center;
-      grid-row: 1;
       min-width: 58px;
       min-height: 28px;
       padding: 5px 10px;
@@ -1883,12 +1897,14 @@
     }
 
     .pub-detail-box {
-      grid-column: 1 / -1;
-      grid-row: 2;
-      width: 100%;
+      position: absolute;
+      left: 0;
+      top: calc(var(--pub-action-row-height, 30px) + 8px);
+      z-index: 2;
+      width: min(100%, 780px);
       max-width: 100%;
       min-width: 0;
-      margin-top: 2px;
+      margin-top: 0;
       padding: 11px 12px;
       overflow: hidden;
       border: 1px solid rgba(7,24,39,0.08);
@@ -2571,7 +2587,7 @@
       }
 
       .pub-actions {
-        grid-template-columns: repeat(3, max-content) minmax(0, 1fr);
+        width: 100%;
         gap: 6px;
       }
 
@@ -3359,16 +3375,53 @@
     });
   });
 
-  document.querySelectorAll('.pub-detail').forEach(detail => {
-    detail.addEventListener('toggle', () => {
-      if (!detail.open) return;
+  const publicationDetails = Array.from(document.querySelectorAll('.pub-detail'));
+  const publicationActions = Array.from(document.querySelectorAll('.pub-actions'));
 
-      document.querySelectorAll('.pub-detail[open]').forEach(openDetail => {
-        if (openDetail !== detail) {
-          openDetail.open = false;
-        }
-      });
+  const updatePublicationPanelSpace = actions => {
+    if (!actions) return;
+
+    const openDetail = actions.querySelector('.pub-detail[open]');
+    if (!openDetail) {
+      actions.style.setProperty('--pub-panel-space', '0px');
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      const openPanel = openDetail.querySelector('.pub-detail-box');
+      if (!openDetail.open || !openPanel) {
+        actions.style.setProperty('--pub-panel-space', '0px');
+        return;
+      }
+
+      const controls = Array.from(actions.querySelectorAll('summary, .pub-action'));
+      const actionTop = actions.getBoundingClientRect().top;
+      const rowHeight = controls.reduce((height, control) => {
+        const rect = control.getBoundingClientRect();
+        return Math.max(height, rect.bottom - actionTop);
+      }, 0);
+
+      actions.style.setProperty('--pub-action-row-height', `${Math.ceil(rowHeight)}px`);
+      actions.style.setProperty('--pub-panel-space', `${Math.ceil(openPanel.offsetHeight + 10)}px`);
     });
+  };
+
+  publicationDetails.forEach(detail => {
+    detail.addEventListener('toggle', () => {
+      if (detail.open) {
+        publicationDetails.forEach(openDetail => {
+          if (openDetail !== detail) {
+            openDetail.open = false;
+          }
+        });
+      }
+
+      publicationActions.forEach(updatePublicationPanelSpace);
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    publicationActions.forEach(updatePublicationPanelSpace);
   });
 
   const butterflySwarm = document.querySelector('.butterfly-swarm');
@@ -3722,9 +3775,19 @@
       overlay.className = 'rabbit-fall-overlay';
       overlay.style.setProperty('--fall-x', `${centerX}px`);
       overlay.style.setProperty('--fall-y', `${centerY}px`);
+      overlay.style.setProperty('--fall-surface', '0');
       overlay.style.setProperty('--fall-depth', '0');
+      overlay.style.setProperty('--fall-surface-sheen', '0');
+      overlay.style.setProperty('--fall-surface-blue', '0');
+      overlay.style.setProperty('--fall-surface-navy', '0');
+      overlay.style.setProperty('--fall-depth-shadow', '0');
+      overlay.style.setProperty('--fall-depth-blue', '0');
+      overlay.style.setProperty('--fall-depth-navy', '0');
+      overlay.style.setProperty('--fall-depth-black', '0');
       overlay.style.setProperty('--fall-overlay-opacity', '0');
       overlay.style.setProperty('--streak-opacity', '0.08');
+      document.body.style.setProperty('--fall-page-brightness', '1');
+      document.body.style.setProperty('--fall-page-saturation', '1');
 
       const startY = window.scrollY;
       const maxScrollY = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
@@ -3741,8 +3804,8 @@
       const targetY = maxScrollY();
       const surfaceDistance = Math.max(0, surfaceBottomY - startY);
       const depthDistance = Math.max(0, targetY - surfaceBottomY);
-      const split = surfaceDistance > window.innerHeight * 0.45 ? 0.52 : 0.26;
-      const duration = 2850;
+      const split = surfaceDistance > window.innerHeight * 0.45 ? 0.68 : 0.44;
+      const duration = 3900;
       const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       const easeOutQuart = t => 1 - Math.pow(1 - t, 4);
       let startTime = null;
@@ -3751,24 +3814,39 @@
         if (!startTime) startTime = timestamp;
         const progress = Math.min((timestamp - startTime) / duration, 1);
         let scrollY = startY;
+        let surfaceTint = 0;
         let depthProgress = 0;
-        let overlayOpacity = 0.05;
+        let pageBrightness = 1;
+        let pageSaturation = 1;
 
         if (progress <= split) {
           const surfaceProgress = easeInOutCubic(progress / split);
           scrollY = startY + surfaceDistance * surfaceProgress;
-          overlayOpacity = 0.04 + surfaceProgress * 0.14;
+          surfaceTint = surfaceProgress;
+          pageBrightness = 1 - surfaceProgress * 0.18;
+          pageSaturation = 1 - surfaceProgress * 0.08;
         } else {
+          surfaceTint = 1;
           depthProgress = easeOutQuart((progress - split) / (1 - split));
           scrollY = surfaceBottomY + depthDistance * depthProgress;
-          overlayOpacity = 0.18 + depthProgress * 0.42;
+          pageBrightness = 0.82 - depthProgress * 0.36;
+          pageSaturation = 0.92 - depthProgress * 0.18;
         }
 
         window.scrollTo(0, scrollY);
         overlay.style.setProperty('--fall-progress', progress.toFixed(3));
+        overlay.style.setProperty('--fall-surface', surfaceTint.toFixed(3));
         overlay.style.setProperty('--fall-depth', depthProgress.toFixed(3));
-        overlay.style.setProperty('--fall-overlay-opacity', overlayOpacity.toFixed(3));
-        overlay.style.setProperty('--streak-opacity', (0.08 + progress * 0.38).toFixed(3));
+        overlay.style.setProperty('--fall-surface-sheen', (surfaceTint * 0.045).toFixed(3));
+        overlay.style.setProperty('--fall-surface-blue', (surfaceTint * 0.13).toFixed(3));
+        overlay.style.setProperty('--fall-surface-navy', (surfaceTint * 0.18).toFixed(3));
+        overlay.style.setProperty('--fall-depth-shadow', (depthProgress * 0.58).toFixed(3));
+        overlay.style.setProperty('--fall-depth-blue', (depthProgress * 0.13).toFixed(3));
+        overlay.style.setProperty('--fall-depth-navy', (depthProgress * 0.36).toFixed(3));
+        overlay.style.setProperty('--fall-depth-black', (depthProgress * 0.62).toFixed(3));
+        overlay.style.setProperty('--streak-opacity', (0.05 + progress * 0.32).toFixed(3));
+        document.body.style.setProperty('--fall-page-brightness', pageBrightness.toFixed(3));
+        document.body.style.setProperty('--fall-page-saturation', pageSaturation.toFixed(3));
 
         if (progress < 1) {
           requestAnimationFrame(fall);
@@ -3888,6 +3966,8 @@
     window.addEventListener('pageshow', () => {
       portalOpening = false;
       document.body.classList.remove('portal-open', 'rabbit-fall-open');
+      document.body.style.removeProperty('--fall-page-brightness');
+      document.body.style.removeProperty('--fall-page-saturation');
       document.querySelectorAll('.butterfly-portal').forEach(portal => portal.remove());
       document.querySelectorAll('.rabbit-fall-overlay, .rabbit-fall-extension').forEach(element => element.remove());
       butterflies.forEach(({ el }) => {

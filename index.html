@@ -1767,6 +1767,10 @@
 
     .pub-card:last-child { border-bottom: none; }
 
+    .pub-card > div:last-child {
+      min-width: 0;
+    }
+
     .pub-card a {
       color: inherit;
       text-decoration: none;
@@ -1825,9 +1829,10 @@
 
     .pub-actions {
       display: grid;
-      grid-template-columns: repeat(3, max-content);
+      grid-template-columns: repeat(3, max-content) minmax(0, 1fr);
       gap: 8px;
       align-items: start;
+      width: 100%;
       margin-top: 10px;
     }
 
@@ -1839,29 +1844,33 @@
     .pub-action {
       display: inline-grid;
       place-items: center;
-      min-width: 54px;
-      min-height: 30px;
-      padding: 6px 11px;
-      border: 1px solid rgba(7,24,39,0.2);
+      grid-row: 1;
+      min-width: 58px;
+      min-height: 28px;
+      padding: 5px 10px;
+      border: 1px solid rgba(7,24,39,0.12);
       border-radius: 5px;
-      color: var(--text);
-      background: rgba(255,255,255,0.66);
-      font-size: 12px;
+      color: rgba(29,29,31,0.78);
+      background: rgba(255,255,255,0.42);
+      font-size: 11.5px;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       text-decoration: none;
       cursor: pointer;
-      transition: border-color 0.15s var(--ease), color 0.15s var(--ease), background 0.15s var(--ease);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+      transition: border-color 0.15s var(--ease), color 0.15s var(--ease), background 0.15s var(--ease), box-shadow 0.15s var(--ease);
     }
 
+    .pub-detail[open] summary,
     .pub-detail summary:hover,
     .pub-detail summary:focus-visible,
     .pub-action:hover,
     .pub-action:focus-visible {
       color: var(--rose);
-      border-color: rgba(17,122,167,0.42);
-      background: rgba(255,255,255,0.9);
+      border-color: rgba(17,122,167,0.24);
+      background: rgba(255,255,255,0.62);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72);
     }
 
     .pub-detail summary::-webkit-details-marker {
@@ -1870,25 +1879,37 @@
 
     .pub-detail-box {
       grid-column: 1 / -1;
+      grid-row: 2;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
       margin-top: 2px;
-      padding: 12px 13px;
-      border: 1px solid var(--border);
+      padding: 11px 12px;
+      overflow: hidden;
+      border: 1px solid rgba(7,24,39,0.08);
       border-radius: 7px;
-      background: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.46);
       color: var(--text-2);
       font-size: 13.3px;
       line-height: 1.55;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
     }
 
     .pub-detail-box p {
       margin: 0;
+      max-width: 100%;
       font-size: inherit;
       line-height: inherit;
+      overflow-wrap: break-word;
+      word-break: normal;
     }
 
     .pub-detail-box pre {
       margin: 0;
+      max-width: 100%;
+      overflow-x: auto;
       white-space: pre-wrap;
+      overflow-wrap: anywhere;
       color: var(--text-2);
       font: 12.4px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     }
@@ -2542,6 +2563,24 @@
 
       .pub-thumb {
         width: 68px;
+      }
+
+      .pub-actions {
+        grid-template-columns: repeat(3, max-content) minmax(0, 1fr);
+        gap: 6px;
+      }
+
+      .pub-detail summary,
+      .pub-action {
+        min-width: 50px;
+        min-height: 27px;
+        padding: 5px 8px;
+        font-size: 11px;
+      }
+
+      .pub-detail-box {
+        padding: 10px;
+        font-size: 12.8px;
       }
 
       .pub-title,
@@ -3312,6 +3351,18 @@
       e.preventDefault();
       document.querySelector(a.getAttribute('href'))
         ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  document.querySelectorAll('.pub-detail').forEach(detail => {
+    detail.addEventListener('toggle', () => {
+      if (!detail.open) return;
+
+      document.querySelectorAll('.pub-detail[open]').forEach(openDetail => {
+        if (openDetail !== detail) {
+          openDetail.open = false;
+        }
+      });
     });
   });
 

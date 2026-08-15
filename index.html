@@ -1318,7 +1318,7 @@
     }
 
     .timeline-logo--cmu img {
-      transform: translateY(-7%) scale(0.88);
+      transform: translateY(-13%) scale(0.88);
       transform-origin: center;
     }
 
@@ -1480,6 +1480,16 @@
       padding: 7px;
     }
 
+    .experience-logo--msca img {
+      transform: translateY(-8%) scale(1.04);
+      transform-origin: center;
+    }
+
+    .experience-logo--cebeg img {
+      transform: scale(1.16);
+      transform-origin: center;
+    }
+
     .experience-title {
       color: var(--text);
       font-size: 14.5px;
@@ -1578,6 +1588,76 @@
       text-decoration: underline;
       text-decoration-color: rgba(143,63,79,0.28);
       text-underline-offset: 3px;
+    }
+
+    .pub-actions {
+      display: grid;
+      grid-template-columns: repeat(3, max-content);
+      gap: 8px;
+      align-items: start;
+      margin-top: 10px;
+    }
+
+    .pub-detail {
+      display: contents;
+    }
+
+    .pub-detail summary,
+    .pub-action {
+      display: inline-grid;
+      place-items: center;
+      min-width: 54px;
+      min-height: 30px;
+      padding: 6px 11px;
+      border: 1px solid rgba(7,24,39,0.2);
+      border-radius: 5px;
+      color: var(--text);
+      background: rgba(255,255,255,0.66);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.15s var(--ease), color 0.15s var(--ease), background 0.15s var(--ease);
+    }
+
+    .pub-detail summary:hover,
+    .pub-detail summary:focus-visible,
+    .pub-action:hover,
+    .pub-action:focus-visible {
+      color: var(--rose);
+      border-color: rgba(17,122,167,0.42);
+      background: rgba(255,255,255,0.9);
+    }
+
+    .pub-detail summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .pub-detail-box {
+      grid-column: 1 / -1;
+      margin-top: 2px;
+      padding: 12px 13px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: rgba(255,255,255,0.7);
+      color: var(--text-2);
+      font-size: 13.3px;
+      line-height: 1.55;
+    }
+
+    .pub-detail-box p {
+      margin: 0;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    .pub-detail-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      color: var(--text-2);
+      font: 12.4px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     }
 
     .pub-year {
@@ -1797,6 +1877,13 @@
       text-decoration: underline;
       text-decoration-color: rgba(143,63,79,0.28);
       text-underline-offset: 3px;
+    }
+
+    .about-whisper {
+      margin-top: 10px;
+      color: var(--text-3);
+      font-size: 12.8px;
+      font-style: italic;
     }
 
     /* ── Personal travel cards ── */
@@ -2371,7 +2458,6 @@
     <a href="#publications">Publications</a>
     <a href="#awards">Honors</a>
     <a href="#thoughts">Thoughts</a>
-    <a href="#personal">Personal</a>
     <a href="#contact">Contact</a>
   </nav>
 
@@ -2467,7 +2553,6 @@
           <li><a href="#publications" class="nav-link">Publications</a></li>
           <li><a href="#awards"       class="nav-link">Honors</a></li>
           <li><a href="#thoughts"     class="nav-link">Thoughts</a></li>
-          <li><a href="#personal"     class="nav-link">Personal</a></li>
           <li><a href="#contact"      class="nav-link">Contact</a></li>
         </ul>
       </nav>
@@ -2492,9 +2577,8 @@
           My name is Juliette Faivre, and I am French, Polish, and Luxembourgish.
           From a young age, I have lived in more than seven countries, and I
           enjoy discovering new cultures, learning languages, and discussing new
-          ideas (more about me in <a href="#personal">this section</a>).
-          Technology was one of the things that tied those places together for
-          me as a child.
+          ideas. Technology was one of the things that tied those places
+          together for me as a child.
         </p>
         <p>
           As I studied management from 2018&ndash;2022, I embraced technology's
@@ -2511,6 +2595,10 @@
           Cambridge. This coincided with generative AI and large language models
           emerging, which quickly became the focus of my
           <a href="#research">research projects</a>.
+        </p>
+        <p class="about-whisper">
+          I happen to like butterflies. If you catch one, perhaps it will tell you
+          more about me.
         </p>
       </div>
 
@@ -2596,11 +2684,11 @@
         existing institutions can help us govern AI, and what needs to change or
         be created to support safer development?
       </p>
-      <p>This necessitates the study of the following:</p>
+      <p>In this context, I have studied and continue to study the following areas:</p>
       <ul class="research-list">
         <li>Socioeconomic impacts of AI, especially labor and creative markets, digital sovereignty, and broadly shared benefits.</li>
-        <li>Accountability, bias, and transparency, including enforceable frameworks for high-stakes systems, watermarking, and alignment.</li>
-        <li>Online safety and privacy, including AI companions and therapy chatbots for minors, deepfakes, CSAM, and nonconsensual intimate imagery.</li>
+        <li>Accountability, bias, and transparency, including enforceable frameworks for high-stakes systems and alignment.</li>
+        <li>Online safety and privacy, including AI companions, deepfakes, and CSAM.</li>
         <li>International coordination, regulatory fragmentation, and geopolitics in AI policy.</li>
       </ul>
       <p>
@@ -2614,8 +2702,7 @@
         literature reviews, semi-structured interviews, and policy/document
         analysis. I also use quantitative methods from the social sciences, with
         experience in SPSS and foundational training in Python and R. I like
-        projects where the method follows the policy question, not the other way
-        around.
+        trying to make the method follow the policy question.
       </p>
 
       <h3 class="subsection-title">Experiences</h3>
@@ -2673,74 +2760,187 @@
 
       <article class="pub-card">
         <div class="pub-thumb" aria-hidden="true">
-          <img src="assets/publications/taxing-ai.svg" alt="" />
+          <img src="assets/publications/thumbs/taxing-ai.pdf.png" alt="" />
         </div>
         <div>
           <a href="https://arxiv.org/abs/2607.02144" target="_blank" rel="noopener">
             <div class="pub-title">Taxing Artificial Intelligence</div>
             <div class="pub-meta">arXiv working paper &middot; with Sarah H. Cen &middot; <span class="pub-year">2026</span></div>
           </a>
-          <div class="pub-news">&#128240; <a href="https://www.ece.cmu.edu/news-and-events/story/2026/07/ai-taxation.html" target="_blank" rel="noopener"><em>Read the CMU news article about our paper.</em></a></div>
+          <div class="pub-news">&#128240; <a href="https://www.ece.cmu.edu/news-and-events/story/2026/07/ai-taxation.html" target="_blank" rel="noopener"><em>Read the CMU news article about our paper. &#128161;</em></a></div>
+          <div class="pub-actions">
+            <details class="pub-detail">
+              <summary>Abs</summary>
+              <div class="pub-detail-box">
+                <p>While AI promises major benefits, its development and deployment can shift costs onto others, including environmental pressures on local communities, labor and creative displacement, and systemic risks from rapid frontier development. Taxation is an integral part of policy design, and recent academic, industry, and policy debates have begun to consider whether tax instruments can help address these harms. In this paper, we explore the viability of AI taxation. More broadly, AI taxation should not be understood only as Pigouvian correction. In the AI context, taxation can also correct harmful activity, redistribute unevenly borne costs and gains, and fund regulatory capacity. We discuss the main externalities associated with AI and survey possible tax instruments, including corporate income and rent-based taxes, consumption taxes on AI-related services, and excise instruments tied to specific AI activities. We further assess the benefits and pitfalls of these instruments, including feasibility, measurement problems, incidence, leakage, and innovation costs. Because AI externalities differ in nuanced ways, tax policy must be carefully designed and matched to the specific harms and policy objectives.</p>
+              </div>
+            </details>
+            <details class="pub-detail">
+              <summary>BibTeX</summary>
+              <div class="pub-detail-box">
+                <pre>@misc{faivre2026taxingai,
+  title = {Taxing Artificial Intelligence},
+  author = {Faivre, Juliette and Cen, Sarah H.},
+  year = {2026},
+  eprint = {2607.02144},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.CY},
+  url = {https://arxiv.org/abs/2607.02144}
+}</pre>
+              </div>
+            </details>
+            <a class="pub-action" href="assets/publications/pdfs/taxing-ai.pdf" download>PDF</a>
+          </div>
         </div>
       </article>
 
       <article class="pub-card">
         <div class="pub-thumb" aria-hidden="true">
-          <img src="assets/publications/deepseek.svg" alt="" />
+          <img src="assets/publications/thumbs/deepseek.pdf.png" alt="" />
         </div>
         <div>
           <a href="https://www.privacylaws.com/reports-gateway/articles/int197/int197deepseek/" target="_blank" rel="noopener">
             <div class="pub-title">DeepSeek under international scrutiny: balancing innovation and users' data protection</div>
             <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2025</span></div>
           </a>
+          <div class="pub-actions">
+            <details class="pub-detail">
+              <summary>BibTeX</summary>
+              <div class="pub-detail-box">
+                <pre>@article{faivre2025deepseek,
+  title = {DeepSeek under international scrutiny: balancing innovation and users' data protection},
+  author = {Faivre, Juliette},
+  journal = {Privacy Laws \&amp; Business International Report},
+  year = {2025},
+  month = {October},
+  url = {https://www.privacylaws.com/reports-gateway/articles/int197/int197deepseek/}
+}</pre>
+              </div>
+            </details>
+            <a class="pub-action" href="assets/publications/pdfs/deepseek.pdf" download>PDF</a>
+          </div>
         </div>
       </article>
 
       <article class="pub-card">
         <div class="pub-thumb" aria-hidden="true">
-          <img src="assets/publications/ai-paradox.svg" alt="" />
+          <img src="assets/publications/thumbs/ai-paradox.pdf.png" alt="" />
         </div>
         <div>
           <a href="https://www.privacylaws.com/reports-gateway/articles/int184/" target="_blank" rel="noopener">
             <div class="pub-title">Unlocking the AI paradox?</div>
             <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2023</span></div>
           </a>
+          <div class="pub-actions">
+            <details class="pub-detail">
+              <summary>BibTeX</summary>
+              <div class="pub-detail-box">
+                <pre>@article{faivre2023aiparadox,
+  title = {Unlocking the AI paradox?},
+  author = {Faivre, Juliette},
+  journal = {Privacy Laws \&amp; Business International Report},
+  year = {2023},
+  month = {August},
+  url = {https://www.privacylaws.com/reports-gateway/articles/int184/}
+}</pre>
+              </div>
+            </details>
+            <a class="pub-action" href="assets/publications/pdfs/ai-paradox.pdf" download>PDF</a>
+          </div>
         </div>
       </article>
 
       <article class="pub-card">
         <div class="pub-thumb" aria-hidden="true">
-          <img src="assets/publications/ai-act.svg" alt="" />
+          <img src="assets/publications/thumbs/ai-act.pdf.png" alt="" />
         </div>
         <div>
           <a href="https://ssrn.com/abstract=4514993" target="_blank" rel="noopener">
             <div class="pub-title">The AI Act: towards global effects?</div>
             <div class="pub-meta">SSRN working paper &middot; <span class="pub-year">2023</span></div>
           </a>
+          <div class="pub-actions">
+            <details class="pub-detail">
+              <summary>Abs</summary>
+              <div class="pub-detail-box">
+                <p>This paper examines the European Union's Artificial Intelligence Act (AIA) and its potential to become a global gold standard for trustworthy AI. The AIA aims to address ethical concerns and ensure responsible AI development. The paper highlights the need for AI guidelines, discusses the key features of the AIA, and explores controversies surrounding the legislation, particularly regarding newer generative AI technologies. It also discusses the ongoing discussions and potential for a "Brussels effect," where the AIA's standards influence global AI regulation. The paper concludes by emphasizing the importance of a regulation that sets guardrails for AI while promoting understanding and collaboration with the private sector.</p>
+              </div>
+            </details>
+            <details class="pub-detail">
+              <summary>BibTeX</summary>
+              <div class="pub-detail-box">
+                <pre>@misc{faivre2023aiact,
+  title = {The AI Act: Towards Global Effects?},
+  author = {Faivre, Juliette},
+  year = {2023},
+  note = {SSRN working paper},
+  url = {https://ssrn.com/abstract=4514993}
+}</pre>
+              </div>
+            </details>
+            <a class="pub-action" href="assets/publications/pdfs/ai-act.pdf" download>PDF</a>
+          </div>
         </div>
       </article>
 
       <article class="pub-card">
         <div class="pub-thumb" aria-hidden="true">
-          <img src="assets/publications/ransomware.svg" alt="" />
+          <img src="assets/publications/thumbs/ransomware-negotiations.pdf.png" alt="" />
         </div>
         <div>
           <a href="https://ssrn.com/abstract=4530094" target="_blank" rel="noopener">
             <div class="pub-title">Negotiations in tech: an analysis of asymmetric ransomware negotiations</div>
             <div class="pub-meta">SSRN working paper &middot; <span class="pub-year">2023</span></div>
           </a>
+          <div class="pub-actions">
+            <details class="pub-detail">
+              <summary>Abs</summary>
+              <div class="pub-detail-box">
+                <p>Ransomware attacks have emerged as a significant threat to both private and public organizations, with devastating consequences in terms of data encryption and financial loss. This paper delves into the realm of asymmetric ransomware negotiations, focusing on the power dynamics between cybercriminals and their corporate victims. We assume a targeted ransomware attack scenario, where cybercriminals invest efforts in selectively distributing ransomware to specific victims. Drawing on concepts from literature, we analyze the "unlevel playing field" created by cybercriminals through illegitimate strategies and unethical means. Additionally, game theory analysis reveals the strategic interactions between both parties, highlighting factors influencing ransom demands and the victim's willingness to pay. Furthermore, we explore the role of social engineering tactics employed by cybercriminals to coerce and manipulate victims during negotiations. By examining the psychological aspects of communication, we uncover the dynamics of fear and urgency utilized by cybercriminals to drive victim behavior. We also discuss countermeasures that victims can employ to mitigate the effects of social engineering and maximize their interests in negotiation. Ultimately, this paper aims to shed light on the intricacies of asymmetric ransomware negotiations, providing insights for better understanding and responding to this growing cybersecurity threat in the technology domain.</p>
+              </div>
+            </details>
+            <details class="pub-detail">
+              <summary>BibTeX</summary>
+              <div class="pub-detail-box">
+                <pre>@misc{faivre2023ransomware,
+  title = {Negotiations in Tech: An Analysis of Asymmetric Ransomware Negotiations},
+  author = {Faivre, Juliette},
+  year = {2023},
+  note = {SSRN working paper},
+  url = {https://ssrn.com/abstract=4530094}
+}</pre>
+              </div>
+            </details>
+            <a class="pub-action" href="assets/publications/pdfs/ransomware-negotiations.pdf" download>PDF</a>
+          </div>
         </div>
       </article>
 
       <article class="pub-card">
         <div class="pub-thumb" aria-hidden="true">
-          <img src="assets/publications/neobrowsers.svg" alt="" />
+          <img src="assets/publications/thumbs/neobrowsers.pdf.png" alt="" />
         </div>
         <div>
           <a href="https://www.privacylaws.com/media/4004/int179.pdf" target="_blank" rel="noopener">
             <div class="pub-title">Get rewarded for giving your data away? The rise of &lsquo;neobrowsers&rsquo;</div>
             <div class="pub-meta"><em>Privacy Laws &amp; Business</em> &middot; <span class="pub-year">2022</span></div>
           </a>
+          <div class="pub-actions">
+            <details class="pub-detail">
+              <summary>BibTeX</summary>
+              <div class="pub-detail-box">
+                <pre>@article{faivre2022neobrowsers,
+  title = {Get rewarded for giving your data away? The rise of 'neobrowsers'},
+  author = {Faivre, Juliette},
+  journal = {Privacy Laws \&amp; Business International Report},
+  year = {2022},
+  month = {October},
+  url = {https://www.privacylaws.com/media/4004/int179.pdf}
+}</pre>
+              </div>
+            </details>
+            <a class="pub-action" href="assets/publications/pdfs/neobrowsers.pdf" download>PDF</a>
+          </div>
         </div>
       </article>
     </section>
@@ -2807,15 +3007,6 @@
             <p class="blog-blurb">A short note on why AI governance needs institutions that are technically literate, accountable, and adaptable.</p>
           </div>
         </a>
-
-        <a class="blog-item" href="notes/digital-public-services.html">
-          <img class="blog-thumb" src="assets/note-public-services.svg" alt="" />
-          <div class="blog-content">
-            <div class="blog-title">Digital Public Services and Trust</div>
-            <div class="blog-meta">In progress</div>
-            <p class="blog-blurb">Currently writing: reflections on how governments can make online services easier to use without losing transparency or public confidence.</p>
-          </div>
-        </a>
       </div>
 
       <h3 class="subsection-title">Recommendations</h3>
@@ -2826,38 +3017,6 @@
       <ul class="recommendation-list">
         <li>Work in progress.</li>
       </ul>
-    </section>
-
-    <!-- PERSONAL ────────────────── -->
-    <section id="personal">
-      <h2>Personal</h2>
-
-      <div class="personal-accordion">
-        <details>
-          <summary>Travels</summary>
-          <p>
-            I love travelling and keep a public map of the countries I have
-            visited so far:
-            <a href="travel/visited-countries.html">see my visited countries map</a>.
-          </p>
-        </details>
-        <details>
-          <summary>Hobbies</summary>
-          <p>
-            I love travelling, painting
-            (<a href="travel/paintings.html">my paintings and favorite painters</a>),
-            and tennis, where I am currently working on my skills.
-          </p>
-        </details>
-        <details>
-          <summary>Luxembourg</summary>
-          <p>
-            When I mention that I come from Luxembourg, people are often curious
-            about the country, so I made a quick
-            <a href="travel/luxembourg.html">fun facts page about Luxembourg</a>.
-          </p>
-        </details>
-      </div>
     </section>
 
     <!-- CONTACT ────────────────── -->

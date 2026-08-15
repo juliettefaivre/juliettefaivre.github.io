@@ -322,11 +322,17 @@
 
     /* ── Decorative butterfly ── */
     .butterfly-swarm {
-      position: absolute;
+      position: fixed;
       inset: 0;
-      z-index: 4;
+      z-index: 7;
       pointer-events: none;
       overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.38s var(--ease);
+    }
+
+    .butterfly-swarm.is-active {
+      opacity: 1;
     }
 
     .butterfly {
@@ -348,6 +354,11 @@
       transform-origin: center;
       will-change: transform;
       transition: filter 0.22s var(--ease), opacity 0.22s var(--ease);
+    }
+
+    .butterfly-swarm:not(.is-active) .butterfly,
+    .rabbit-fall-open .butterfly {
+      pointer-events: none;
     }
 
     .butterfly::before {
@@ -400,6 +411,146 @@
 
     body.portal-open {
       overflow: hidden;
+    }
+
+    body.rabbit-fall-open {
+      overflow-x: hidden;
+      background: #02070c;
+    }
+
+    body.rabbit-fall-open #hero,
+    body.rabbit-fall-open #main-layout,
+    body.rabbit-fall-open footer {
+      animation: rabbitFallContent 1.62s cubic-bezier(0.08, 0.78, 0.14, 1) both;
+      transform-origin: 50% 72vh;
+      will-change: transform, filter, opacity;
+    }
+
+    .rabbit-fall-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0;
+      background:
+        radial-gradient(circle at var(--fall-x, 50%) var(--fall-y, 50%),
+          rgba(216,240,247,0.24) 0 4%,
+          rgba(33,174,232,0.13) 12%,
+          rgba(4,19,31,0.14) 28%,
+          rgba(1,6,12,0.78) 78%,
+          #000 100%),
+        linear-gradient(180deg,
+          rgba(8,42,64,0.04),
+          rgba(3,15,27,0.64) 48%,
+          rgba(0,0,0,0.92));
+      transition: opacity 0.08s ease-out;
+    }
+
+    .rabbit-fall-overlay.is-falling {
+      opacity: 1;
+    }
+
+    .rabbit-fall-overlay::before,
+    .rabbit-fall-overlay::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .rabbit-fall-overlay::before {
+      inset: -22vmax;
+      background:
+        repeating-linear-gradient(92deg,
+          transparent 0 78px,
+          rgba(216,240,247,0.12) 79px 80px,
+          transparent 81px 150px),
+        repeating-linear-gradient(78deg,
+          transparent 0 118px,
+          rgba(33,174,232,0.09) 119px 120px,
+          transparent 121px 210px);
+      filter: blur(0.2px);
+      animation: rabbitFallStreaks 0.52s linear infinite;
+    }
+
+    .rabbit-fall-overlay::after {
+      left: 50%;
+      top: 72%;
+      width: 34vmin;
+      height: 34vmin;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle,
+          #000 0 22%,
+          rgba(2,7,12,0.98) 36%,
+          rgba(11,52,76,0.5) 53%,
+          rgba(216,240,247,0.1) 64%,
+          transparent 75%);
+      box-shadow:
+        0 0 54px rgba(33,174,232,0.16),
+        inset 0 0 34px rgba(0,0,0,0.86);
+      filter: blur(4px) saturate(0.76);
+      transform: translate(-50%, -50%) scale(0.28);
+      animation: rabbitFallMouth 1.55s cubic-bezier(0.08, 0.78, 0.14, 1) both;
+    }
+
+    .rabbit-fall-extension {
+      position: relative;
+      min-height: 420vh;
+      margin-top: -1px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 28% 14%, rgba(98,230,243,0.18), transparent 22%),
+        radial-gradient(ellipse at 70% 32%, rgba(216,240,247,0.1), transparent 25%),
+        radial-gradient(ellipse at 50% 84%, rgba(0,0,0,0.84), transparent 42%),
+        linear-gradient(180deg,
+          #134e68 0%,
+          #0a314c 24%,
+          #061b31 48%,
+          #020a14 72%,
+          #000 100%);
+    }
+
+    .rabbit-fall-extension::before,
+    .rabbit-fall-extension::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .rabbit-fall-extension::before {
+      background:
+        repeating-linear-gradient(90deg,
+          transparent 0 120px,
+          rgba(216,240,247,0.08) 121px 122px,
+          transparent 123px 260px),
+        repeating-linear-gradient(180deg,
+          transparent 0 150px,
+          rgba(33,174,232,0.08) 151px 152px,
+          transparent 153px 330px);
+      opacity: 0.44;
+      animation: rabbitFallExtensionDrift 1.2s linear infinite;
+    }
+
+    .rabbit-fall-extension::after {
+      background:
+        radial-gradient(circle at 50% 100%, rgba(0,0,0,0.96), transparent 32%),
+        linear-gradient(180deg, transparent 0 46%, rgba(0,0,0,0.48) 100%);
+    }
+
+    .fall-symbol {
+      position: absolute;
+      left: var(--fall-symbol-x);
+      top: var(--fall-symbol-y);
+      color: rgba(216,240,247,0.48);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(18px, 2.5vw, 44px);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 18px rgba(33,174,232,0.16);
+      transform: rotate(var(--fall-symbol-r)) scale(var(--fall-symbol-s));
+      animation: fallSymbolDrift var(--fall-symbol-d) ease-in-out infinite alternate;
     }
 
     .butterfly-portal {
@@ -1033,6 +1184,76 @@
           translate(var(--portal-x), var(--portal-y))
           rotate(var(--connector-angle))
           scaleX(1);
+      }
+    }
+
+    @keyframes rabbitFallContent {
+      0% {
+        opacity: 1;
+        filter: brightness(1) blur(0);
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      }
+      36% {
+        opacity: 0.94;
+        filter: brightness(0.86) blur(0.2px);
+        transform: translate3d(0, -18vh, 0) scale(1.015) rotate(-0.12deg);
+      }
+      72% {
+        opacity: 0.62;
+        filter: brightness(0.54) blur(1px);
+        transform: translate3d(0, -84vh, 0) scale(1.055) rotate(0.18deg);
+      }
+      100% {
+        opacity: 0.22;
+        filter: brightness(0.24) blur(2.6px);
+        transform: translate3d(0, -142vh, 0) scale(1.12) rotate(-0.28deg);
+      }
+    }
+
+    @keyframes rabbitFallStreaks {
+      0% {
+        opacity: 0.22;
+        transform: translate3d(0, -9vh, 0) scale(0.96);
+      }
+      100% {
+        opacity: 0.46;
+        transform: translate3d(0, 24vh, 0) scale(1.06);
+      }
+    }
+
+    @keyframes rabbitFallMouth {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.18);
+      }
+      42% {
+        opacity: 0.72;
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(5.6);
+      }
+    }
+
+    @keyframes rabbitFallExtensionDrift {
+      from { background-position: 0 0, 0 0; }
+      to { background-position: 0 260px, 0 330px; }
+    }
+
+    @keyframes fallSymbolDrift {
+      from {
+        opacity: 0.2;
+        transform:
+          translate3d(-8px, -18px, 0)
+          rotate(calc(var(--fall-symbol-r) - 8deg))
+          scale(var(--fall-symbol-s));
+      }
+      to {
+        opacity: 0.58;
+        transform:
+          translate3d(8px, 28px, 0)
+          rotate(calc(var(--fall-symbol-r) + 10deg))
+          scale(var(--fall-symbol-s));
       }
     }
 
@@ -2441,6 +2662,9 @@
       .portal-butterfly,
       .portal-tunnel,
       .portal-spark,
+      .rabbit-fall-overlay,
+      .rabbit-fall-extension,
+      .fall-symbol,
       .hero-note {
         animation: none !important;
         transition: none !important;
@@ -2460,8 +2684,6 @@
     <a href="#thoughts">Thoughts</a>
     <a href="#contact">Contact</a>
   </nav>
-
-  <div class="butterfly-swarm"></div>
 
   <div class="hero-inner">
     <div class="hero-primary">
@@ -2531,6 +2753,8 @@
     </aside>
   </div>
 </section>
+
+<div class="butterfly-swarm"></div>
 
 <!-- ═══════════════════════ MAIN LAYOUT ════════════════════════ -->
 <div id="main-layout">
@@ -3080,11 +3304,11 @@
   });
 
   const butterflySwarm = document.querySelector('.butterfly-swarm');
+  const heroSection = document.getElementById('hero');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   if (butterflySwarm && !reduceMotion.matches) {
-    const heroFrame = document.querySelector('.hero-inner');
-    let butterflyVisible = true;
+    let butterflyVisible = false;
     let portalOpening = false;
     const butterflySvg = `
       <svg viewBox="0 0 104 82" role="presentation" focusable="false">
@@ -3197,6 +3421,7 @@
       el.href = 'secret-butterfly.html';
       el.setAttribute('aria-label', 'Open the secret butterfly page');
       el.title = 'Follow the butterfly';
+      el.tabIndex = -1;
       el.innerHTML = butterflySvg;
       el.style.setProperty('--butterfly-size', '62px');
       const wingBase = 0.56 + Math.random() * 0.1;
@@ -3247,75 +3472,22 @@
       };
     };
 
-    const getHeroAvoidRect = size => {
-      if (!heroFrame) return null;
-
-      const swarmRect = butterflySwarm.getBoundingClientRect();
-      const frameRect = heroFrame.getBoundingClientRect();
-      const clearance = Math.max(34, size * 0.56);
-
-      return {
-        left: frameRect.left - swarmRect.left - size - clearance,
-        right: frameRect.right - swarmRect.left + clearance,
-        top: frameRect.top - swarmRect.top - size - clearance,
-        bottom: frameRect.bottom - swarmRect.top + clearance
-      };
-    };
-
-    const getTopRightFloatZone = size => {
+    const getPageFloatZone = size => {
       const bounds = butterflySwarm.getBoundingClientRect();
-      const margin = Math.min(120, Math.max(56, bounds.width * 0.08));
-      const maxX = Math.max(margin, bounds.width - margin - size);
-      const maxY = Math.max(margin, bounds.height - margin - size);
-      const makeZone = ({ left, right, top, bottom }) => normalizeZone({
-        left: clamp(left, margin, maxX),
-        right: clamp(right, margin, maxX),
-        top: clamp(top, margin, maxY),
-        bottom: clamp(bottom, margin, maxY)
+      const marginX = Math.min(96, Math.max(28, bounds.width * 0.035));
+      const marginTop = Math.min(112, Math.max(70, bounds.height * 0.08));
+      const marginBottom = Math.min(118, Math.max(58, bounds.height * 0.09));
+
+      return normalizeZone({
+        left: marginX,
+        right: Math.max(marginX, bounds.width - marginX - size),
+        top: marginTop,
+        bottom: Math.max(marginTop, bounds.height - marginBottom - size)
       });
-      const fallback = makeZone({
-        left: bounds.width * 0.72,
-        right: maxX,
-        top: bounds.height * 0.1,
-        bottom: bounds.height * 0.28
-      });
-
-      if (!heroFrame) return fallback;
-
-      const swarmRect = butterflySwarm.getBoundingClientRect();
-      const frameRect = heroFrame.getBoundingClientRect();
-      const frameTop = frameRect.top - swarmRect.top;
-      const frameRight = frameRect.right - swarmRect.left;
-      const frameBottom = frameRect.bottom - swarmRect.top;
-      const sideLeft = frameRight + Math.max(34, size * 0.6);
-
-      if (sideLeft + 76 < maxX) {
-        const top = clamp(frameTop + 42, margin, maxY);
-        const bottom = clamp(Math.max(top + 76, Math.min(frameTop + 190, frameBottom - size * 0.5)), margin, maxY);
-
-        return makeZone({
-          left: sideLeft,
-          right: maxX,
-          top,
-          bottom
-        });
-      }
-
-      const aboveBottom = frameTop - size - 34;
-      if (aboveBottom > margin + 70) {
-        return makeZone({
-          left: bounds.width * 0.68,
-          right: maxX,
-          top: margin + 8,
-          bottom: aboveBottom
-        });
-      }
-
-      return fallback;
     };
 
-    const pickTopRightTarget = size => {
-      const zone = getTopRightFloatZone(size);
+    const pickPageTarget = size => {
+      const zone = getPageFloatZone(size);
 
       return {
         x: zone.left + Math.random() * Math.max(1, zone.right - zone.left),
@@ -3323,127 +3495,134 @@
       };
     };
 
-    const keepOutsideHeroFrame = (x, y, size) => {
-      const avoid = getHeroAvoidRect(size);
-
-      if (!avoid || x <= avoid.left || x >= avoid.right || y <= avoid.top || y >= avoid.bottom) {
-        return { x, y, changed: false };
-      }
-
+    const keepInsideViewport = (x, y, size) => {
       const bounds = butterflySwarm.getBoundingClientRect();
-      const margin = Math.min(120, Math.max(56, bounds.width * 0.08));
-      const maxX = Math.max(margin, bounds.width - margin - size);
-      const maxY = Math.max(margin, bounds.height - margin - size);
-      const options = [];
-
-      if (avoid.left >= margin) options.push({ x: avoid.left, y, distance: Math.abs(x - avoid.left) });
-      if (avoid.right <= maxX) options.push({ x: avoid.right, y, distance: Math.abs(avoid.right - x) });
-      if (avoid.top >= margin) options.push({ x, y: avoid.top, distance: Math.abs(y - avoid.top) });
-      if (avoid.bottom <= maxY) options.push({ x, y: avoid.bottom, distance: Math.abs(avoid.bottom - y) });
-
-      if (!options.length) {
-        return { ...pickTopRightTarget(size), changed: true };
-      }
-
-      options.sort((a, b) => a.distance - b.distance);
-      let nextX = x;
-      let nextY = y;
-
-      nextX = options[0].x;
-      nextY = options[0].y;
+      const zone = getPageFloatZone(size);
+      const nextX = clamp(x, zone.left, Math.max(zone.left, bounds.width - zone.left - size));
+      const nextY = clamp(y, zone.top, Math.max(zone.top, bounds.height - zone.top - size));
 
       return {
-        x: Math.max(margin, Math.min(maxX, nextX)),
-        y: Math.max(margin, Math.min(maxY, nextY)),
-        changed: true
+        x: nextX,
+        y: nextY,
+        changed: nextX !== x || nextY !== y
       };
+    };
+
+    const updateButterflyVisibility = () => {
+      if (portalOpening) return false;
+
+      const heroRect = heroSection?.getBoundingClientRect();
+      const isPastHero = !heroRect || heroRect.bottom < Math.min(window.innerHeight * 0.34, 300);
+
+      if (isPastHero !== butterflyVisible) {
+        butterflyVisible = isPastHero;
+        butterflySwarm.classList.toggle('is-active', butterflyVisible);
+        butterflies.forEach(({ el }) => {
+          el.tabIndex = butterflyVisible ? 0 : -1;
+        });
+        if (butterflyVisible) {
+          butterflies.forEach(pickTarget);
+        }
+      }
+
+      return butterflyVisible;
     };
 
     const pickTarget = butterfly => {
       const size = butterfly.el.offsetWidth || 62;
-      const nextTarget = pickTopRightTarget(size);
+      const nextTarget = pickPageTarget(size);
 
       butterfly.target.x = nextTarget.x;
       butterfly.target.y = nextTarget.y;
-      butterfly.target.s = 0.82 + Math.random() * 0.1;
-      butterfly.nextTargetAt = performance.now() + 7600 + Math.random() * 4200;
+      butterfly.target.s = 0.76 + Math.random() * 0.16;
+      butterfly.nextTargetAt = performance.now() + 5400 + Math.random() * 4800;
+    };
+
+    const ensureFallExtension = () => {
+      let extension = document.querySelector('.rabbit-fall-extension');
+      if (extension) return extension;
+
+      extension = document.createElement('div');
+      extension.className = 'rabbit-fall-extension';
+      extension.setAttribute('aria-hidden', 'true');
+
+      const symbols = ['AI', 'policy', 'trust', 'data', '01', '?', 'safety', 'law', 'models', 'risk', 'science', 'public'];
+      Array.from({ length: 22 }, (_, index) => {
+        const symbol = document.createElement('span');
+        symbol.className = 'fall-symbol';
+        symbol.textContent = symbols[index % symbols.length];
+        symbol.style.setProperty('--fall-symbol-x', `${8 + Math.random() * 84}%`);
+        symbol.style.setProperty('--fall-symbol-y', `${5 + Math.random() * 88}%`);
+        symbol.style.setProperty('--fall-symbol-r', `${-18 + Math.random() * 36}deg`);
+        symbol.style.setProperty('--fall-symbol-s', `${(0.72 + Math.random() * 0.58).toFixed(2)}`);
+        symbol.style.setProperty('--fall-symbol-d', `${(1.4 + Math.random() * 1.8).toFixed(2)}s`);
+        extension.appendChild(symbol);
+      });
+
+      const footer = document.querySelector('footer');
+      if (footer) {
+        footer.after(extension);
+      } else {
+        document.body.appendChild(extension);
+      }
+
+      return extension;
     };
 
     const openButterflyPortal = (href, sourceEl) => {
       if (portalOpening) return;
       portalOpening = true;
       butterflyVisible = false;
+      butterflySwarm.classList.remove('is-active');
 
       const rect = sourceEl.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      const viewportCenterX = window.innerWidth / 2;
-      const viewportCenterY = window.innerHeight / 2;
-      const offsetX = centerX - viewportCenterX;
-      const offsetY = centerY - viewportCenterY;
-      const connectorDistance = Math.max(1, Math.hypot(offsetX, offsetY));
-      const connectorAngle = Math.atan2(viewportCenterY - centerY, viewportCenterX - centerX) * 180 / Math.PI;
-      const longestSide = Math.max(window.innerWidth, window.innerHeight);
-      const portalFullSize = Math.max(longestSide * 1.55, 1180);
-      const portalStartScale = Math.max(0.035, rect.width / portalFullSize);
-      const portalPopScale = Math.min(0.38, Math.max(0.18, portalStartScale * 9.2));
+      const overlay = document.createElement('div');
+      overlay.className = 'rabbit-fall-overlay';
+      overlay.style.setProperty('--fall-x', `${centerX}px`);
+      overlay.style.setProperty('--fall-y', `${centerY}px`);
 
-      const portal = document.createElement('div');
-      portal.className = 'butterfly-portal';
-      portal.style.setProperty('--portal-x', `${centerX}px`);
-      portal.style.setProperty('--portal-y', `${centerY}px`);
-      portal.style.setProperty('--portal-offset-x', `${offsetX}px`);
-      portal.style.setProperty('--portal-offset-y', `${offsetY}px`);
-      portal.style.setProperty('--portal-full-size', `${portalFullSize}px`);
-      portal.style.setProperty('--portal-start-scale', portalStartScale.toFixed(4));
-      portal.style.setProperty('--portal-pop-scale', portalPopScale.toFixed(4));
-      portal.style.setProperty('--portal-end-scale', '1.78');
-      portal.style.setProperty('--connector-distance', `${connectorDistance}px`);
-      portal.style.setProperty('--connector-angle', `${connectorAngle}deg`);
-
-      if (connectorDistance > 24) {
-        const connector = document.createElement('span');
-        connector.className = 'portal-connector';
-        portal.appendChild(connector);
-      }
-
-      const portalTunnel = document.createElement('div');
-      portalTunnel.className = 'portal-tunnel';
-      portal.appendChild(portalTunnel);
-
-      const sparkColors = [
-        'rgba(216,240,247,0.82)',
-        'rgba(156,236,255,0.72)',
-        'rgba(33,174,232,0.58)',
-        'rgba(132,152,166,0.5)'
-      ];
-      Array.from({ length: 18 }, (_, sparkIndex) => {
-        const spark = document.createElement('span');
-        spark.className = 'portal-spark';
-        spark.style.setProperty('--spark-angle', `${-10 + Math.random() * 20}deg`);
-        spark.style.setProperty('--spark-distance', `${220 + Math.random() * 360}px`);
-        spark.style.setProperty('--spark-delay', `${0.14 + Math.random() * 0.2}s`);
-        spark.style.setProperty('--spark-length', `${28 + Math.random() * 46}px`);
-        spark.style.setProperty('--spark-color', sparkColors[sparkIndex % sparkColors.length]);
-        portal.appendChild(spark);
-      });
-
-      document.body.classList.add('portal-open');
-      document.body.appendChild(portal);
+      ensureFallExtension();
+      document.body.classList.add('rabbit-fall-open');
+      document.body.appendChild(overlay);
       sourceEl.style.visibility = 'hidden';
 
       requestAnimationFrame(() => {
-        portal.classList.add('is-open');
+        overlay.classList.add('is-falling');
       });
 
-      window.setTimeout(() => {
-        window.location.href = href;
-      }, 1040);
+      const startY = window.scrollY;
+      const maxScrollY = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const targetY = maxScrollY();
+      const duration = 1950;
+      const easeOutQuart = t => 1 - Math.pow(1 - t, 4);
+      let startTime = null;
+
+      const fall = timestamp => {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const eased = easeOutQuart(progress);
+
+        window.scrollTo(0, startY + (targetY - startY) * eased);
+        overlay.style.setProperty('--fall-progress', progress.toFixed(3));
+
+        if (progress < 1) {
+          requestAnimationFrame(fall);
+        } else {
+          window.setTimeout(() => {
+            window.location.href = href;
+          }, 120);
+        }
+      };
+
+      requestAnimationFrame(fall);
     };
 
     const fly = now => {
       const delta = Math.min((now - lastFrame) / 16.67, 2);
       lastFrame = now;
+      updateButterflyVisibility();
 
       if (!butterflyVisible) {
         requestAnimationFrame(fly);
@@ -3506,7 +3685,7 @@
           Math.sin((now + butterfly.phase * 1.8) / 3600) * 7;
         let drawX = pos.x + driftX;
         let drawY = pos.y + driftY;
-        const safePoint = keepOutsideHeroFrame(drawX, drawY, (el.offsetWidth || 62) * target.s);
+        const safePoint = keepInsideViewport(drawX, drawY, (el.offsetWidth || 62) * target.s);
 
         if (safePoint.changed) {
           pos.x += safePoint.x - drawX;
@@ -3535,20 +3714,23 @@
       butterfly.pos.x = butterfly.target.x;
       butterfly.pos.y = butterfly.target.y;
     });
+    updateButterflyVisibility();
     requestAnimationFrame(fly);
-    window.addEventListener('resize', () => butterflies.forEach(pickTarget));
+    window.addEventListener('resize', () => {
+      butterflies.forEach(pickTarget);
+      updateButterflyVisibility();
+    });
+    window.addEventListener('scroll', updateButterflyVisibility, { passive: true });
     window.addEventListener('pageshow', () => {
       portalOpening = false;
-      document.body.classList.remove('portal-open');
+      document.body.classList.remove('portal-open', 'rabbit-fall-open');
       document.querySelectorAll('.butterfly-portal').forEach(portal => portal.remove());
+      document.querySelectorAll('.rabbit-fall-overlay, .rabbit-fall-extension').forEach(element => element.remove());
       butterflies.forEach(({ el }) => {
         el.style.visibility = '';
       });
+      updateButterflyVisibility();
     });
-
-    new IntersectionObserver(entries => {
-      butterflyVisible = entries.some(entry => entry.isIntersecting);
-    }, { threshold: 0.02 }).observe(butterflySwarm);
   }
 </script>
 
